@@ -32,7 +32,7 @@ public class PlayerMovement : MonoBehaviour
     private void HandleMovement()
     {
         Vector3 targetPosition =  transform.position + playerController.GetMoveDirection() * (moveSpeed * Time.deltaTime);
-
+   
         transform.position = ClampToCameraBoundaries(targetPosition);
     }
 
