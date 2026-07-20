@@ -8,3 +8,5 @@
 *.csproj
 *.sln
 *.suo
+.vs/
+.vsidx
