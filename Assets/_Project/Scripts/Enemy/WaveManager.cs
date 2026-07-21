@@ -1,22 +1,42 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class WaveManager : MonoBehaviour
 {
     [Header("Wave settings")]
+    [SerializeField] private float timeToSpawnWave = 2f;
     [SerializeField] private WaveSO[] waves;
     [SerializeField] private EnemyListSO[] enemyList;
-    [SerializeField] private float timeToSpawnWave = 2f;
+    [Space]
+    [SerializeField] private WaveSO bossWave;
+    [SerializeField] private EnemyListSO bossList;
 
     private bool canSpawn;
     private WaitForSeconds waitTimeToSpawnWave;
     private Coroutine spawnEnemiesRoutine;
-    private Enemy enemyPrefab;
 
     private void Start()
     {
         waitTimeToSpawnWave = new WaitForSeconds(timeToSpawnWave);
         EnableSpawnEnemy();
+    }
+
+    private void Update()
+    {
+        if (Keyboard.current !=null && Keyboard.current.spaceKey.wasPressedThisFrame)
+        {
+            SpawnBossEnemy();
+        }
+    }
+
+    private void SpawnBossEnemy()
+    {
+        DisableSpawnEnemy();
+
+        EnemyBoss bossSelected = bossList.Enemies[Random.Range(0, bossList.Enemies.Length)] as EnemyBoss;
+        EnemyBoss newBoss = Instantiate(bossSelected, bossWave.GetStartingPoint().position, Quaternion.identity);
+        newBoss.SetupEnemy(bossWave);
     }
 
     private IEnumerator SpawnEnemiesRoutine()
@@ -32,9 +52,8 @@ public class WaveManager : MonoBehaviour
                 if (!canSpawn)
                     break;
 
-                enemyPrefab = enemyListSelected.Enemies[i];
+                Enemy enemyPrefab = enemyListSelected.Enemies[i];
                 Enemy newEnemy = Instantiate(enemyPrefab, waveSelected.GetStartingPoint().position, Quaternion.identity);
-                newEnemy.transform.Rotate(180, 0, 0);
                 newEnemy.SetupEnemy(waveSelected);
 
                 yield return waitTimeSpawnEnemy;
