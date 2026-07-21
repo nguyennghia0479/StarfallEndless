@@ -1,21 +1,20 @@
 using System.Collections;
 using UnityEngine;
 
-public class Shoot : MonoBehaviour
+public class Shooter : MonoBehaviour
 {
-    [SerializeField] private Transform projectileHolder;
     [SerializeField] private GameObject projectilePrefab;
     [SerializeField] private Transform[] gunPoints;
     [SerializeField] private float fireRate = .5f;
 
     private Coroutine fireRoutine;
     private WaitForSeconds waitTime;
-    private bool isAutoFire = true;
+    private bool isAutoFire;
 
-    private void Start()
+    protected virtual void Start()
     {
         waitTime = new WaitForSeconds(fireRate);
-        fireRoutine = StartCoroutine(FireRoutine());
+        EnableAutoFire();
     }
 
     private IEnumerator FireRoutine()
@@ -24,7 +23,7 @@ public class Shoot : MonoBehaviour
         {
             foreach (Transform gunPoint in gunPoints)
             {
-                Instantiate(projectilePrefab, gunPoint.position, gunPoint.rotation, projectileHolder);
+                ProjectileManager.Instance.CreateProjectile(projectilePrefab, gunPoint.position, gunPoint.rotation);
             }
 
             yield return waitTime;
@@ -33,7 +32,8 @@ public class Shoot : MonoBehaviour
 
     public void EnableAutoFire()
     {
-        if (isAutoFire || fireRoutine != null) return;
+        if (isAutoFire || fireRoutine != null) 
+            return;
 
         isAutoFire = true;
         fireRoutine = StartCoroutine(FireRoutine());
