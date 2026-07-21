@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c738e9a38b8b84f4b8bf773d311aadcc, type: 3}
+  m_Name: Enemy Blue
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyListSO
+  enemies:
+  - {fileID: 3892144918735762774, guid: 3e421dae19a1305429b6c1f740699c86, type: 3}
+  - {fileID: 3892144918735762774, guid: bf135ab56b3dd2e48a7e2b7be4bda9b5, type: 3}
+  - {fileID: 3892144918735762774, guid: 5828ae6223f782a4aa639d0ebf65fc06, type: 3}
+  - {fileID: 3892144918735762774, guid: 06d24817658dc5b4f9e4c18105f239a2, type: 3}
+  - {fileID: 3892144918735762774, guid: 79beee663967e7342a6e4b890661f1f9, type: 3}
