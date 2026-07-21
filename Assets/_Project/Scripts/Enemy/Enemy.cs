@@ -2,32 +2,33 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] private float moveSpeed = 6f;
+    [SerializeField] protected float moveSpeed = 6f;
 
-    private WaveSO wave;
-    private Transform[] waypoints;
-    private Transform currentWaypoint;
-    private int waypointIndex;
-    private bool canMove;
-    private readonly float sqrDistanceThreshold = .01f;
+    protected WaveSO wave;
+    protected Transform[] waypoints;
+    protected Transform currentWaypoint;
+    protected int waypointIndex;
+    protected bool isMovedByWaypoint;
+    protected readonly float sqrDistanceThreshold = .01f;
 
-    private void Update()
+    protected virtual void Update()
     {
         HandleMovement();
     }
 
-    public void SetupEnemy(WaveSO wave)
+    public virtual void SetupEnemy(WaveSO wave)
     {
         this.wave = wave;
         waypoints = wave.Waypoints;
         currentWaypoint = wave.GetStartingPoint();
         waypointIndex = 0;
-        canMove = true;
+        isMovedByWaypoint = true;
+        transform.Rotate(180, 0, 0);
     }
 
-    private void HandleMovement()
+    protected virtual void HandleMovement()
     {
-        if (wave == null || waypoints.Length <= 0 || !canMove)
+        if (waypoints.Length <= 0 || !isMovedByWaypoint)
             return;
 
         transform.position = Vector2.MoveTowards(transform.position, currentWaypoint.position, moveSpeed * Time.deltaTime);
@@ -38,7 +39,7 @@ public class Enemy : MonoBehaviour
                 currentWaypoint = waypoints[waypointIndex];
             else
             {
-                canMove = false;
+                isMovedByWaypoint = false;
                 Destroy(gameObject);
             }
         }

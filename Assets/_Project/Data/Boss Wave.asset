@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c6eef0a77ab8fe4390b88b397772d90, type: 3}
+  m_Name: Boss Wave
+  m_EditorClassIdentifier: Assembly-CSharp::Wave
+  path: {fileID: 7600318743865162075, guid: f6ea52ab83cc1c242bc5a828e21e1b50, type: 3}
+  minTimeToSpawn: 0.5
+  maxTimeToSpawn: 0.5
