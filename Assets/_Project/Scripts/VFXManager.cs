@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class VFXManager : MonoBehaviour
 {
+    [SerializeField] private GameObject hitVFX;
     [SerializeField] private GameObject explodeVFX;
 
     private void OnEnable()
@@ -14,8 +15,10 @@ public class VFXManager : MonoBehaviour
         GameEvents.OnExploded -= PlayExplosionVFX;
     }
 
-    private void PlayExplosionVFX(Vector2 position)
+    private void PlayExplosionVFX(Vector2 position, bool isExploded)
     {
-        Instantiate(explodeVFX, position, Quaternion.identity);
+        GameObject vfxPrefab = isExploded ? explodeVFX : hitVFX;
+
+        Instantiate(vfxPrefab, position, Quaternion.identity);
     }
 }

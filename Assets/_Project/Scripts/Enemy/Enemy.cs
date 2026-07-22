@@ -26,6 +26,7 @@ public class Enemy : MonoBehaviour
 
     protected void HandleDeath()
     {
+        GameEvents.RaiseExploded(transform.position);
         GameEvents.RaiseEnemyDied(scorePoints);
     }
 
