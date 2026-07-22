@@ -5,7 +5,7 @@ public static class GameEvents
 {
     public static event Action<int> OnEnemyDied;
     public static event Action OnPlayerDied;
-    public static event Action<Vector2> OnExploded;
+    public static event Action<Vector2, bool> OnExploded;
     public static event Action OnPlayerDamaged;
 
     public static void RaiseEnemyDied(int scorePoints)
@@ -18,9 +18,9 @@ public static class GameEvents
         OnPlayerDied?.Invoke();
     }
 
-    public static void RaiseExploded(Vector2 position)
+    public static void RaiseExploded(Vector2 position, bool isExploded = true)
     {
-        OnExploded?.Invoke(position);
+        OnExploded?.Invoke(position, isExploded);
     }
 
     public static void RaisePlayerDamaged()

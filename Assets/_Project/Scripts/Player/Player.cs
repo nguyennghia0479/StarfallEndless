@@ -23,6 +23,7 @@ public class Player : MonoBehaviour
 
     private void HandleDeath()
     {
+        GameEvents.RaiseExploded(transform.position);
         GameEvents.RaisePlayerDied();
     }
 

@@ -541,7 +541,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8cee4d0d8df9244490555a15e6f58e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::VFXManager
-  explodeVFX: {fileID: 1859459328540736192, guid: c32af3ce7d9b97240add34f58754587a, type: 3}
+  hitVFX: {fileID: 1859459328540736192, guid: c32af3ce7d9b97240add34f58754587a, type: 3}
+  explodeVFX: {fileID: 7045907378095817686, guid: f79b0c28f6656574e9351591227bb1dd, type: 3}
 --- !u!4 &1531177812
 Transform:
   m_ObjectHideFlags: 0
