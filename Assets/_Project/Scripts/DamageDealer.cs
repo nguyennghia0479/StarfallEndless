@@ -7,6 +7,9 @@ public class DamageDealer : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.TryGetComponent<IDamageable>(out var damageable))
+        {
+            GameEvents.RaiseExploded(transform.position);
             damageable.TakeDamage(damage);
+        }
     }
 }

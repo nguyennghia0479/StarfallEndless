@@ -12,15 +12,22 @@ public class Player : MonoBehaviour
     private void OnEnable()
     {
         health.OnDeath += HandleDeath;
+        health.OnDamaged += HandleDamaged;
     }
 
     private void OnDisable()
     {
-        health.OnDeath -= HandleDeath;    
+        health.OnDeath -= HandleDeath;
+        health.OnDamaged -= HandleDamaged;
     }
 
     private void HandleDeath()
     {
         GameEvents.RaisePlayerDied();
+    }
+
+    private void HandleDamaged()
+    {
+        GameEvents.RaisePlayerDamaged();
     }
 }

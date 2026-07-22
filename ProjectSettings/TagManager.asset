@@ -50,6 +50,9 @@ TagManager:
   - name: Playership
     uniqueID: 4044286355
     locked: 0
+  - name: VFX
+    uniqueID: 2590337355
+    locked: 0
   m_RenderingLayers:
   - Default
   m_MigratedRenderPipelines: []
