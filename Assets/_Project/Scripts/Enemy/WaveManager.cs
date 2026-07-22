@@ -36,7 +36,7 @@ public class WaveManager : MonoBehaviour
 
         EnemyBoss bossSelected = bossList.Enemies[Random.Range(0, bossList.Enemies.Length)] as EnemyBoss;
         EnemyBoss newBoss = Instantiate(bossSelected, bossWave.GetStartingPoint().position, Quaternion.identity);
-        newBoss.SetupEnemy(bossWave);
+        newBoss.Movement.SetupEnemyMove(bossWave);
     }
 
     private IEnumerator SpawnEnemiesRoutine()
@@ -54,7 +54,7 @@ public class WaveManager : MonoBehaviour
 
                 Enemy enemyPrefab = enemyListSelected.Enemies[i];
                 Enemy newEnemy = Instantiate(enemyPrefab, waveSelected.GetStartingPoint().position, Quaternion.identity);
-                newEnemy.SetupEnemy(waveSelected);
+                newEnemy.Movement.SetupEnemyMove(waveSelected);
 
                 yield return waitTimeSpawnEnemy;
             }
