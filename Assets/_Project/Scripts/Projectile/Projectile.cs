@@ -10,15 +10,24 @@ public class Projectile : MonoBehaviour
     private void Update()
     {
         HandleMovement();
+        SelfDestroy();
+    }
 
-        timer += Time.deltaTime;
-        if (timer >= selfDestroyTime)
-            Destroy(gameObject);
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Destroy(gameObject);
     }
 
     private void HandleMovement()
     {
         transform.position += transform.up * (moveSpeed * Time.deltaTime);
+    }
+
+    private void SelfDestroy()
+    {
+        timer += Time.deltaTime;
+        if (timer >= selfDestroyTime)
+            Destroy(gameObject);
     }
 
 }

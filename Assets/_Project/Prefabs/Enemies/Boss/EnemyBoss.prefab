@@ -132,10 +132,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1175893379194440235}
+  - component: {fileID: -674587975670901264}
   - component: {fileID: 682376142761920129}
   - component: {fileID: 1630911163809592103}
   - component: {fileID: 8682559898543050247}
-  m_Layer: 0
+  - component: {fileID: 6113958784621643157}
+  - component: {fileID: 9046220834279011861}
+  - component: {fileID: -8096247367759132447}
+  m_Layer: 8
   m_Name: EnemyBoss
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -158,6 +162,19 @@ Transform:
   - {fileID: 1850261874488646526}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 180, y: 0, z: 0}
+--- !u!114 &-674587975670901264
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3894742295453415923}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8e29801926dbd144bee501b62ecddf5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyBoss
+  scorePoints: 100
 --- !u!114 &682376142761920129
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -170,7 +187,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee3751eb4ccec0a4eb455d53dfa6e258, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyBoss
-  moveSpeed: 2
+  moveSpeed: 4
   cameraBoundary: {fileID: 1630911163809592103}
   sprite: {fileID: 3678519480350315645}
 --- !u!114 &1630911163809592103
@@ -205,6 +222,68 @@ MonoBehaviour:
   gunPoints:
   - {fileID: 5692033291078989544}
   fireRate: 0.5
+--- !u!114 &6113958784621643157
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3894742295453415923}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58dabdfd91e6f7f448afad0617393757, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HealthPoint
+  healthPoint: 200
+--- !u!114 &9046220834279011861
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3894742295453415923}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6eef85ff94f48a847b01a65a67b95a81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DamageDealer
+  damage: 100
+--- !u!58 &-8096247367759132447
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3894742295453415923}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_Radius: 0.5
 --- !u!1 &4184402995575572483
 GameObject:
   m_ObjectHideFlags: 0

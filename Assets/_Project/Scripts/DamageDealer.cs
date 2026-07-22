@@ -1,0 +1,12 @@
+using UnityEngine;
+
+public class DamageDealer : MonoBehaviour
+{
+    [SerializeField] private int damage = 10;
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.TryGetComponent<IDamageable>(out var damageable))
+            damageable.TakeDamage(damage);
+    }
+}

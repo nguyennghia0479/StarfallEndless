@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Bosses
   m_EditorClassIdentifier: Assembly-CSharp::EnemyListSO
   enemies:
-  - {fileID: 7059945776640249961, guid: 92503d5d454266f42a9db2c09a93379c, type: 3}
-  - {fileID: 7059945776640249961, guid: f9220f74643cdb049afad6ff7223aea0, type: 3}
+  - {fileID: 2171544212410794776, guid: 92503d5d454266f42a9db2c09a93379c, type: 3}
+  - {fileID: 2171544212410794776, guid: f9220f74643cdb049afad6ff7223aea0, type: 3}
