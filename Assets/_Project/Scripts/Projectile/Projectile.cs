@@ -1,33 +1,16 @@
 using UnityEngine;
 
-public class Projectile : MonoBehaviour
+public class Projectile : Movement
 {
-    [SerializeField] private float moveSpeed = 10f;
-    [SerializeField] private float selfDestroyTime = 2f;
-
-    private float timer = 0;
-
-    private void Update()
-    {
-        HandleMovement();
-        SelfDestroy();
-    }
+    [SerializeField] private DamageDealer damageDealer;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Destroy(gameObject);
     }
 
-    private void HandleMovement()
+    public void ModifiyDamage(float buffPercent)
     {
-        transform.position += transform.up * (moveSpeed * Time.deltaTime);
+        damageDealer.ModifiyDamage(buffPercent);
     }
-
-    private void SelfDestroy()
-    {
-        timer += Time.deltaTime;
-        if (timer >= selfDestroyTime)
-            Destroy(gameObject);
-    }
-
 }

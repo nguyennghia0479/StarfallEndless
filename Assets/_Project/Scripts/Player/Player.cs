@@ -2,26 +2,40 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    private HealthPoint health;
+    [SerializeField] private SpriteRenderer shieldSpriteRenderer;
+
+    public HealthPoint Health {  get; private set; }
+    public PlayerMovement Movement { get; private set; }
+    public Shooter Shooter { get; private set; }
+
+    private float enableShieldTimer;
+    private bool isShieldEnabled;
 
     private void Awake()
     {
-        health = GetComponent<HealthPoint>();
+        Health = GetComponent<HealthPoint>();
+        Movement = GetComponent<PlayerMovement>();
+        Shooter = GetComponent<Shooter>();
     }
 
     private void OnEnable()
     {
-        health.OnDeath += HandleDeath;
-        health.OnDamaged += HandleDamaged;
+        Health.OnDestroyed += HandleDestroyed;
+        Health.OnDamaged += HandleDamaged;
     }
 
     private void OnDisable()
     {
-        health.OnDeath -= HandleDeath;
-        health.OnDamaged -= HandleDamaged;
+        Health.OnDestroyed -= HandleDestroyed;
+        Health.OnDamaged -= HandleDamaged;
     }
 
-    private void HandleDeath()
+    private void Update()
+    {
+        DisableShield();
+    }
+
+    private void HandleDestroyed()
     {
         GameEvents.RaiseExploded(transform.position);
         GameEvents.RaisePlayerDied();
@@ -30,5 +44,26 @@ public class Player : MonoBehaviour
     private void HandleDamaged()
     {
         GameEvents.RaisePlayerDamaged();
+    }
+
+    public void EnableShield(Sprite shieldSprite, float duration)
+    {
+        enableShieldTimer = duration;
+        isShieldEnabled = true;
+        shieldSpriteRenderer.sprite = shieldSprite;
+        shieldSpriteRenderer.gameObject.SetActive(true);
+    }
+
+    private void DisableShield()
+    {
+        if (!isShieldEnabled)
+            return;
+
+        enableShieldTimer -= Time.deltaTime;
+        if (enableShieldTimer <= 0)
+        {
+            isShieldEnabled = false;
+            shieldSpriteRenderer.gameObject.SetActive(false);
+        }
     }
 }

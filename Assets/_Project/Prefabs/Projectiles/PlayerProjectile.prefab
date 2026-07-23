@@ -140,12 +140,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3c54beefa560bf43be10ad7e7bad8d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Projectile
-  damageDealer: {fileID: -4001746056758398579}
   moveSpeed: 10
-  selfDestroyTime: 2
-  targetLayer:
-    serializedVersion: 2
-    m_Bits: 256
+  lifeTime: 2
+  isMoveUp: 1
+  damageDealer: {fileID: -4001746056758398579}
 --- !u!114 &-4001746056758398579
 MonoBehaviour:
   m_ObjectHideFlags: 0

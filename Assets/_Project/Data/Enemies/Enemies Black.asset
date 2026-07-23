@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c738e9a38b8b84f4b8bf773d311aadcc, type: 3}
-  m_Name: EnemiesBlack
+  m_Name: Enemies Black
   m_EditorClassIdentifier: Assembly-CSharp::EnemyListSO
   enemies:
   - {fileID: 8007641231954654908, guid: 725f4503a0f42cc42a613e69a08e3dd1, type: 3}

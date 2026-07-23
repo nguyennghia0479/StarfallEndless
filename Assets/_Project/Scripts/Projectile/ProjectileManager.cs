@@ -12,8 +12,8 @@ public class ProjectileManager : MonoBehaviour
             Destroy(gameObject);
     }
 
-    public void CreateProjectile(GameObject projectilePrefab, Vector3 position, Quaternion rotation)
+    public Projectile CreateProjectile(Projectile projectilePrefab, Vector3 position, Quaternion rotation)
     {
-        Instantiate(projectilePrefab, position, rotation, transform);
+        return Instantiate(projectilePrefab, position, rotation, transform);
     }
 }
