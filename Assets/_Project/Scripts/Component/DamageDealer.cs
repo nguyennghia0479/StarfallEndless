@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class DamageDealer : MonoBehaviour
 {
-    [SerializeField] private int damage = 10;
+    [SerializeField] private float damage;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -12,4 +12,6 @@ public class DamageDealer : MonoBehaviour
             damageable.TakeDamage(damage);
         }
     }
+
+    public void Initialize(float damage) => this.damage = damage;
 }

@@ -9,6 +9,6 @@ public class ItemSpeedEffectSO : ItemEffectSO
 
     public override void ApplyEffect(Player player)
     {
-        player.Movement.AddModifier(buffPercent, duration);
+        player.Movement.AppylyIncreaseSpeed(buffPercent, duration);
     }
 }

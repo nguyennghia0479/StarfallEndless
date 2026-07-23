@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: Effect Projectile - Gold
   m_EditorClassIdentifier: Assembly-CSharp::ItemDamageEffectSO
   upgradeProjectile: {fileID: 5097140985701448133, guid: 7d89fceccd6e6324c994dfd2ee853c9c, type: 3}
+  buffPercent: 0.7
   duration: 10

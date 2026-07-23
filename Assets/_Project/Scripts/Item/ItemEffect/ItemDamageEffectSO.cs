@@ -4,10 +4,12 @@ using UnityEngine;
 public class ItemDamageEffectSO : ItemEffectSO
 {
     [SerializeField] private Projectile upgradeProjectile;
+    [Range(0f, 1f)]
+    [SerializeField] private float buffPercent = .3f;
     [SerializeField] private float duration = 10;
 
     public override void ApplyEffect(Player player)
     {
-        player.Shooter.AddModifier(upgradeProjectile, duration);
+        player.Shooter.ApplyUpgradeProjectile(upgradeProjectile, buffPercent, duration);
     }
 }

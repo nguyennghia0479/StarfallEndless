@@ -102,7 +102,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2635272260733189480}
   - component: {fileID: 5097140985701448133}
-  - component: {fileID: -4001746056758398579}
   - component: {fileID: 5189496051529954620}
   - component: {fileID: 5356748233727002895}
   m_Layer: 7
@@ -143,20 +142,7 @@ MonoBehaviour:
   moveSpeed: 10
   lifeTime: 2
   isMoveUp: 1
-  damageDealer: {fileID: -4001746056758398579}
---- !u!114 &-4001746056758398579
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7930951197769485024}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6eef85ff94f48a847b01a65a67b95a81, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DamageDealer
-  damage: 10
+  damageDealer: {fileID: 0}
 --- !u!61 &5189496051529954620
 BoxCollider2D:
   m_ObjectHideFlags: 0

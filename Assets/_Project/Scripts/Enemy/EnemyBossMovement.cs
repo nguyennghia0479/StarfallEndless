@@ -5,10 +5,17 @@ public class EnemyBossMovement : EnemyMovement
     [SerializeField] private CameraBoundary cameraBoundary;
     [SerializeField] private SpriteRenderer sprite;
 
+    private HealthPoint healthPoint;
     private bool canRoamMove;
     private float heightClamp;
     private float widthClamp;
     private Vector3 targetPosition;
+
+    private void Awake()
+    {
+        healthPoint = GetComponent<HealthPoint>();
+        healthPoint.DisableDamaged();
+    }
 
     private void Start()
     {
@@ -44,6 +51,7 @@ public class EnemyBossMovement : EnemyMovement
         isMovedByWaypoint = false;
         canRoamMove = true;
         targetPosition = GetRandomPosition();
+        healthPoint.EnableDamaged();
     }
 
     private void HandleRoamingMove()

@@ -1,34 +1,23 @@
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class Enemy : Entity
 {
-    
-    [SerializeField] protected int scorePoints = 10;
+    public EnemyMovement Movement {  get; private set; }
+    protected int scorePoints;
 
-    protected HealthPoint health;
-    protected EnemyMovement movement;
-
-    protected void Awake()
+    protected override void Awake()
     {
-        health = GetComponent<HealthPoint>();
-        movement = GetComponent<EnemyMovement>();
+        base.Awake();
+
+        Movement = GetComponent<EnemyMovement>();
+        Movement.Initialize(stats.MoveSpeed);
+        scorePoints = stats.ScorePoint;
     }
 
-    protected void OnEnable()
+    protected override void HandleDestroyed()
     {
-        health.OnDestroyed += HandleDeath;
-    }
+        base.HandleDestroyed();
 
-    protected void OnDisable()
-    {
-        health.OnDestroyed -= HandleDeath;
-    }
-
-    protected void HandleDeath()
-    {
-        GameEvents.RaiseExploded(transform.position);
         GameEvents.RaiseEnemyDied(scorePoints);
     }
-
-    public EnemyMovement Movement => movement;
 }

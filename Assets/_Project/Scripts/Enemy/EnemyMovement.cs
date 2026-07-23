@@ -2,19 +2,20 @@ using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
 {
-    [SerializeField] protected float moveSpeed = 6f;
-
     protected WaveSO wave;
     protected Transform[] waypoints;
     protected Transform currentWaypoint;
     protected int waypointIndex;
     protected bool isMovedByWaypoint;
+    protected float moveSpeed = 6f;
     protected readonly float sqrDistanceThreshold = .01f;
 
     protected virtual void Update()
     {
         HandleMovement();
     }
+
+    public void Initialize(float moveSpeed) => this.moveSpeed = moveSpeed;
 
     public virtual void SetupEnemyMove(WaveSO wave)
     {

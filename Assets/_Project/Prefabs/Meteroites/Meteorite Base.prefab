@@ -157,6 +157,7 @@ MonoBehaviour:
   moveSpeed: 2
   lifeTime: 10
   isMoveUp: 0
+  stats: {fileID: 11400000, guid: 9d2322dac49c9ca43be7166b3f5082fc, type: 2}
 --- !u!114 &8611805386597965920
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -170,6 +171,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HealthPoint
   maxHP: 50
+  canTakeDamge: 0
 --- !u!114 &8136430926962635983
 MonoBehaviour:
   m_ObjectHideFlags: 0
