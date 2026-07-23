@@ -77,11 +77,11 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: -1003107891
-  m_SortingLayer: 1
+  m_SortingLayerID: -250680941
+  m_SortingLayer: 2
   m_SortingOrder: -2
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300000, guid: e7ebaebe426083b44a52c4296b586aa1, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8d4f7be14fff5a14387312bd404b245e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -102,11 +102,11 @@ GameObject:
   m_Component:
   - component: {fileID: 2635272260733189480}
   - component: {fileID: 5097140985701448133}
-  - component: {fileID: 1078609620110160835}
+  - component: {fileID: -4001746056758398579}
   - component: {fileID: 5189496051529954620}
-  - component: {fileID: -9210999919223444490}
-  m_Layer: 9
-  m_Name: EnemyProjectile
+  - component: {fileID: 5356748233727002895}
+  m_Layer: 7
+  m_Name: Player Projectile Bronze
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -143,8 +143,8 @@ MonoBehaviour:
   moveSpeed: 10
   lifeTime: 2
   isMoveUp: 1
-  damageDealer: {fileID: 1078609620110160835}
---- !u!114 &1078609620110160835
+  damageDealer: {fileID: -4001746056758398579}
+--- !u!114 &-4001746056758398579
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -156,7 +156,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6eef85ff94f48a847b01a65a67b95a81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageDealer
-  damage: 10
+  damage: 13
 --- !u!61 &5189496051529954620
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -191,7 +191,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.0019087195, y: 0}
+  m_Offset: {x: -0.00009397417, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -201,9 +201,9 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.093212724, y: 0.3651554}
+  m_Size: {x: 0.08920734, y: 0.3651554}
   m_EdgeRadius: 0
---- !u!50 &-9210999919223444490
+--- !u!50 &5356748233727002895
 Rigidbody2D:
   serializedVersion: 5
   m_ObjectHideFlags: 0

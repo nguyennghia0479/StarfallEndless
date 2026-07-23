@@ -8,9 +8,4 @@ public class Projectile : Movement
     {
         Destroy(gameObject);
     }
-
-    public void ModifiyDamage(float buffPercent)
-    {
-        damageDealer.ModifiyDamage(buffPercent);
-    }
 }
