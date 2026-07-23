@@ -2,26 +2,30 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] private float moveSpeed = 8f;
-    [SerializeField] private SpriteRenderer sprite;
-
     [Header("Boundary settings")]
+    [SerializeField] private SpriteRenderer sprite;
     [SerializeField] private CameraBoundary cameraBoundary;
 
     private PlayerController playerController;
+    private float moveSpeed;
     private float defaultMoveSpeed;
     private float buffTimer;
 
     private void Awake()
     {
-        playerController = GetComponent<PlayerController>();
-        defaultMoveSpeed = moveSpeed;
+        playerController = GetComponent<PlayerController>(); 
     }
 
     private void Update()
     {
         HandleMovement();
-        RemoveModifier();
+        RemoveIncreaseSpeed();
+    }
+
+    public void Initialize(float moveSpeed)
+    {
+        this.moveSpeed = moveSpeed;
+        defaultMoveSpeed = moveSpeed;
     }
 
     private void HandleMovement()
@@ -31,13 +35,13 @@ public class PlayerMovement : MonoBehaviour
         transform.position = cameraBoundary.ClampToCameraBoundaries(sprite, targetPosition);
     }
 
-    public void AddModifier(float buffPercent, float duration)
+    public void AppylyIncreaseSpeed(float buffPercent, float duration)
     {
         buffTimer = duration;
         moveSpeed = defaultMoveSpeed + (defaultMoveSpeed * buffPercent);
     }
 
-    private void RemoveModifier()
+    private void RemoveIncreaseSpeed()
     {
         if (moveSpeed == defaultMoveSpeed)
             return;

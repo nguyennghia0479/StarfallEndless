@@ -2,13 +2,21 @@ using UnityEngine;
 
 public class Meteorite : Movement
 {
+    [SerializeField] private StatsSO stats;
+
     private HealthPoint health;
+    private DamageDealer damageDealer;
     private float topBound;
     private bool isEnteredScreen;
 
     private void Awake()
     {
         health = GetComponent<HealthPoint>();
+        damageDealer = GetComponent<DamageDealer>();
+
+        Initialize(stats.MoveSpeed);
+        health.Initialize(stats.MaxHP, stats.Defend);
+        damageDealer.Initialize(stats.CollisionDamage);
     }
 
     private void OnEnable()

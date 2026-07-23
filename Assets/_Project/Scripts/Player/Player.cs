@@ -1,31 +1,32 @@
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : Entity
 {
     [SerializeField] private SpriteRenderer shieldSpriteRenderer;
 
-    public HealthPoint Health {  get; private set; }
     public PlayerMovement Movement { get; private set; }
-    public Shooter Shooter { get; private set; }
 
     private float enableShieldTimer;
 
-    private void Awake()
+    protected override void Awake()
     {
-        Health = GetComponent<HealthPoint>();
+        base.Awake();
+
         Movement = GetComponent<PlayerMovement>();
-        Shooter = GetComponent<Shooter>();
+        Movement.Initialize(stats.MoveSpeed);
     }
 
-    private void OnEnable()
+    protected override void OnEnable()
     {
-        Health.OnDestroyed += HandleDestroyed;
+        base.OnEnable();
+
         Health.OnDamaged += HandleDamaged;
     }
 
-    private void OnDisable()
+    protected override void OnDisable()
     {
-        Health.OnDestroyed -= HandleDestroyed;
+        base.OnDisable();
+
         Health.OnDamaged -= HandleDamaged;
     }
 
@@ -34,9 +35,10 @@ public class Player : MonoBehaviour
         DisableShield();
     }
 
-    private void HandleDestroyed()
+    protected override void HandleDestroyed()
     {
-        GameEvents.RaiseExploded(transform.position);
+        base.HandleDestroyed();
+
         GameEvents.RaisePlayerDied();
     }
 

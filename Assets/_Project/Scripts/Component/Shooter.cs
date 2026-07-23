@@ -10,6 +10,8 @@ public class Shooter : MonoBehaviour
     private Projectile defaultProjectile;
     private Coroutine fireRoutine;
     private WaitForSeconds waitTime;
+    private float projectileDamage;
+    private float defaultProjectileDamage;
     private bool isAutoFire;
     private float buffTimer;
 
@@ -22,7 +24,13 @@ public class Shooter : MonoBehaviour
 
     private void Update()
     {
-        RemoveModifier();
+        RemoveUpgradeProjectile();
+    }
+
+    public void Initialize(float projectileDamage)
+    {
+        this.projectileDamage = projectileDamage;
+        defaultProjectileDamage = projectileDamage;
     }
 
     private IEnumerator FireRoutine()
@@ -31,7 +39,8 @@ public class Shooter : MonoBehaviour
         {
             foreach (Transform gunPoint in gunPoints)
             {
-                ProjectileManager.Instance.CreateProjectile(projectilePrefab, gunPoint.position, gunPoint.rotation);
+                Projectile newProjectile = ProjectileManager.Instance.CreateProjectile(projectilePrefab, gunPoint.position, gunPoint.rotation);
+                newProjectile.Initialize(projectileDamage);
             }
 
             yield return waitTime;
@@ -40,7 +49,7 @@ public class Shooter : MonoBehaviour
 
     public void EnableAutoFire()
     {
-        if (isAutoFire || fireRoutine != null) 
+        if (isAutoFire || fireRoutine != null)
             return;
 
         isAutoFire = true;
@@ -56,19 +65,23 @@ public class Shooter : MonoBehaviour
         }
     }
 
-    public void AddModifier(Projectile upgradeProjectile, float duration)
+    public void ApplyUpgradeProjectile(Projectile upgradeProjectile, float buffPercent, float duration)
     {
         buffTimer = duration;
         projectilePrefab = upgradeProjectile;
+        projectileDamage = defaultProjectileDamage + (defaultProjectileDamage * buffPercent);
     }
 
-    private void RemoveModifier()
+    private void RemoveUpgradeProjectile()
     {
-        if (projectilePrefab == defaultProjectile)
+        if (projectilePrefab == defaultProjectile || projectileDamage == defaultProjectileDamage)
             return;
 
         buffTimer -= Time.deltaTime;
         if (buffTimer <= 0)
+        {
             projectilePrefab = defaultProjectile;
+            projectileDamage = defaultProjectileDamage;
+        }
     }
 }

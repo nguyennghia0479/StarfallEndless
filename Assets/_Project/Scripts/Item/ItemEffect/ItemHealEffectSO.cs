@@ -8,6 +8,6 @@ public class ItemHealEffectSO : ItemEffectSO
 
     public override void ApplyEffect(Player player)
     {
-        player.Health.HealingHealth(healPercent);
+        player.Health.ApplyHealing(healPercent);
     }
 }

@@ -15,6 +15,8 @@ public class Movement : MonoBehaviour
         SelfDestroy();
     }
 
+    public virtual void Initialize(float moveSpeed) => this.moveSpeed = moveSpeed;
+
     protected virtual void HandleMovement()
     {
         float moveDelta = moveSpeed * Time.deltaTime;

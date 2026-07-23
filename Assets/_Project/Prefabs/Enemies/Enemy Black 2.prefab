@@ -14,7 +14,7 @@ PrefabInstance:
       objectReference: {fileID: -7896999999951008849, guid: f3c2a7c557c31c54480e397df74c2328, type: 3}
     - target: {fileID: 5503332492708352977, guid: 7242d311862bafb41b5fb2a5190b49c4, type: 3}
       propertyPath: m_Name
-      value: EnemyBlack 2
+      value: Enemy Black 2
       objectReference: {fileID: 0}
     - target: {fileID: 8001792790393322353, guid: 7242d311862bafb41b5fb2a5190b49c4, type: 3}
       propertyPath: m_LocalPosition.x
@@ -56,6 +56,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8600910230785697512, guid: 7242d311862bafb41b5fb2a5190b49c4, type: 3}
+      propertyPath: stats
+      value: 
+      objectReference: {fileID: 11400000, guid: fbbe92c6c706a124b8b5d33896dcfbc3, type: 2}
     - target: {fileID: 9214450921998076496, guid: 7242d311862bafb41b5fb2a5190b49c4, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0.255

@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c738e9a38b8b84f4b8bf773d311aadcc, type: 3}
-  m_Name: Enemies Blue
-  m_EditorClassIdentifier: Assembly-CSharp::EnemyListSO
+  m_Script: {fileID: 11500000, guid: 7f68d496a28ceba46924a54cd785fd69, type: 3}
+  m_Name: Enemy Blue DB
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyDatabaseSO
   enemies:
   - {fileID: 3892144918735762774, guid: 3e421dae19a1305429b6c1f740699c86, type: 3}
   - {fileID: 3892144918735762774, guid: bf135ab56b3dd2e48a7e2b7be4bda9b5, type: 3}
