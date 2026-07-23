@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 492201c47b0589047b8b839a0037dbd5, type: 3}
+  m_Name: Item - Bolt Gold
+  m_EditorClassIdentifier: Assembly-CSharp::ItemSO
+  icon: {fileID: 21300000, guid: ff738f566a0010f4381f805286d5e330, type: 3}
+  effect: {fileID: 11400000, guid: 471503f2741b47e4f8ee147b5594f397, type: 2}

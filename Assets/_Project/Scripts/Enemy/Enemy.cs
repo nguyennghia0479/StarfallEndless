@@ -16,12 +16,12 @@ public class Enemy : MonoBehaviour
 
     protected void OnEnable()
     {
-        health.OnDeath += HandleDeath;
+        health.OnDestroyed += HandleDeath;
     }
 
     protected void OnDisable()
     {
-        health.OnDeath -= HandleDeath;
+        health.OnDestroyed -= HandleDeath;
     }
 
     protected void HandleDeath()

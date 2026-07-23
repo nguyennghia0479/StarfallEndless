@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Wave ", menuName = "ScriptableObject/Wave")]
+[CreateAssetMenu(fileName = "Wave ", menuName = "Scriptable Objects/Wave")]
 public class WaveSO : ScriptableObject
 {
     [SerializeField] private Transform path;

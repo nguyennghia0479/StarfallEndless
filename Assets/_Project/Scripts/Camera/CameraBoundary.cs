@@ -4,8 +4,6 @@ public class CameraBoundary : MonoBehaviour
 {
     [Range(0f, 2f)]
     [SerializeField] private float bottomPadding = 0;
-    [Range(0f, 2f)]
-    [SerializeField] private float topPadding = 0;
     [Range(0, 1f)]
     [SerializeField] private float topLimited = .5f;
     [Space]
@@ -40,12 +38,26 @@ public class CameraBoundary : MonoBehaviour
         if (!isLookUp)
         {
             minYClamp = midBound.y;
-            maxYClamp = maxBound.y - spritePaddingY + topPadding;
+            maxYClamp = maxBound.y - spritePaddingY + bottomPadding;
         }
         
         targetPosition.x = Mathf.Clamp(targetPosition.x, minXClamp, maxXClamp);
         targetPosition.y = Mathf.Clamp(targetPosition.y, minYClamp, maxYClamp);
 
+        return targetPosition;
+    }
+
+    public Vector3 ClampToCameraWidthBoundary(SpriteRenderer sprite, Vector3 targetPosition)
+    {
+        SetSpritePadding(sprite);
+
+        Vector2 minBound = camera.ViewportToWorldPoint(new Vector2(0, 0));
+        Vector2 maxBound = camera.ViewportToWorldPoint(new Vector2(1, 1));
+
+        float minXClamp = minBound.x + spritePaddingX;
+        float maxXClamp = maxBound.x - spritePaddingX;
+
+        targetPosition.x = Mathf.Clamp(targetPosition.x, minXClamp, maxXClamp);
         return targetPosition;
     }
 
@@ -58,6 +70,7 @@ public class CameraBoundary : MonoBehaviour
         }
     }
 
+    public float GetTopBoundPosition() => camera.ViewportToWorldPoint(new Vector2(0, 1)).y;
     public float GetHeightClamp() => heightClamp;
     public float GetWidthClamp() => widthClamp;
 }
