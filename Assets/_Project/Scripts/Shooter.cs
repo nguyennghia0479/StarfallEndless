@@ -7,14 +7,15 @@ public class Shooter : MonoBehaviour
     [SerializeField] private Transform[] gunPoints;
     [SerializeField] private float fireRate = .5f;
 
+    private Projectile defaultProjectile;
     private Coroutine fireRoutine;
     private WaitForSeconds waitTime;
     private bool isAutoFire;
-    private float buffPercent;
     private float buffTimer;
 
     private void Start()
     {
+        defaultProjectile = projectilePrefab;
         waitTime = new WaitForSeconds(fireRate);
         EnableAutoFire();
     }
@@ -30,8 +31,7 @@ public class Shooter : MonoBehaviour
         {
             foreach (Transform gunPoint in gunPoints)
             {
-                Projectile newProjectile = ProjectileManager.Instance.CreateProjectile(projectilePrefab, gunPoint.position, gunPoint.rotation);
-                newProjectile.ModifiyDamage(buffPercent);
+                ProjectileManager.Instance.CreateProjectile(projectilePrefab, gunPoint.position, gunPoint.rotation);
             }
 
             yield return waitTime;
@@ -56,19 +56,19 @@ public class Shooter : MonoBehaviour
         }
     }
 
-    public void AddModifier(float buffPercent, float duration)
+    public void AddModifier(Projectile upgradeProjectile, float duration)
     {
         buffTimer = duration;
-        this.buffPercent = buffPercent;
+        projectilePrefab = upgradeProjectile;
     }
 
     private void RemoveModifier()
     {
-        if (buffPercent == 0)
+        if (projectilePrefab == defaultProjectile)
             return;
 
         buffTimer -= Time.deltaTime;
         if (buffTimer <= 0)
-            buffPercent = 0;
+            projectilePrefab = defaultProjectile;
     }
 }

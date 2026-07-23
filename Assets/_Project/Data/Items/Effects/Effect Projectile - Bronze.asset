@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8130f4ce97cc2584499b8f389c313bd2, type: 3}
-  m_Name: Effect Damage - Silver
+  m_Name: Effect Projectile - Bronze
   m_EditorClassIdentifier: Assembly-CSharp::ItemDamageEffectSO
-  buffPercent: 0.4
+  upgradeProjectile: {fileID: 5097140985701448133, guid: f5a30e628e518e1419aa40073d38167c, type: 3}
   duration: 10

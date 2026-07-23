@@ -25,13 +25,6 @@ public class HealthPoint : MonoBehaviour, IDamageable
         RemoveModifier();
     }
 
-    public void HealingHealth(float healPercent)
-    {
-        int healAmount = Mathf.RoundToInt(maxHP * healPercent);
-        currentHP += healAmount;
-        currentHP = Mathf.Clamp(currentHP, 0, maxHP);
-    }
-
     public void TakeDamage(int damage)
     {
         if (isDeath || !canTakeDamge) return;
@@ -52,6 +45,13 @@ public class HealthPoint : MonoBehaviour, IDamageable
         isDeath = true;
         OnDestroyed?.Invoke();
         Destroy(gameObject);
+    }
+
+    public void HealingHealth(float healPercent)
+    {
+        int healAmount = Mathf.RoundToInt(maxHP * healPercent);
+        currentHP += healAmount;
+        currentHP = Mathf.Clamp(currentHP, 0, maxHP);
     }
 
     public void AddModifier(float shieldDefPercent, float duration)

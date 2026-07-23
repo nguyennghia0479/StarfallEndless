@@ -9,7 +9,6 @@ public class Player : MonoBehaviour
     public Shooter Shooter { get; private set; }
 
     private float enableShieldTimer;
-    private bool isShieldEnabled;
 
     private void Awake()
     {
@@ -49,21 +48,17 @@ public class Player : MonoBehaviour
     public void EnableShield(Sprite shieldSprite, float duration)
     {
         enableShieldTimer = duration;
-        isShieldEnabled = true;
         shieldSpriteRenderer.sprite = shieldSprite;
         shieldSpriteRenderer.gameObject.SetActive(true);
     }
 
     private void DisableShield()
     {
-        if (!isShieldEnabled)
+        if (!shieldSpriteRenderer.gameObject.activeSelf)
             return;
 
         enableShieldTimer -= Time.deltaTime;
         if (enableShieldTimer <= 0)
-        {
-            isShieldEnabled = false;
             shieldSpriteRenderer.gameObject.SetActive(false);
-        }
     }
 }
