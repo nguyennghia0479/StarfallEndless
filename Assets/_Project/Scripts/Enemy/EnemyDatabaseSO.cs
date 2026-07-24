@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Enemy Database", menuName = "Scriptable Objects/Enemy Database")]
+[CreateAssetMenu(fileName = "Enemy Database", menuName = "Scriptable Objects/Database/Enemy Database")]
 public class EnemyDatabaseSO : ScriptableObject
 {
     [SerializeField] private Enemy[] enemies;

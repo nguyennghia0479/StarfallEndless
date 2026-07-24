@@ -97,7 +97,7 @@ public class BackgroundScrolling : MonoBehaviour
         sprite.GetPropertyBlock(propertyBlock);
 
         Color color = new(1f, 1f, 1f, targetAlpha);
-        propertyBlock.SetColor(SharderIDs.BASE_COLOR, color);
+        propertyBlock.SetColor(GameIdentifiers.SharderIDs.BASE_COLOR, color);
         sprite.SetPropertyBlock(propertyBlock);
     }
 

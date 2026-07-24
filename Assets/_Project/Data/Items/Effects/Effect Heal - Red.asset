@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88c75ec71549d4c4681e04f0210a22aa, type: 3}
   m_Name: Effect Heal - Red
   m_EditorClassIdentifier: Assembly-CSharp::ItemHealEffectSO
-  healthAmount: 0.5
+  healPercent: 0.6

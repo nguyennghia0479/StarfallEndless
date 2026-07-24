@@ -12,25 +12,29 @@ public class Shooter : MonoBehaviour
     private WaitForSeconds waitTime;
     private float projectileDamage;
     private float defaultProjectileDamage;
+    private float defaultFireRate;
     private bool isAutoFire;
+    private float upgradeTimer;
     private float buffTimer;
 
-    private void Start()
-    {
-        defaultProjectile = projectilePrefab;
-        waitTime = new WaitForSeconds(fireRate);
-        EnableAutoFire();
-    }
+    private const float MIN_FIRE_RATE = .25f;
 
     private void Update()
     {
         RemoveUpgradeProjectile();
+        RemoveBuffFireRate();
     }
 
     public void Initialize(float projectileDamage)
     {
         this.projectileDamage = projectileDamage;
         defaultProjectileDamage = projectileDamage;
+
+        defaultProjectile = projectilePrefab;
+        defaultFireRate = fireRate;
+
+        waitTime = new WaitForSeconds(fireRate);
+        EnableAutoFire();
     }
 
     private IEnumerator FireRoutine()
@@ -67,7 +71,7 @@ public class Shooter : MonoBehaviour
 
     public void ApplyUpgradeProjectile(Projectile upgradeProjectile, float buffPercent, float duration)
     {
-        buffTimer = duration;
+        upgradeTimer = duration;
         projectilePrefab = upgradeProjectile;
         projectileDamage = defaultProjectileDamage + (defaultProjectileDamage * buffPercent);
     }
@@ -77,11 +81,28 @@ public class Shooter : MonoBehaviour
         if (projectilePrefab == defaultProjectile || projectileDamage == defaultProjectileDamage)
             return;
 
-        buffTimer -= Time.deltaTime;
-        if (buffTimer <= 0)
+        upgradeTimer -= Time.deltaTime;
+        if (upgradeTimer <= 0)
         {
             projectilePrefab = defaultProjectile;
             projectileDamage = defaultProjectileDamage;
         }
+    }
+
+    public void ApplyBuffFireRate(float buffFireRatePercent, float duration)
+    {
+        buffTimer = duration;
+        fireRate = defaultFireRate - (defaultFireRate * buffFireRatePercent);
+        fireRate = Mathf.Clamp(fireRate, MIN_FIRE_RATE, fireRate);
+    }
+
+    private void RemoveBuffFireRate()
+    {
+        if (fireRate == defaultFireRate)
+            return;
+
+        buffTimer -= Time.deltaTime;
+        if (buffTimer <= 0)
+            fireRate = defaultFireRate;
     }
 }

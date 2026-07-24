@@ -4,7 +4,6 @@ using UnityEngine;
 public class HealthPoint : MonoBehaviour, IDamageable
 {
     public event Action OnDestroyed;
-    public event Action OnDamaged;
 
     private const int DEFEND_MITTIGATION = 50;
 
@@ -18,7 +17,7 @@ public class HealthPoint : MonoBehaviour, IDamageable
 
     private void Update()
     {
-        RemoveIncreaseDefend();
+        RemoveBuffDefend();
     }
 
     public void Initialize(float maxHP, float defend)
@@ -33,16 +32,22 @@ public class HealthPoint : MonoBehaviour, IDamageable
     public void TakeDamage(float rawDamage)
     {
         if (isDeath || !canTakeDamge) return;
+        float finalDamage = CalculateFinalDamage(rawDamage);
 
+        currentHP -= finalDamage;
+        GameEvents.RaiseEntityDamaged(gameObject);
+
+        if (currentHP <= 0)
+            Destroyed();
+    }
+
+    private float CalculateFinalDamage(float rawDamage)
+    {
         float mitigationPercent = defend / (defend + DEFEND_MITTIGATION);
         float finalDamage = rawDamage * (1 - mitigationPercent);
         finalDamage = Mathf.Clamp(finalDamage, 1, finalDamage);
 
-        currentHP -= finalDamage;
-        OnDamaged?.Invoke();
-
-        if (currentHP <= 0)
-            Destroyed();
+        return finalDamage;
     }
 
     private void Destroyed()
@@ -51,7 +56,7 @@ public class HealthPoint : MonoBehaviour, IDamageable
             return;
 
         isDeath = true;
-        OnDestroyed?.Invoke();
+        OnDestroyed?.Invoke(); // note to check if can replace with GameEvents
         Destroy(gameObject);
     }
 
@@ -61,13 +66,13 @@ public class HealthPoint : MonoBehaviour, IDamageable
         currentHP = Mathf.Clamp(currentHP, 0, maxHP);
     }
 
-    public void ApplyIncreaseDefend(float buffPercent, float duration)
+    public void ApplyBuffDefend(float buffPercent, float duration)
     {
         buffTimer = duration;
         defend = defaultDefend + (defaultDefend * buffPercent);
     }
 
-    private void RemoveIncreaseDefend()
+    private void RemoveBuffDefend()
     {
         if (defend == defaultDefend)
             return;

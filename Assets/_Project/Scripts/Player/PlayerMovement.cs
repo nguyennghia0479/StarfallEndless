@@ -7,19 +7,22 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private CameraBoundary cameraBoundary;
 
     private PlayerController playerController;
+    private TrailRenderer trail;
     private float moveSpeed;
     private float defaultMoveSpeed;
     private float buffTimer;
 
     private void Awake()
     {
-        playerController = GetComponent<PlayerController>(); 
+        playerController = GetComponent<PlayerController>();
+        trail = GetComponentInChildren<TrailRenderer>();
+        DisableTrail();
     }
 
     private void Update()
     {
         HandleMovement();
-        RemoveIncreaseSpeed();
+        RemoveBuffSpeed();
     }
 
     public void Initialize(float moveSpeed)
@@ -30,25 +33,43 @@ public class PlayerMovement : MonoBehaviour
 
     private void HandleMovement()
     {
-        Vector3 targetPosition =  transform.position + playerController.GetMoveDirection() * (moveSpeed * Time.deltaTime);
-   
+        Vector3 targetPosition = transform.position + playerController.GetMoveDirection() * (moveSpeed * Time.deltaTime);
+
         transform.position = cameraBoundary.ClampToCameraBoundaries(sprite, targetPosition);
     }
 
-    public void AppylyIncreaseSpeed(float buffPercent, float duration)
+    public void AppylyBuffSpeed(float buffPercent, float duration)
     {
         buffTimer = duration;
         moveSpeed = defaultMoveSpeed + (defaultMoveSpeed * buffPercent);
+        EnableTrail();
     }
 
-    private void RemoveIncreaseSpeed()
+    private void RemoveBuffSpeed()
     {
         if (moveSpeed == defaultMoveSpeed)
             return;
 
+        buffTimer -= Time.deltaTime;
         if (buffTimer <= 0)
         {
             moveSpeed = defaultMoveSpeed;
+            DisableTrail();
         }
+    }
+
+    private void EnableTrail()
+    {
+        if (trail == null) 
+            return;
+
+        trail.gameObject.SetActive(true);
+    }
+    private void DisableTrail()
+    {
+        if (trail == null)
+            return;
+
+        trail.gameObject.SetActive(false);
     }
 }

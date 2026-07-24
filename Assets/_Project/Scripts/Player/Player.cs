@@ -16,20 +16,6 @@ public class Player : Entity
         Movement.Initialize(stats.MoveSpeed);
     }
 
-    protected override void OnEnable()
-    {
-        base.OnEnable();
-
-        Health.OnDamaged += HandleDamaged;
-    }
-
-    protected override void OnDisable()
-    {
-        base.OnDisable();
-
-        Health.OnDamaged -= HandleDamaged;
-    }
-
     private void Update()
     {
         DisableShield();
@@ -39,12 +25,7 @@ public class Player : Entity
     {
         base.HandleDestroyed();
 
-        GameEvents.RaisePlayerDied();
-    }
-
-    private void HandleDamaged()
-    {
-        GameEvents.RaisePlayerDamaged();
+        GameEvents.RaisePlayerDestroyed(transform.position);
     }
 
     public void EnableShield(Sprite shieldSprite, float duration)

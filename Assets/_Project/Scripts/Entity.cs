@@ -31,6 +31,6 @@ public class Entity : MonoBehaviour
 
     protected virtual void HandleDestroyed()
     {
-        GameEvents.RaiseExploded(transform.position);
+
     }
 }

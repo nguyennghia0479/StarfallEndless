@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ec53af3e57b87e4a96cd733f8ecb1f6, type: 3}
   m_Name: Effect Speed - Silver
   m_EditorClassIdentifier: Assembly-CSharp::ItemSpeedEffectSO
-  buffPercent: 0.25
+  buffSpeedPercent: 0.4
+  buffFireRatePercent: 0.15
   duration: 10
