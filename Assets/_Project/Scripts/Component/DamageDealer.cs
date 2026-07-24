@@ -8,7 +8,7 @@ public class DamageDealer : MonoBehaviour
     {
         if (collision.TryGetComponent<IDamageable>(out var damageable))
         {
-            GameEvents.RaiseExploded(transform.position, false);
+            GameEvents.RaiseHit(transform.position);
             damageable.TakeDamage(damage);
         }
     }

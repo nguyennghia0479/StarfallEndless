@@ -18,6 +18,6 @@ public class Enemy : Entity
     {
         base.HandleDestroyed();
 
-        GameEvents.RaiseEnemyDied(scorePoints);
+        GameEvents.RaiseEnemyDestroyed(scorePoints, transform.position);
     }
 }

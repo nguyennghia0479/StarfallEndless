@@ -8,7 +8,7 @@ public class Projectile : Movement
     {
         if (collision.TryGetComponent<IDamageable>(out var damageable))
         {
-            GameEvents.RaiseExploded(transform.position, false);
+            GameEvents.RaiseHit(transform.position);
             damageable.TakeDamage(damage);
         }
         Destroy(gameObject);

@@ -3,34 +3,49 @@ using UnityEngine;
 
 public static class GameEvents
 {
-    public static event Action<int> OnEnemyDied;
-    public static event Action OnPlayerDied;
-    public static event Action<Vector2, bool> OnExploded;
-    public static event Action OnPlayerDamaged;
+    public static event Action<int> OnEnemyDestroyed;
+    public static event Action OnPlayerDestroyed;
+    public static event Action<Vector2> OnExploded;
+    public static event Action<Vector2> OnHit;
+    public static event Action<GameObject> OnEntityDamaged;
     public static event Action<Vector2> OnMeteoriteDestroyed;
+    public static event Action<GameObject> OnHealed;
+    public static event Action<GameObject> OnConsumed;
 
-    public static void RaiseEnemyDied(int scorePoints)
+    public static void RaiseEnemyDestroyed(int scorePoints, Vector2 position)
     {
-        OnEnemyDied?.Invoke(scorePoints);
+        OnEnemyDestroyed?.Invoke(scorePoints);
+        OnExploded?.Invoke(position);
     }
 
-    public static void RaisePlayerDied()
+    public static void RaisePlayerDestroyed(Vector2 position)
     {
-        OnPlayerDied?.Invoke();
+        OnPlayerDestroyed?.Invoke();
+        OnExploded?.Invoke(position);
     }
 
-    public static void RaiseExploded(Vector2 position, bool isExploded = true)
+    public static void RaiseHit(Vector2 position)
     {
-        OnExploded?.Invoke(position, isExploded);
+        OnHit?.Invoke(position);
     }
 
-    public static void RaisePlayerDamaged()
+    public static void RaiseEntityDamaged(GameObject gameObject)
     {
-        OnPlayerDamaged?.Invoke();
+        OnEntityDamaged?.Invoke(gameObject);
     }
 
     public static void RaiseMeteoriteDestroyed(Vector2 position)
     {
         OnMeteoriteDestroyed?.Invoke(position);
+    }
+
+    public static void RaiseHealedEffect(GameObject gameObject)
+    {
+        OnHealed?.Invoke(gameObject);
+    }
+
+    public static void RaiseConsumedEffect(GameObject gameObject)
+    {
+        OnConsumed?.Invoke(gameObject);
     }
 }

@@ -18,16 +18,19 @@ public class CameraShake : MonoBehaviour
 
     private void OnEnable()
     {
-        GameEvents.OnPlayerDamaged += PlayCameraShake;
+        GameEvents.OnEntityDamaged += PlayCameraShake;
     }
 
     private void OnDisable()
     {
-        GameEvents.OnPlayerDamaged -= PlayCameraShake;
+        GameEvents.OnEntityDamaged -= PlayCameraShake;
     }
 
-    public void PlayCameraShake()
+    public void PlayCameraShake(GameObject gameObject)
     {
+        if (!gameObject.CompareTag(GameIdentifiers.GameTags.TAG_PLAYER))
+            return;
+
         if (cameraShakeRoutine != null)
         {
             StopCoroutine(cameraShakeRoutine);

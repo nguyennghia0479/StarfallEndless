@@ -6,14 +6,14 @@ public class ScoreManager : MonoBehaviour
 
     private void OnEnable()
     {
-        GameEvents.OnEnemyDied += IncreaseScorePoints;
-        GameEvents.OnPlayerDied += ShowScorePoints;
+        GameEvents.OnEnemyDestroyed += IncreaseScorePoints;
+        GameEvents.OnPlayerDestroyed += ShowScorePoints;
     }
 
     private void OnDisable()
     {
-        GameEvents.OnEnemyDied -= IncreaseScorePoints;
-        GameEvents.OnPlayerDied -= ShowScorePoints;
+        GameEvents.OnEnemyDestroyed -= IncreaseScorePoints;
+        GameEvents.OnPlayerDestroyed -= ShowScorePoints;
     }
 
     private void IncreaseScorePoints(int scorePoints)
