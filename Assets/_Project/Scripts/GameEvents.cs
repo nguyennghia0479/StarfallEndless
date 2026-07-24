@@ -3,14 +3,21 @@ using UnityEngine;
 
 public static class GameEvents
 {
+    // Gameplay Events
     public static event Action<int> OnEnemyDestroyed;
     public static event Action OnPlayerDestroyed;
-    public static event Action<Vector2> OnExploded;
-    public static event Action<Vector2> OnHit;
     public static event Action<GameObject> OnEntityDamaged;
     public static event Action<Vector2> OnMeteoriteDestroyed;
+
+    // VFX Events
+    public static event Action<Vector2> OnHit;
+    public static event Action<Vector2> OnExploded;
     public static event Action<GameObject> OnHealed;
     public static event Action<GameObject> OnConsumed;
+
+    // UI Events
+    public static event Action<int> OnScoreChanged;
+    public static event Action<GameObject, float> OnHealthChanged;
 
     public static void RaiseEnemyDestroyed(int scorePoints, Vector2 position)
     {
@@ -47,5 +54,15 @@ public static class GameEvents
     public static void RaiseConsumedEffect(GameObject gameObject)
     {
         OnConsumed?.Invoke(gameObject);
+    }
+
+    public static void RaiseScoreChanged(int currentScore)
+    {
+        OnScoreChanged?.Invoke(currentScore);
+    }
+
+    public static void RaiseHealthChanged(GameObject gameObject, float currentHP)
+    {
+        OnHealthChanged?.Invoke(gameObject, currentHP);
     }
 }

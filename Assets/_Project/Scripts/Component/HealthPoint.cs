@@ -27,6 +27,7 @@ public class HealthPoint : MonoBehaviour, IDamageable
         currentHP = maxHP;
         defaultDefend = defend;
         EnableDamaged();
+        GameEvents.RaiseHealthChanged(gameObject, currentHP);
     }
 
     public void TakeDamage(float rawDamage)
@@ -36,6 +37,7 @@ public class HealthPoint : MonoBehaviour, IDamageable
 
         currentHP -= finalDamage;
         GameEvents.RaiseEntityDamaged(gameObject);
+        GameEvents.RaiseHealthChanged(gameObject, currentHP);
 
         if (currentHP <= 0)
             Destroyed();
@@ -56,7 +58,7 @@ public class HealthPoint : MonoBehaviour, IDamageable
             return;
 
         isDeath = true;
-        OnDestroyed?.Invoke(); // note to check if can replace with GameEvents
+        OnDestroyed?.Invoke();
         Destroy(gameObject);
     }
 
