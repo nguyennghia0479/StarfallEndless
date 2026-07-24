@@ -1,8 +1,14 @@
+using System;
 using UnityEngine;
 
 public class ScoreManager : MonoBehaviour
 {
     private int scorePoints;
+
+    private void Awake()
+    {
+        GameEvents.RaiseScoreChanged(scorePoints);
+    }
 
     private void OnEnable()
     {
@@ -19,6 +25,7 @@ public class ScoreManager : MonoBehaviour
     private void IncreaseScorePoints(int scorePoints)
     {
         this.scorePoints += scorePoints;
+        GameEvents.RaiseScoreChanged(this.scorePoints);
     }
 
     private void ShowScorePoints()

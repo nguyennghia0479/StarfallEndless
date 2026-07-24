@@ -10,5 +10,6 @@ public static class GameIdentifiers
     public static class GameTags
     {
         public const string TAG_PLAYER = "Player";
+        public const string TAG_ENEMY = "Enemy";
     }
 }
