@@ -13,7 +13,10 @@ public class Entity : MonoBehaviour
         Health = GetComponent<HealthPoint>();
         Shooter = GetComponent<Shooter>();
         DamageDealer = GetComponent<DamageDealer>();
+    }
 
+    protected virtual void Start()
+    {
         Health.Initialize(stats.MaxHP, stats.Defend);
         Shooter.Initialize(stats.ProjectileDamage);
         DamageDealer.Initialize(stats.CollisionDamage);
@@ -33,4 +36,8 @@ public class Entity : MonoBehaviour
     {
 
     }
+
+    protected void StartFire() => Shooter.EnableAutoFire();
+
+    protected void StopFire() => Shooter.DisableAutoFire();
 }

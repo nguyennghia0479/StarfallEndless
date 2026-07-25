@@ -4,10 +4,12 @@ using UnityEngine;
 public static class GameEvents
 {
     // Gameplay Events
-    public static event Action<int> OnEnemyDestroyed;
+    public static event Action OnPlayerRevived;
     public static event Action OnPlayerDestroyed;
+    public static event Action<int> OnEnemyDestroyed;
     public static event Action<GameObject> OnEntityDamaged;
     public static event Action<Vector2> OnMeteoriteDestroyed;
+    public static event Action OnGameStarted;
 
     // VFX Events
     public static event Action<Vector2> OnHit;
@@ -15,9 +17,10 @@ public static class GameEvents
     public static event Action<GameObject> OnHealed;
     public static event Action<GameObject> OnConsumed;
 
-    // UI Events
-    public static event Action<int> OnScoreChanged;
-    public static event Action<GameObject, float> OnHealthChanged;
+    public static void RaisePlayerRevived()
+    {
+        OnPlayerRevived?.Invoke();
+    }
 
     public static void RaiseEnemyDestroyed(int scorePoints, Vector2 position)
     {
@@ -31,11 +34,6 @@ public static class GameEvents
         OnExploded?.Invoke(position);
     }
 
-    public static void RaiseHit(Vector2 position)
-    {
-        OnHit?.Invoke(position);
-    }
-
     public static void RaiseEntityDamaged(GameObject gameObject)
     {
         OnEntityDamaged?.Invoke(gameObject);
@@ -46,6 +44,16 @@ public static class GameEvents
         OnMeteoriteDestroyed?.Invoke(position);
     }
 
+    public static void RaiseStartGame()
+    {
+        OnGameStarted?.Invoke();
+    }
+
+    public static void RaiseHit(Vector2 position)
+    {
+        OnHit?.Invoke(position);
+    }
+
     public static void RaiseHealedEffect(GameObject gameObject)
     {
         OnHealed?.Invoke(gameObject);
@@ -54,15 +62,5 @@ public static class GameEvents
     public static void RaiseConsumedEffect(GameObject gameObject)
     {
         OnConsumed?.Invoke(gameObject);
-    }
-
-    public static void RaiseScoreChanged(int currentScore)
-    {
-        OnScoreChanged?.Invoke(currentScore);
-    }
-
-    public static void RaiseHealthChanged(GameObject gameObject, float currentHP)
-    {
-        OnHealthChanged?.Invoke(gameObject, currentHP);
     }
 }

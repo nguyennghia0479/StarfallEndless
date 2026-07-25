@@ -27,7 +27,14 @@ public class HealthPoint : MonoBehaviour, IDamageable
         currentHP = maxHP;
         defaultDefend = defend;
         EnableDamaged();
-        GameEvents.RaiseHealthChanged(gameObject, currentHP);
+        UIEvents.RaiseHealthChanged(gameObject, currentHP);
+    }
+
+    public void Revive()
+    {
+        isDeath = false;
+        currentHP = maxHP;
+        UIEvents.RaiseHealthChanged(gameObject, currentHP);
     }
 
     public void TakeDamage(float rawDamage)
@@ -37,10 +44,13 @@ public class HealthPoint : MonoBehaviour, IDamageable
 
         currentHP -= finalDamage;
         GameEvents.RaiseEntityDamaged(gameObject);
-        GameEvents.RaiseHealthChanged(gameObject, currentHP);
+        UIEvents.RaiseHealthChanged(gameObject, currentHP);
 
         if (currentHP <= 0)
-            Destroyed();
+        {
+            isDeath = true;
+            OnDestroyed?.Invoke();
+        }
     }
 
     private float CalculateFinalDamage(float rawDamage)
@@ -52,20 +62,11 @@ public class HealthPoint : MonoBehaviour, IDamageable
         return finalDamage;
     }
 
-    private void Destroyed()
-    {
-        if (isDeath)
-            return;
-
-        isDeath = true;
-        OnDestroyed?.Invoke();
-        Destroy(gameObject);
-    }
-
     public void ApplyHealing(float healPercent)
     {
         currentHP += maxHP * healPercent;
         currentHP = Mathf.Clamp(currentHP, 0, maxHP);
+        UIEvents.RaiseHealthChanged(gameObject, currentHP);
     }
 
     public void ApplyBuffDefend(float buffPercent, float duration)
