@@ -13,10 +13,14 @@ public class Meteorite : Movement
     {
         health = GetComponent<HealthPoint>();
         damageDealer = GetComponent<DamageDealer>();
+    }
 
+    private void Start()
+    {
         Initialize(stats.MoveSpeed);
         health.Initialize(stats.MaxHP, stats.Defend);
         damageDealer.Initialize(stats.CollisionDamage);
+        health.DisableDamaged();
     }
 
     private void OnEnable()
@@ -49,11 +53,11 @@ public class Meteorite : Movement
     public void SetupMeteorite(float topBound)
     {
         this.topBound = topBound;
-        health.DisableDamaged();
     }
 
     private void HandleDestroyed()
     {
         GameEvents.RaiseMeteoriteDestroyed(transform.position);
+        Destroy(gameObject);
     }
 }

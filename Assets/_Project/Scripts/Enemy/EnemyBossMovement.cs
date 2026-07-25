@@ -1,7 +1,10 @@
+using System;
 using UnityEngine;
 
 public class EnemyBossMovement : EnemyMovement
 {
+    public event Action OnEnteredScreen;
+
     [SerializeField] private CameraBoundary cameraBoundary;
     [SerializeField] private SpriteRenderer sprite;
 
@@ -10,27 +13,27 @@ public class EnemyBossMovement : EnemyMovement
     private float heightClamp;
     private float widthClamp;
     private Vector3 targetPosition;
+    private bool isEnterScreen = true;
 
     private void Awake()
     {
         healthPoint = GetComponent<HealthPoint>();
-        healthPoint.DisableDamaged();
     }
 
     private void Start()
     {
         heightClamp = cameraBoundary.GetHeightClamp();
         widthClamp = cameraBoundary.GetWidthClamp();
+        healthPoint.DisableDamaged();
     }
 
     protected override void Update()
     {
-        base.Update();
-
+        HandleMoveToPosition(isEnterScreen);
         HandleRoamingMove();
     }
 
-    protected override void HandleMovement()
+    protected void HandleMoveToPosition(bool isEnterScreen)
     {
         if (waypoints.Length <= 0 || !isMovedByWaypoint)
             return;
@@ -38,16 +41,41 @@ public class EnemyBossMovement : EnemyMovement
         transform.position = Vector2.MoveTowards(transform.position, currentWaypoint.position, moveSpeed * Time.deltaTime);
         if ((currentWaypoint.position - transform.position).sqrMagnitude < sqrDistanceThreshold)
         {
-            waypointIndex++;
-            if (waypointIndex < waypoints.Length)
-                currentWaypoint = waypoints[waypointIndex];
+            if (isEnterScreen)
+                EnterScreen();
             else
-                ChangeToRoamingMove();
+                ExitScreen();
         }
+    }
+
+    private void EnterScreen()
+    {
+        waypointIndex++;
+        if (waypointIndex < waypoints.Length)
+            currentWaypoint = waypoints[waypointIndex];
+        else
+            ChangeToRoamingMove();
+    }
+
+    private void ExitScreen()
+    {
+        waypointIndex--;
+        if (waypointIndex >= 0)
+            currentWaypoint = waypoints[waypointIndex];
+        else
+            Destroy(gameObject);
+    }
+
+    public void StopRoamingMove()
+    {
+        isEnterScreen = false;
+        isMovedByWaypoint = true;
+        canRoamMove = false;
     }
 
     private void ChangeToRoamingMove()
     {
+        OnEnteredScreen?.Invoke();
         isMovedByWaypoint = false;
         canRoamMove = true;
         targetPosition = GetRandomPosition();
@@ -67,8 +95,8 @@ public class EnemyBossMovement : EnemyMovement
 
     private Vector3 GetRandomPosition()
     {
-        float randomXPos = Random.Range(-widthClamp, widthClamp);
-        float randomYPos = Random.Range(-heightClamp, heightClamp);
+        float randomXPos = UnityEngine.Random.Range(-widthClamp, widthClamp);
+        float randomYPos = UnityEngine.Random.Range(-heightClamp, heightClamp);
         Vector3 cameraPos = cameraBoundary.transform.position;
         Vector3 rawPos = new(cameraPos.x + randomXPos, cameraPos.y + randomYPos, 0);
 

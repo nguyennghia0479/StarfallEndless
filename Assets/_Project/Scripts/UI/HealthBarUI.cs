@@ -18,12 +18,12 @@ public class HealthBarUI : MonoBehaviour
 
     private void OnEnable()
     {
-        GameEvents.OnHealthChanged += UpdateHealthBar;
+        UIEvents.OnHealthChanged += UpdateHealthBar;
     }
 
     private void OnDisable()
     {
-        GameEvents.OnHealthChanged -= UpdateHealthBar;
+        UIEvents.OnHealthChanged -= UpdateHealthBar;
     }
 
     private void UpdateHealthBar(GameObject gameObject, float currentHP)

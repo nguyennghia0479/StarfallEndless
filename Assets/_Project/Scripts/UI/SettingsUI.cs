@@ -15,6 +15,8 @@ public class SettingsUI : MonoBehaviour
     private void OnDisable()
     {
         Time.timeScale = 1f;
+
+        mainMenuButton.onClick.RemoveListener(PlayMainMenuButton);
     }
 
     private void PlayMainMenuButton()

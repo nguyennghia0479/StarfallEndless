@@ -2,23 +2,43 @@ using UnityEngine;
 
 public class Player : Entity
 {
-    [SerializeField] private SpriteRenderer shieldSpriteRenderer;
+    [SerializeField] private Transform startPoint;
 
     public PlayerMovement Movement { get; private set; }
+    public PlayerVisual Visual { get; private set; }
 
-    private float enableShieldTimer;
+    private Collider2D collider;
 
     protected override void Awake()
     {
         base.Awake();
 
         Movement = GetComponent<PlayerMovement>();
+        Visual = GetComponent<PlayerVisual>();
+        collider = GetComponent<Collider2D>();
+    }
+
+    protected override void Start()
+    {
+        base.Start();
+
         Movement.Initialize(stats.MoveSpeed);
     }
 
-    private void Update()
+    protected override void OnEnable()
     {
-        DisableShield();
+        base.OnEnable();
+
+        GameEvents.OnGameStarted += OnGameStarted;
+        UIEvents.OnPlayerRevived += EnablePlayer;
+    }
+
+    protected override void OnDisable()
+    {
+        base.OnDisable();
+
+        GameEvents.OnGameStarted -= OnGameStarted;
+        UIEvents.OnPlayerRevived -= EnablePlayer;
     }
 
     protected override void HandleDestroyed()
@@ -26,22 +46,37 @@ public class Player : Entity
         base.HandleDestroyed();
 
         GameEvents.RaisePlayerDestroyed(transform.position);
+        DisablePlayer();
     }
 
-    public void EnableShield(Sprite shieldSprite, float duration)
+    private void OnGameStarted()
     {
-        enableShieldTimer = duration;
-        shieldSpriteRenderer.sprite = shieldSprite;
-        shieldSpriteRenderer.gameObject.SetActive(true);
+        StartFire();
+        Visual.StopBlinkEffect();
+        Health.EnableDamaged();
+        collider.enabled = true;
     }
 
-    private void DisableShield()
+    private void EnablePlayer()
     {
-        if (!shieldSpriteRenderer.gameObject.activeSelf)
-            return;
+        transform.position = startPoint.localPosition;
+        Visual.EnableShipVisual();
+        Visual.PlayBlinkEffect();
+        Movement.EnableMovement();
+        DamageDealer.EnableDealDamage();
+        Health.Revive();
+    }
 
-        enableShieldTimer -= Time.deltaTime;
-        if (enableShieldTimer <= 0)
-            shieldSpriteRenderer.gameObject.SetActive(false);
+    private void DisablePlayer()
+    {
+        Visual.DisableShipVisual();
+        Visual.HideShield();
+        Shooter.DisableAutoFire();
+        Shooter.StopAllBuffs();
+        Movement.DisableMovement();
+        Movement.StopBuff();
+        DamageDealer.DisableDealDamage();
+        Health.DisableDamaged();
+        collider.enabled = false;
     }
 }

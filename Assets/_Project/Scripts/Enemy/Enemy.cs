@@ -10,8 +10,29 @@ public class Enemy : Entity
         base.Awake();
 
         Movement = GetComponent<EnemyMovement>();
+    }
+
+    protected override void OnEnable()
+    {
+        base.OnEnable();
+
+        GameEvents.OnPlayerDestroyed += HandlePlayerDestroyed;
+    }
+
+    protected override void OnDisable()
+    {
+        base.OnDisable();
+
+        GameEvents.OnPlayerDestroyed -= HandlePlayerDestroyed;
+    }
+
+    protected override void Start()
+    {
+        base.Start();
+
         Movement.Initialize(stats.MoveSpeed);
         scorePoints = stats.ScorePoint;
+        StartFire();
     }
 
     protected override void HandleDestroyed()
@@ -19,5 +40,11 @@ public class Enemy : Entity
         base.HandleDestroyed();
 
         GameEvents.RaiseEnemyDestroyed(scorePoints, transform.position);
+        Destroy(gameObject);
+    }
+
+    protected virtual void HandlePlayerDestroyed()
+    {
+        StopFire();
     }
 }

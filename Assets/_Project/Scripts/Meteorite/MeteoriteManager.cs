@@ -15,11 +15,23 @@ public class MeteoriteManager : MonoBehaviour
     private float spawnTimer;
     private float widthClamp;
     private float topBound;
+    private bool canSpawn;
 
     private void Awake()
     {
         meteorites = meteoriteDB.Meteorites;
-        timeToSpawn = GetTimeToSpawnMeteorite();
+    }
+
+    private void OnEnable()
+    {
+        GameEvents.OnGameStarted += EnableSpawnMeteorites;
+        GameEvents.OnPlayerDestroyed += DisableSpawnMeteorites;
+    }
+
+    private void OnDisable()
+    {
+        GameEvents.OnGameStarted -= EnableSpawnMeteorites;
+        GameEvents.OnPlayerDestroyed -= DisableSpawnMeteorites;
     }
 
     private void Start()
@@ -30,6 +42,9 @@ public class MeteoriteManager : MonoBehaviour
 
     private void Update()
     {
+        if (!canSpawn)
+            return;
+
         spawnTimer += Time.deltaTime;
         if (spawnTimer >= timeToSpawn)
         {
@@ -59,4 +74,15 @@ public class MeteoriteManager : MonoBehaviour
     }
 
     private float GetTimeToSpawnMeteorite() => Random.Range(minTimeToSpawn, maxTimeToSpawn);
+
+    public void EnableSpawnMeteorites()
+    {
+        canSpawn = true;
+        timeToSpawn = GetTimeToSpawnMeteorite();
+    }
+
+    public void DisableSpawnMeteorites()
+    {
+        canSpawn = false;
+    }
 }

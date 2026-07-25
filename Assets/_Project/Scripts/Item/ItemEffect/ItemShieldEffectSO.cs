@@ -10,7 +10,7 @@ public class ItemShieldEffectSO : ItemEffectSO
 
     public override void ApplyEffect(Player player)
     {
-        player.EnableShield(shieldSprite, duration);
+        player.Visual.EnableShield(shieldSprite, duration);
         player.Health.ApplyBuffDefend(buffPercent, duration);
         GameEvents.RaiseConsumedEffect(player.gameObject);
     }

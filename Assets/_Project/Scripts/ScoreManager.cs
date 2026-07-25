@@ -7,7 +7,7 @@ public class ScoreManager : MonoBehaviour
 
     private void Awake()
     {
-        GameEvents.RaiseScoreChanged(scorePoints);
+        UIEvents.RaiseScoreChanged(scorePoints);
     }
 
     private void OnEnable()
@@ -25,7 +25,7 @@ public class ScoreManager : MonoBehaviour
     private void IncreaseScorePoints(int scorePoints)
     {
         this.scorePoints += scorePoints;
-        GameEvents.RaiseScoreChanged(this.scorePoints);
+        UIEvents.RaiseScoreChanged(this.scorePoints);
     }
 
     private void ShowScorePoints()

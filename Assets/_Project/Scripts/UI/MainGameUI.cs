@@ -7,12 +7,12 @@ public class MainGameUI : MonoBehaviour
 
     private void OnEnable()
     {
-        GameEvents.OnScoreChanged += UpdateScorePointText;
+        UIEvents.OnScoreChanged += UpdateScorePointText;
     }
 
     private void OnDisable()
     {
-        GameEvents.OnScoreChanged -= UpdateScorePointText;
+        UIEvents.OnScoreChanged -= UpdateScorePointText;
     }
 
     private void UpdateScorePointText(int scorePoints)

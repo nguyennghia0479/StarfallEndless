@@ -38,6 +38,8 @@ public class PlayerMovement : MonoBehaviour
         transform.position = cameraBoundary.ClampToCameraBoundaries(sprite, targetPosition);
     }
 
+    public void StopBuff() => buffTimer = 0;
+
     public void AppylyBuffSpeed(float buffPercent, float duration)
     {
         buffTimer = duration;
@@ -72,4 +74,7 @@ public class PlayerMovement : MonoBehaviour
 
         trail.gameObject.SetActive(false);
     }
+
+    public void EnableMovement() => playerController.EnableInputs();
+    public void DisableMovement() => playerController.DisableInputs();
 }

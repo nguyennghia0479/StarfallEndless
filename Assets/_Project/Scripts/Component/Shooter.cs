@@ -32,9 +32,8 @@ public class Shooter : MonoBehaviour
 
         defaultProjectile = projectilePrefab;
         defaultFireRate = fireRate;
-
+        
         waitTime = new WaitForSeconds(fireRate);
-        EnableAutoFire();
     }
 
     private IEnumerator FireRoutine()
@@ -55,10 +54,11 @@ public class Shooter : MonoBehaviour
     {
         if (isAutoFire || fireRoutine != null)
             return;
-
+  
         isAutoFire = true;
         fireRoutine = StartCoroutine(FireRoutine());
     }
+
     public void DisableAutoFire()
     {
         isAutoFire = false;
@@ -67,6 +67,12 @@ public class Shooter : MonoBehaviour
             StopCoroutine(fireRoutine);
             fireRoutine = null;
         }
+    }
+
+    public void StopAllBuffs()
+    {
+        upgradeTimer = 0;
+        buffTimer = 0;
     }
 
     public void ApplyUpgradeProjectile(Projectile upgradeProjectile, float buffPercent, float duration)

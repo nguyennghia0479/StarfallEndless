@@ -17,10 +17,21 @@ public class WaveManager : MonoBehaviour
     private WaitForSeconds waitTimeToSpawnWave;
     private Coroutine spawnEnemiesRoutine;
 
-    private void Start()
+    private void Awake()
     {
         waitTimeToSpawnWave = new WaitForSeconds(timeToSpawnWave);
-        EnableSpawnEnemy();
+    }
+
+    private void OnEnable()
+    {
+        GameEvents.OnGameStarted += EnableSpawnEnemy;
+        GameEvents.OnPlayerDestroyed += DisableSpawnEnemy;
+    }
+
+    private void OnDisable()
+    {
+        GameEvents.OnGameStarted -= EnableSpawnEnemy;
+        GameEvents.OnPlayerDestroyed -= DisableSpawnEnemy;
     }
 
     private void Update()

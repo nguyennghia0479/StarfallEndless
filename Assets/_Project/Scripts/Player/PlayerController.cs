@@ -11,12 +11,12 @@ public class PlayerController : MonoBehaviour
 
     private void OnEnable()
     {
-        inputs.Enable();
+        EnableInputs();
     }
 
     private void OnDisable()
     {
-        inputs.Disable();
+        DisableInputs();
     }
 
     public  Vector3 GetMoveDirection()
@@ -25,4 +25,7 @@ public class PlayerController : MonoBehaviour
 
         return moveDir.normalized;
     }
+
+    public void EnableInputs() => inputs.Enable();
+    public void DisableInputs() => inputs.Disable();
 }
