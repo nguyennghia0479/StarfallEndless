@@ -40,7 +40,7 @@ public class CountingUI : MonoBehaviour
         {
             hasRollOut = true;
             gameObject.SetActive(false);
-            GameEvents.RaiseStartGame();
+            GameEvents.RaiseGameStarted();
         }
     }
 }

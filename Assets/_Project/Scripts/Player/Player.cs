@@ -30,6 +30,7 @@ public class Player : Entity
         base.OnEnable();
 
         GameEvents.OnGameStarted += OnGameStarted;
+        GameEvents.OnGameRetry += EnablePlayer;
         UIEvents.OnPlayerRevived += EnablePlayer;
     }
 
@@ -38,6 +39,7 @@ public class Player : Entity
         base.OnDisable();
 
         GameEvents.OnGameStarted -= OnGameStarted;
+        GameEvents.OnGameRetry -= EnablePlayer;
         UIEvents.OnPlayerRevived -= EnablePlayer;
     }
 
@@ -64,7 +66,7 @@ public class Player : Entity
         Visual.PlayBlinkEffect();
         Movement.EnableMovement();
         DamageDealer.EnableDealDamage();
-        Health.Revive();
+        Health.ResetHealth();
     }
 
     private void DisablePlayer()

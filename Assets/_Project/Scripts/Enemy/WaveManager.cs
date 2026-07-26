@@ -1,92 +1,123 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class WaveManager : MonoBehaviour
 {
+    public static WaveManager Instance { get; private set; }
+
     [Header("Enemy wave settings")]
     [SerializeField] private WaveSO[] waves;
-    [SerializeField] private EnemyDatabaseSO[] enemyList;
+    [SerializeField] private EnemyDatabaseSO[] enemyDB;
     [SerializeField] private float timeToSpawnWave = 2f;
     
     [Header("Boss wave settings")]
     [SerializeField] private WaveSO bossWave;
-    [SerializeField] private EnemyDatabaseSO bossList;
+    [SerializeField] private EnemyDatabaseSO bossDB;
+    [SerializeField] private int waveAmountToSpawnBoss = 10;
 
-    private bool canSpawn;
     private WaitForSeconds waitTimeToSpawnWave;
     private Coroutine spawnEnemiesRoutine;
+    private bool canSpawnEnemy;
+    private bool isBossWave;
+    private int currentWave;
 
     private void Awake()
     {
+        if (Instance == null)
+            Instance = this;
+        else
+            Destroy(gameObject);
+
         waitTimeToSpawnWave = new WaitForSeconds(timeToSpawnWave);
     }
 
     private void OnEnable()
     {
-        GameEvents.OnGameStarted += EnableSpawnEnemy;
-        GameEvents.OnPlayerDestroyed += DisableSpawnEnemy;
+        GameEvents.OnGameStarted += EnableSpawnWave;
+        GameEvents.OnGameRetry += ResetWave;
+        GameEvents.OnPlayerDestroyed += DisableSpawnWave;
+        GameEvents.OnEnemyDestroyed += CheckIfBossDestroyed;
     }
 
     private void OnDisable()
     {
-        GameEvents.OnGameStarted -= EnableSpawnEnemy;
-        GameEvents.OnPlayerDestroyed -= DisableSpawnEnemy;
+        GameEvents.OnGameStarted -= EnableSpawnWave;
+        GameEvents.OnGameRetry -= ResetWave;
+        GameEvents.OnPlayerDestroyed -= DisableSpawnWave;
+        GameEvents.OnEnemyDestroyed -= CheckIfBossDestroyed;
     }
 
-    private void Update()
+    private void CheckIfBossDestroyed(Enemy gameObject)
     {
-        if (Keyboard.current !=null && Keyboard.current.spaceKey.wasPressedThisFrame)
+        if (gameObject.IsBoss)
         {
-            SpawnBossEnemy();
+            isBossWave = false;
+            EnableSpawnWave();
         }
     }
 
-    private void SpawnBossEnemy()
+    private void SpawnEnemyBoss()
     {
-        DisableSpawnEnemy();
-
-        EnemyBoss bossSelected = bossList.Enemies[Random.Range(0, bossList.Enemies.Length)] as EnemyBoss;
+        EnemyBoss bossSelected = bossDB.Enemies[Random.Range(0, bossDB.Enemies.Length)] as EnemyBoss;
         EnemyBoss newBoss = Instantiate(bossSelected, bossWave.GetStartingPoint().position, Quaternion.identity);
         newBoss.Movement.SetupEnemyMove(bossWave);
     }
 
-    private IEnumerator SpawnEnemiesRoutine()
+    private IEnumerator SpawnWaveRoutine()
     {
-        while (canSpawn)
+        while (canSpawnEnemy)
         {
             WaveSO waveSelected = waves[Random.Range(0, waves.Length)];
-            EnemyDatabaseSO enemyListSelected = enemyList[Random.Range(0, enemyList.Length)];
+            EnemyDatabaseSO enemyListSelected = enemyDB[Random.Range(0, enemyDB.Length)];
             WaitForSeconds waitTimeSpawnEnemy = new(waveSelected.GetTimeToSpawnEnemy());
 
-            for (int i = 0; i < enemyListSelected.Enemies.Length; i++)
-            {
-                if (!canSpawn)
-                    break;
-
-                Enemy enemyPrefab = enemyListSelected.Enemies[i];
-                Enemy newEnemy = Instantiate(enemyPrefab, waveSelected.GetStartingPoint().position, Quaternion.identity);
-                newEnemy.Movement.SetupEnemyMove(waveSelected);
-
-                yield return waitTimeSpawnEnemy;
-            }
-
+            yield return SpawnEnemyRoutine(waveSelected, enemyListSelected, waitTimeSpawnEnemy);
             yield return waitTimeToSpawnWave;
+            CheckToSpawnEnemyBoss();
         }
     }
 
-    public void EnableSpawnEnemy()
+    private IEnumerator SpawnEnemyRoutine(WaveSO waveSelected, EnemyDatabaseSO enemyListSelected, WaitForSeconds waitTimeSpawnEnemy)
     {
-        if (canSpawn || spawnEnemiesRoutine != null)
-            return;
+        for (int i = 0; i < enemyListSelected.Enemies.Length; i++)
+        {
+            if (!canSpawnEnemy)
+                break;
 
-        canSpawn = true;
-        spawnEnemiesRoutine = StartCoroutine(SpawnEnemiesRoutine());
+            Enemy enemyPrefab = enemyListSelected.Enemies[i];
+            Enemy newEnemy = Instantiate(enemyPrefab, waveSelected.GetStartingPoint().position, Quaternion.identity);
+            newEnemy.Movement.SetupEnemyMove(waveSelected);
+
+            yield return waitTimeSpawnEnemy;
+        }
     }
 
-    public void DisableSpawnEnemy()
+    private void CheckToSpawnEnemyBoss()
     {
-        canSpawn = false;
+        currentWave++;
+        if (currentWave % waveAmountToSpawnBoss == 0 && !isBossWave)
+        {
+            isBossWave = true;
+            DisableSpawnWave();
+            SpawnEnemyBoss();
+        }
+    }
+
+    private void ResetWave() => currentWave = 0;
+
+    private void EnableSpawnWave()
+    {
+        if (canSpawnEnemy || spawnEnemiesRoutine != null)
+            return;
+
+        isBossWave = false;
+        canSpawnEnemy = true;
+        spawnEnemiesRoutine = StartCoroutine(SpawnWaveRoutine());
+    }
+
+    private void DisableSpawnWave()
+    {
+        canSpawnEnemy = false;
 
         if (spawnEnemiesRoutine != null)
         {
@@ -94,4 +125,6 @@ public class WaveManager : MonoBehaviour
             spawnEnemiesRoutine = null;
         }
     }
+
+    public int CurrentWave => currentWave;
 }

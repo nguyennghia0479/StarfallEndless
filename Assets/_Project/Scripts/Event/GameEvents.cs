@@ -4,12 +4,12 @@ using UnityEngine;
 public static class GameEvents
 {
     // Gameplay Events
-    public static event Action OnPlayerRevived;
     public static event Action OnPlayerDestroyed;
-    public static event Action<int> OnEnemyDestroyed;
+    public static event Action<Enemy> OnEnemyDestroyed;
     public static event Action<GameObject> OnEntityDamaged;
     public static event Action<Vector2> OnMeteoriteDestroyed;
     public static event Action OnGameStarted;
+    public static event Action OnGameRetry;
 
     // VFX Events
     public static event Action<Vector2> OnHit;
@@ -17,15 +17,10 @@ public static class GameEvents
     public static event Action<GameObject> OnHealed;
     public static event Action<GameObject> OnConsumed;
 
-    public static void RaisePlayerRevived()
+    public static void RaiseEnemyDestroyed(Enemy enemy)
     {
-        OnPlayerRevived?.Invoke();
-    }
-
-    public static void RaiseEnemyDestroyed(int scorePoints, Vector2 position)
-    {
-        OnEnemyDestroyed?.Invoke(scorePoints);
-        OnExploded?.Invoke(position);
+        OnEnemyDestroyed?.Invoke(enemy);
+        OnExploded?.Invoke(enemy.gameObject.transform.position);
     }
 
     public static void RaisePlayerDestroyed(Vector2 position)
@@ -44,9 +39,14 @@ public static class GameEvents
         OnMeteoriteDestroyed?.Invoke(position);
     }
 
-    public static void RaiseStartGame()
+    public static void RaiseGameStarted()
     {
         OnGameStarted?.Invoke();
+    }
+
+    public static void RaiseGameRetry()
+    {
+        OnGameRetry?.Invoke();
     }
 
     public static void RaiseHit(Vector2 position)
