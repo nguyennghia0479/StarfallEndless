@@ -2,7 +2,13 @@ using UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
+    public static UIManager Instance { get; private set; }
+
+    [SerializeField] private GameObject[] uiElements;
+
     [Header("UI Elements")]
+    [SerializeField] private MainMenuUI mainMenuUI;
+    [SerializeField] private MainGameUI mainGameUI;
     [SerializeField] private SettingsUI settingsUI;
     [SerializeField] private ReviveUI reviveUI;
     [SerializeField] private CountingUI countingUI;
@@ -13,60 +19,100 @@ public class UIManager : MonoBehaviour
     [SerializeField] private ScoreManager scoreManager;
     [SerializeField] private WaveManager waveManager;
 
+    private void Awake()
+    {
+        if (Instance == null)
+            Instance = this;
+        else
+            Destroy(gameManager);
+    }
+
     private void OnEnable()
     {
-        //GameEvents.OnGameStarted += HandleGameStarted;
-        GameEvents.OnGameRetry += HandleGameRetry;
-        GameEvents.OnPlayerDestroyed += EnableReviveUI;
+        UIEvents.OnGamePlayed += HandleGamePlayed;
+        GameEvents.OnGameRetried += HandleGameRetrired;
+        GameEvents.OnPlayerDestroyed += HandlePlayerDestroyed;
         UIEvents.OnPlayerRevived += HandlePlayerRevived;
-        UIEvents.OnGameEnded += EnableGameOverUI;
+        UIEvents.OnGameEnded += HandleGameEnded;
     }
 
     private void OnDisable()
     {
-        //GameEvents.OnGameStarted -= HandleGameStarted;
-        GameEvents.OnGameRetry -= HandleGameRetry;
-        GameEvents.OnPlayerDestroyed -= EnableReviveUI;
+        UIEvents.OnGamePlayed -= HandleGamePlayed;
+        GameEvents.OnGameRetried -= HandleGameRetrired;
+        GameEvents.OnPlayerDestroyed -= HandlePlayerDestroyed;
         UIEvents.OnPlayerRevived -= HandlePlayerRevived;
-        UIEvents.OnGameEnded -= EnableGameOverUI;
+        UIEvents.OnGameEnded -= HandleGameEnded;
     }
 
     private void Start()
     {
-        HandleGameStarted();
+        HandleMainMenu();
     }
 
-    private void HandleGameStarted()
+    public void SwitchToUI(GameObject uiToEnable)
     {
-        DisableSetingUI();
-        DisableReviveUI();
-        DisableGameOverUI();
+        foreach (var ui in uiElements)
+            ui.SetActive(false);
+
+        uiToEnable.SetActive(true);
     }
 
-    private void HandleGameRetry()
+    public void SwitchToMainMenuUI()
     {
-        DisableReviveUI();
-        DisableGameOverUI();
+        SwitchToUI(mainMenuUI.gameObject);
+    }
+
+    public void SwitchToMainGameUI()
+    {
+        SwitchToUI(mainGameUI.gameObject);
+    }
+
+    public void SwitchToSettingUI()
+    {
+        SwitchToUI(settingsUI.gameObject);
+    }
+
+    private void HandleMainMenu()
+    {
+        SwitchToUI(mainMenuUI.gameObject);
+        gameManager.SwitchToMainMenuState();
+    }
+
+    private void HandleGamePlayed()
+    {
+        SwitchToUI(mainGameUI.gameObject);
+        gameManager.SwitchToGameState();
         countingUI.gameObject.SetActive(true);
-        countingUI.SetToCountdown();
+        HandleResetPointsUI();
+    }
+
+    private void HandleGameRetrired(bool isRetried)
+    {
+        if (isRetried)
+            HandleGamePlayed();
+        else
+            HandleMainMenu();
+
+        HandleResetPointsUI();
+    }
+
+    private void HandleResetPointsUI()
+    {
+        mainGameUI.ResetPoints();
+    }
+
+    private void HandlePlayerDestroyed()
+    {
+        SwitchToUI(reviveUI.gameObject);
     }
 
     private void HandlePlayerRevived()
     {
-        DisableReviveUI();
-        countingUI.gameObject.SetActive(true);
-        countingUI.SetToCountdown();
+        HandleGamePlayed();
     }
 
-    public void EnableSettingUI() => settingsUI.gameObject.SetActive(true);
-
-    public void DisableSetingUI() => settingsUI.gameObject.SetActive(false);
-
-    private void EnableReviveUI() => reviveUI.gameObject.SetActive(true);
-
-    private void DisableReviveUI() => reviveUI.gameObject.SetActive(false);
-
-    private void EnableGameOverUI()
+    private void HandleGameEnded()
     {
         GameResultData resultData = new()
         {
@@ -78,8 +124,6 @@ public class UIManager : MonoBehaviour
         };
 
         gameOverUI.SetGameResult(resultData);
-        gameOverUI.gameObject.SetActive(true);
+        SwitchToUI(gameOverUI.gameObject);
     }
-
-    private void DisableGameOverUI() => gameOverUI.gameObject.SetActive(false);
 }

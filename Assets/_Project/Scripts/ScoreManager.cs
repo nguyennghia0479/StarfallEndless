@@ -5,25 +5,20 @@ public class ScoreManager : MonoBehaviour
     private int scorePoints;
     private int rewardPoints;
 
-    private void Start()
-    {
-        ResetPoints();
-    }
-
     private void OnEnable()
     {
-        GameEvents.OnGameRetry += ResetPoints;
+        GameEvents.OnGameRetried += ResetPoints;
         GameEvents.OnEnemyDestroyed += HandleEnemyDestroyed;
     }
 
 
     private void OnDisable()
     {
-        GameEvents.OnGameRetry -= ResetPoints;
+        GameEvents.OnGameRetried -= ResetPoints;
         GameEvents.OnEnemyDestroyed -= HandleEnemyDestroyed;
     }
 
-    private void ResetPoints()
+    private void ResetPoints(bool _)
     {
         scorePoints = 0;
         rewardPoints = 0;
