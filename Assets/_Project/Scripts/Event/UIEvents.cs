@@ -8,6 +8,7 @@ public static class UIEvents
     public static event Action<GameObject, float> OnHealthChanged;
     public static event Action OnPlayerRevived;
     public static event Action OnGameEnded;
+    public static event Action OnGamePlayed;
 
     public static void RaiseRewardChanged(int currentReward)
     {
@@ -32,5 +33,10 @@ public static class UIEvents
     public static void RaiseGameEnded()
     {
         OnGameEnded?.Invoke();
+    }
+
+    public static void RaiseGamePlayed()
+    {
+        OnGamePlayed?.Invoke();
     }
 }

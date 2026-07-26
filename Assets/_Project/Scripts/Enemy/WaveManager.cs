@@ -34,7 +34,7 @@ public class WaveManager : MonoBehaviour
     private void OnEnable()
     {
         GameEvents.OnGameStarted += EnableSpawnWave;
-        GameEvents.OnGameRetry += ResetWave;
+        GameEvents.OnGameRetried += ResetWave;
         GameEvents.OnPlayerDestroyed += DisableSpawnWave;
         GameEvents.OnEnemyDestroyed += CheckIfBossDestroyed;
     }
@@ -42,7 +42,7 @@ public class WaveManager : MonoBehaviour
     private void OnDisable()
     {
         GameEvents.OnGameStarted -= EnableSpawnWave;
-        GameEvents.OnGameRetry -= ResetWave;
+        GameEvents.OnGameRetried -= ResetWave;
         GameEvents.OnPlayerDestroyed -= DisableSpawnWave;
         GameEvents.OnEnemyDestroyed -= CheckIfBossDestroyed;
     }
@@ -103,7 +103,11 @@ public class WaveManager : MonoBehaviour
         }
     }
 
-    private void ResetWave() => currentWave = 0;
+    private void ResetWave(bool _)
+    {
+        currentWave = 0;
+        DisableSpawnWave();
+    }
 
     private void EnableSpawnWave()
     {

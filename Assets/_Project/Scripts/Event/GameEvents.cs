@@ -9,7 +9,7 @@ public static class GameEvents
     public static event Action<GameObject> OnEntityDamaged;
     public static event Action<Vector2> OnMeteoriteDestroyed;
     public static event Action OnGameStarted;
-    public static event Action OnGameRetry;
+    public static event Action<bool> OnGameRetried;
 
     // VFX Events
     public static event Action<Vector2> OnHit;
@@ -44,9 +44,9 @@ public static class GameEvents
         OnGameStarted?.Invoke();
     }
 
-    public static void RaiseGameRetry()
+    public static void RaiseGameRetried(bool isRetried)
     {
-        OnGameRetry?.Invoke();
+        OnGameRetried?.Invoke(isRetried);
     }
 
     public static void RaiseHit(Vector2 position)

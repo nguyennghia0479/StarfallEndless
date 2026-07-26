@@ -9,20 +9,15 @@ public class CountingUI : MonoBehaviour
     private float countdownTimer;
     private bool hasRollOut;
 
-    private void Awake()
+    private void OnEnable()
     {
-        SetToCountdown();
+        countdownTimer = countdown;
+        hasRollOut = false;
     }
 
     private void Update()
     {
         HandleCountdown();
-    }
-
-    public void SetToCountdown()
-    {
-        countdownTimer = countdown;
-        hasRollOut = false;
     }
 
     private void HandleCountdown()
