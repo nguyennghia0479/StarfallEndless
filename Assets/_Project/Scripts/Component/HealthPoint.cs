@@ -30,7 +30,7 @@ public class HealthPoint : MonoBehaviour, IDamageable
         UIEvents.RaiseHealthChanged(gameObject, currentHP);
     }
 
-    public void Revive()
+    public void ResetHealth()
     {
         isDeath = false;
         currentHP = maxHP;

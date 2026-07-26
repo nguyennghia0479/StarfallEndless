@@ -431,6 +431,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyBoss
   stats: {fileID: 0}
+  isBoss: 1
 --- !u!114 &682376142761920129
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -500,7 +501,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6eef85ff94f48a847b01a65a67b95a81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageDealer
-  damage: 100
 --- !u!114 &11247958598192505
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -25,6 +25,6 @@ public class ReviveUI : MonoBehaviour
 
     private void PlayEndGameButton()
     {
-        Debug.Log("End game");
+        UIEvents.RaiseGameEnded();
     }
 }

@@ -10,7 +10,13 @@ public class PlayerVisual : MonoBehaviour
     [SerializeField] private float blinkTime = .2f;
 
     private float enableShieldTimer;
+    private WaitForSeconds waitTime;
     private Coroutine blinkEffectRoutine;
+
+    private void Awake()
+    {
+        waitTime = new WaitForSeconds(blinkTime);
+    }
 
     private void Update()
     {
@@ -73,12 +79,12 @@ public class PlayerVisual : MonoBehaviour
             foreach (var visual in shipVisuals)
                 visual.color = Color.clear;
 
-            yield return new WaitForSeconds(blinkTime);
+            yield return waitTime;
 
             foreach (var visual in shipVisuals)
                 visual.color = Color.white;
 
-            yield return new WaitForSeconds(blinkTime);
+            yield return waitTime;
         }
     }
 

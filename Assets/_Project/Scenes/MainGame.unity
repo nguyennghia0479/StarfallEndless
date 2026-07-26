@@ -816,6 +816,7 @@ Transform:
   - {fileID: 1531177812}
   - {fileID: 6492691145171158154}
   - {fileID: 219974689}
+  - {fileID: 1775954667}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &285211377
@@ -1376,7 +1377,7 @@ GameObject:
   - component: {fileID: 335134253}
   - component: {fileID: 335134252}
   m_Layer: 5
-  m_Name: CurrencyText
+  m_Name: RewardText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1592,7 +1593,7 @@ GameObject:
   - component: {fileID: 354532272}
   - component: {fileID: 354532271}
   m_Layer: 5
-  m_Name: PlayingTimeVal
+  m_Name: WaveCompletedVal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1637,7 +1638,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 1h30
+  m_text: 1000
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1801,12 +1802,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 48
+  m_fontSize: 36
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 48
+  m_fontSizeMax: 36
   m_fontStyle: 1
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
@@ -2566,7 +2567,7 @@ GameObject:
   - component: {fileID: 478365593}
   - component: {fileID: 478365592}
   m_Layer: 5
-  m_Name: CurrencyIcon
+  m_Name: RewardIcon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4353,12 +4354,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 42
+  m_fontSize: 36
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 42
+  m_fontSizeMax: 36
   m_fontStyle: 1
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
@@ -4417,7 +4418,7 @@ GameObject:
   - component: {fileID: 913553349}
   - component: {fileID: 913553350}
   m_Layer: 5
-  m_Name: PlayingTimeContainer
+  m_Name: WaveCompletedContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4937,6 +4938,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96313bb1d72676747861a1e852b36135, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameOverUI
+  enemiesKillText: {fileID: 627727920}
+  bossesKillText: {fileID: 874865867}
+  rewardPointsText: {fileID: 936548233}
+  scorePointsText: {fileID: 764391404}
+  waveCompletedText: {fileID: 354532271}
+  retryButton: {fileID: 275746211}
+  mainMenuButton: {fileID: 2115753992}
 --- !u!1 &977785291
 GameObject:
   m_ObjectHideFlags: 0
@@ -5232,12 +5240,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 48
+  m_fontSize: 36
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 48
+  m_fontSizeMax: 36
   m_fontStyle: 1
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
@@ -7163,7 +7171,7 @@ GameObject:
   - component: {fileID: 1684644852}
   - component: {fileID: 1684644851}
   m_Layer: 5
-  m_Name: PlayingTimeLabel
+  m_Name: WaveCompletedLabel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7208,7 +7216,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Playing Time:'
+  m_text: Wave Completed
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -7235,12 +7243,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 42
+  m_fontSize: 36
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 42
+  m_fontSizeMax: 36
   m_fontStyle: 1
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
@@ -7340,6 +7348,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83effbaa6fb139245a1c5a7dc5a2287d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MainGameUI
+  rewardPointText: {fileID: 335134252}
   scorePointText: {fileID: 1763157695}
 --- !u!1 &1743949416
 GameObject:
@@ -7425,12 +7434,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 42
+  m_fontSize: 36
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 42
+  m_fontSizeMax: 36
   m_fontStyle: 1
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
@@ -7800,6 +7809,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1772354124}
   m_CullTransparentMesh: 1
+--- !u!1 &1775954665
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1775954667}
+  - component: {fileID: 1775954666}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1775954666
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1775954665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd22ea0b0d1620a4881db69ea03eaddb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameManager
+--- !u!4 &1775954667
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1775954665}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 276279459}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1782448202
 GameObject:
   m_ObjectHideFlags: 0
@@ -7960,6 +8013,10 @@ MonoBehaviour:
   settingsUI: {fileID: 256209031}
   reviveUI: {fileID: 635418869}
   countingUI: {fileID: 1170241419}
+  gameOverUI: {fileID: 969120357}
+  gameManager: {fileID: 1775954666}
+  scoreManager: {fileID: 325661698}
+  waveManager: {fileID: 5165487866155071198}
 --- !u!1 &1808026666
 GameObject:
   m_ObjectHideFlags: 0
@@ -10008,12 +10065,13 @@ MonoBehaviour:
   waves:
   - {fileID: 11400000, guid: 8786f879e18e9ed428da0d8033e77a34, type: 2}
   - {fileID: 11400000, guid: e5039ed8eb7f75f45bbc254c214fd2b8, type: 2}
-  enemyList:
+  enemyDB:
   - {fileID: 11400000, guid: 693f99225d60bf14886001c1cbcb3e57, type: 2}
   - {fileID: 11400000, guid: b418fdfa910e5dd43be3b2d4320dacda, type: 2}
   timeToSpawnWave: 2
   bossWave: {fileID: 11400000, guid: 3127fe96030122a4693ae6e60146b07e, type: 2}
-  bossList: {fileID: 11400000, guid: 9779b9c9d81f63446a5f57d0e23a1242, type: 2}
+  bossDB: {fileID: 11400000, guid: 9779b9c9d81f63446a5f57d0e23a1242, type: 2}
+  waveAmountToSpawnBoss: 5
 --- !u!222 &5305915983123065687
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -10427,7 +10485,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraBoundary
   bottomPadding: 1
-  topLimited: 0.6
+  topLimited: 1
   isLookUp: 1
 --- !u!114 &7300799535124875029
 MonoBehaviour:

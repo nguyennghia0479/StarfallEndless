@@ -3,9 +3,16 @@ using UnityEngine;
 
 public static class UIEvents
 {
+    public static event Action<int> OnRewardChanged;
     public static event Action<int> OnScoreChanged;
     public static event Action<GameObject, float> OnHealthChanged;
     public static event Action OnPlayerRevived;
+    public static event Action OnGameEnded;
+
+    public static void RaiseRewardChanged(int currentReward)
+    {
+        OnRewardChanged?.Invoke(currentReward);
+    }
 
     public static void RaiseScoreChanged(int currentScore)
     {
@@ -20,5 +27,10 @@ public static class UIEvents
     public static void RaisePlayerRevived()
     {
         OnPlayerRevived?.Invoke();
+    }
+
+    public static void RaiseGameEnded()
+    {
+        OnGameEnded?.Invoke();
     }
 }

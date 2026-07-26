@@ -2,7 +2,10 @@ using UnityEngine;
 
 public class Enemy : Entity
 {
-    public EnemyMovement Movement {  get; private set; }
+    [SerializeField] protected bool isBoss;
+
+    public EnemyMovement Movement { get; private set; }
+
     protected int scorePoints;
 
     protected override void Awake()
@@ -39,7 +42,7 @@ public class Enemy : Entity
     {
         base.HandleDestroyed();
 
-        GameEvents.RaiseEnemyDestroyed(scorePoints, transform.position);
+        GameEvents.RaiseEnemyDestroyed(this);
         Destroy(gameObject);
     }
 
@@ -47,4 +50,7 @@ public class Enemy : Entity
     {
         StopFire();
     }
+
+    public int ScorePoints => scorePoints;
+    public bool IsBoss => isBoss;
 }

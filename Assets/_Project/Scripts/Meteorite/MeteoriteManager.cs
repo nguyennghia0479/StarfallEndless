@@ -25,12 +25,14 @@ public class MeteoriteManager : MonoBehaviour
     private void OnEnable()
     {
         GameEvents.OnGameStarted += EnableSpawnMeteorites;
+        GameEvents.OnGameRetry += ResetWave;
         GameEvents.OnPlayerDestroyed += DisableSpawnMeteorites;
     }
 
     private void OnDisable()
     {
         GameEvents.OnGameStarted -= EnableSpawnMeteorites;
+        GameEvents.OnGameRetry -= ResetWave;
         GameEvents.OnPlayerDestroyed -= DisableSpawnMeteorites;
     }
 
@@ -81,8 +83,6 @@ public class MeteoriteManager : MonoBehaviour
         timeToSpawn = GetTimeToSpawnMeteorite();
     }
 
-    public void DisableSpawnMeteorites()
-    {
-        canSpawn = false;
-    }
+    public void DisableSpawnMeteorites() => canSpawn = false;
+    private void ResetWave() => spawnTimer = 0;
 }
