@@ -9,7 +9,7 @@ public class WaveManager : MonoBehaviour
     [SerializeField] private WaveSO[] waves;
     [SerializeField] private EnemyDatabaseSO[] enemyDB;
     [SerializeField] private float timeToSpawnWave = 2f;
-    
+
     [Header("Boss wave settings")]
     [SerializeField] private WaveSO bossWave;
     [SerializeField] private EnemyDatabaseSO bossDB;
@@ -17,6 +17,7 @@ public class WaveManager : MonoBehaviour
 
     private WaitForSeconds waitTimeToSpawnWave;
     private Coroutine spawnEnemiesRoutine;
+    private EnemyBoss enemyBoss;
     private bool canSpawnEnemy;
     private bool isBossWave;
     private int currentWave;
@@ -33,16 +34,16 @@ public class WaveManager : MonoBehaviour
 
     private void OnEnable()
     {
-        GameEvents.OnGameStarted += EnableSpawnWave;
-        GameEvents.OnGameRetried += ResetWave;
+        GameEvents.OnGameStart += HandleGameStart;
+        GameEvents.OnGameQuit += HandleGameQuit;
         GameEvents.OnPlayerDestroyed += DisableSpawnWave;
         GameEvents.OnEnemyDestroyed += CheckIfBossDestroyed;
     }
 
     private void OnDisable()
     {
-        GameEvents.OnGameStarted -= EnableSpawnWave;
-        GameEvents.OnGameRetried -= ResetWave;
+        GameEvents.OnGameStart -= HandleGameStart;
+        GameEvents.OnGameQuit -= HandleGameQuit;
         GameEvents.OnPlayerDestroyed -= DisableSpawnWave;
         GameEvents.OnEnemyDestroyed -= CheckIfBossDestroyed;
     }
@@ -59,8 +60,8 @@ public class WaveManager : MonoBehaviour
     private void SpawnEnemyBoss()
     {
         EnemyBoss bossSelected = bossDB.Enemies[Random.Range(0, bossDB.Enemies.Length)] as EnemyBoss;
-        EnemyBoss newBoss = Instantiate(bossSelected, bossWave.GetStartingPoint().position, Quaternion.identity);
-        newBoss.Movement.SetupEnemyMove(bossWave);
+        enemyBoss = Instantiate(bossSelected, bossWave.GetStartingPoint().position, Quaternion.identity);
+        enemyBoss.Movement.SetupEnemyMove(bossWave);
     }
 
     private IEnumerator SpawnWaveRoutine()
@@ -103,10 +104,20 @@ public class WaveManager : MonoBehaviour
         }
     }
 
-    private void ResetWave(bool _)
+    private void HandleGameStart(bool isRestarted)
     {
-        currentWave = 0;
+        if (isRestarted)
+            currentWave = 0;
+
+        EnableSpawnWave();
+    }
+
+    private void HandleGameQuit()
+    {
         DisableSpawnWave();
+
+        if (enemyBoss != null && enemyBoss.gameObject != null)
+            enemyBoss.StopRoamingMove();
     }
 
     private void EnableSpawnWave()

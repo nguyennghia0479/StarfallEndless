@@ -30,20 +30,20 @@ public class Player : Entity
     {
         base.OnEnable();
 
-        GameEvents.OnGameStarted += OnGameStarted;
-        GameEvents.OnGameRetried += OnGameRetried;
-        UIEvents.OnPlayerRevived += EnablePlayer;
-        UIEvents.OnGamePlayed += EnablePlayer;
+        GameEvents.OnGameReady += EnablePlayer;
+        GameEvents.OnGameStart += ActivatePlayer;
+        UIEvents.OnReviveButtonClicked += HandlePlayerRevive;
+        GameEvents.OnGameQuit += DisablePlayer;
     }
 
     protected override void OnDisable()
     {
         base.OnDisable();
 
-        GameEvents.OnGameStarted -= OnGameStarted;
-        GameEvents.OnGameRetried -= OnGameRetried;
-        UIEvents.OnPlayerRevived -= EnablePlayer;
-        UIEvents.OnGamePlayed -= EnablePlayer;
+        GameEvents.OnGameReady -= EnablePlayer;
+        GameEvents.OnGameStart -= ActivatePlayer;
+        UIEvents.OnReviveButtonClicked -= HandlePlayerRevive;
+        GameEvents.OnGameQuit -= DisablePlayer;
     }
 
     protected override void HandleDestroyed()
@@ -54,20 +54,17 @@ public class Player : Entity
         DisablePlayer();
     }
 
-    private void OnGameStarted()
+    private void HandlePlayerRevive(int _)
+    {
+        EnablePlayer();
+    }
+
+    private void ActivatePlayer(bool _)
     {
         StartFire();
         Visual.StopBlinkEffect();
         Health.EnableDamaged();
         collider.enabled = true;
-    }
-
-    private void OnGameRetried(bool isRetried)
-    {
-        if (isRetried)
-            EnablePlayer();
-        else
-            DisablePlayer();
     }
 
     private void EnablePlayer()

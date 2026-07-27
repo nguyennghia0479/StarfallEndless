@@ -24,7 +24,7 @@ public class MainMenuUI : MonoBehaviour
 
     private void PlayPlayButton()
     {
-        UIEvents.RaiseGamePlayed();
+        UIEvents.RaiseStartButtonClicked();
     }
 
     private void PlaySettingButton()

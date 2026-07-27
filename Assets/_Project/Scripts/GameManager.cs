@@ -2,7 +2,7 @@ using UnityEngine;
 
 public enum GameState
 {
-    MainMenu, GamePlaying, GameOver
+    MainMenu, GamePlaying
 }
 
 public class GameManager : MonoBehaviour
@@ -23,20 +23,39 @@ public class GameManager : MonoBehaviour
 
     private void OnEnable()
     {
-        GameEvents.OnGameRetried += ResetCount;
+        UIEvents.OnStartButtonClicked += HandleGameStart;
+        UIEvents.OnMainMenuButtonClicked += HandleMainMenu;
+        GameEvents.OnGameStart += ResetCount;
         GameEvents.OnEnemyDestroyed += CountEnemiesKill;
     }
 
     private void OnDisable()
     {
-        GameEvents.OnGameRetried -= ResetCount;
+        UIEvents.OnStartButtonClicked -= HandleGameStart;
+        UIEvents.OnMainMenuButtonClicked -= HandleMainMenu;
+        GameEvents.OnGameStart -= ResetCount;
         GameEvents.OnEnemyDestroyed -= CountEnemiesKill;
     }
 
-    private void ResetCount(bool _)
+    private void HandleGameStart()
     {
-        enemiesKill = 0;
-        bossesKill = 0;
+        GameEvents.RaiseGameReady();
+        currentState = GameState.GamePlaying;
+    }
+
+    private void HandleMainMenu()
+    {
+        GameEvents.RaiseGameQuit();
+        currentState = GameState.MainMenu;
+    }
+
+    private void ResetCount(bool isRestarted)
+    {
+        if (isRestarted)
+        {
+            enemiesKill = 0;
+            bossesKill = 0;
+        }
     }
 
     private void CountEnemiesKill(Enemy enemy)
@@ -47,11 +66,7 @@ public class GameManager : MonoBehaviour
             enemiesKill++;
     }
 
-    public void SwitchToMainMenuState() => currentState = GameState.MainMenu;
-    public void SwitchToGameState() => currentState = GameState.GamePlaying;
-    public bool IsMainMenuState() => currentState == GameState.MainMenu;
     public bool IsGamePlayingState() => currentState == GameState.GamePlaying;
-    public GameState State => currentState;
     public int EnemiesKill => enemiesKill;
     public int BossesKill => bossesKill;
 }

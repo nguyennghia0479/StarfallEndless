@@ -13,6 +13,7 @@ public class MainGameUI : MonoBehaviour
     private void OnEnable()
     {
         settingButton.onClick.AddListener(PlaySettingButton);
+
         UIEvents.OnRewardChanged += UpdateRewardPointText;
         UIEvents.OnScoreChanged += UpdateScorePointText;
     }
@@ -20,6 +21,7 @@ public class MainGameUI : MonoBehaviour
     private void OnDisable()
     {
         settingButton.onClick.RemoveListener(PlaySettingButton);
+
         UIEvents.OnRewardChanged -= UpdateRewardPointText;
         UIEvents.OnScoreChanged -= UpdateScorePointText;
     }
@@ -39,7 +41,7 @@ public class MainGameUI : MonoBehaviour
         scorePointText.text = currentScore.ToString();
     }
 
-    public void ResetPoints()
+    public void ResetPointsUI()
     {
         UpdateScorePointText(0);
         UpdateRewardPointText(0);

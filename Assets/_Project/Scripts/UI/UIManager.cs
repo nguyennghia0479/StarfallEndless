@@ -29,25 +29,25 @@ public class UIManager : MonoBehaviour
 
     private void OnEnable()
     {
-        UIEvents.OnGamePlayed += HandleGamePlayed;
-        GameEvents.OnGameRetried += HandleGameRetrired;
-        GameEvents.OnPlayerDestroyed += HandlePlayerDestroyed;
-        UIEvents.OnPlayerRevived += HandlePlayerRevived;
-        UIEvents.OnGameEnded += HandleGameEnded;
+        GameEvents.OnGameReady += HandleGameReady;
+        GameEvents.OnPlayerDestroyed += HandleEnableReviveUI;
+        UIEvents.OnReviveButtonClicked += HandlePlayerRevived;
+        UIEvents.OnEndGameButtonClicked += HandleEnableGameOverUI;
+        GameEvents.OnGameQuit += HandleEnableMainMenuUI;
     }
 
     private void OnDisable()
     {
-        UIEvents.OnGamePlayed -= HandleGamePlayed;
-        GameEvents.OnGameRetried -= HandleGameRetrired;
-        GameEvents.OnPlayerDestroyed -= HandlePlayerDestroyed;
-        UIEvents.OnPlayerRevived -= HandlePlayerRevived;
-        UIEvents.OnGameEnded -= HandleGameEnded;
+        GameEvents.OnGameReady -= HandleGameReady;
+        GameEvents.OnPlayerDestroyed -= HandleEnableReviveUI;
+        UIEvents.OnReviveButtonClicked -= HandlePlayerRevived;
+        UIEvents.OnEndGameButtonClicked -= HandleEnableGameOverUI;
+        GameEvents.OnGameQuit -= HandleEnableMainMenuUI;
     }
 
     private void Start()
     {
-        HandleMainMenu();
+        HandleEnableMainMenuUI();
     }
 
     public void SwitchToUI(GameObject uiToEnable)
@@ -58,61 +58,31 @@ public class UIManager : MonoBehaviour
         uiToEnable.SetActive(true);
     }
 
-    public void SwitchToMainMenuUI()
-    {
-        SwitchToUI(mainMenuUI.gameObject);
-    }
-
-    public void SwitchToMainGameUI()
-    {
-        SwitchToUI(mainGameUI.gameObject);
-    }
-
     public void SwitchToSettingUI()
     {
-        SwitchToUI(settingsUI.gameObject);
+        settingsUI.gameObject.SetActive(true);
     }
 
-    private void HandleMainMenu()
-    {
-        SwitchToUI(mainMenuUI.gameObject);
-        gameManager.SwitchToMainMenuState();
-    }
-
-    private void HandleGamePlayed()
+    private void HandleGameReady()
     {
         SwitchToUI(mainGameUI.gameObject);
-        gameManager.SwitchToGameState();
-        countingUI.gameObject.SetActive(true);
-        HandleResetPointsUI();
+        countingUI.SetStartCountdown(true);
+        mainGameUI.ResetPointsUI();
     }
 
-    private void HandleGameRetrired(bool isRetried)
+    private void HandleEnableReviveUI()
     {
-        if (isRetried)
-            HandleGamePlayed();
-        else
-            HandleMainMenu();
-
-        HandleResetPointsUI();
+        reviveUI.gameObject.SetActive(true);
+        reviveUI.EnableReviveButton(scoreManager.RewardPoints);
     }
 
-    private void HandleResetPointsUI()
+    private void HandlePlayerRevived(int _)
     {
-        mainGameUI.ResetPoints();
+        SwitchToUI(mainGameUI.gameObject);
+        countingUI.SetStartCountdown(false);
     }
 
-    private void HandlePlayerDestroyed()
-    {
-        SwitchToUI(reviveUI.gameObject);
-    }
-
-    private void HandlePlayerRevived()
-    {
-        HandleGamePlayed();
-    }
-
-    private void HandleGameEnded()
+    private void HandleEnableGameOverUI()
     {
         GameResultData resultData = new()
         {
@@ -126,4 +96,10 @@ public class UIManager : MonoBehaviour
         gameOverUI.SetGameResult(resultData);
         SwitchToUI(gameOverUI.gameObject);
     }
+
+    private void HandleEnableMainMenuUI()
+    {
+        SwitchToUI(mainMenuUI.gameObject);
+    }
+
 }

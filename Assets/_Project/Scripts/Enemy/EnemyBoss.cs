@@ -43,4 +43,6 @@ public class EnemyBoss : Enemy
 
         bossMovement.StopRoamingMove();
     }
+
+    public void StopRoamingMove() => bossMovement.StopRoamingMove();
 }
