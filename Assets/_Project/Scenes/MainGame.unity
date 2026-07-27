@@ -443,8 +443,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MeteoriteManager
   meteoriteDB: {fileID: 11400000, guid: 57b5d3c41405f1a498a3e5190c4605b2, type: 2}
-  minTimeToSpawn: 20
-  maxTimeToSpawn: 30
+  minTimeToSpawn: 15
+  maxTimeToSpawn: 25
   cameraBoundary: {fileID: 196213007}
   spawnPoint: {fileID: 1239211246}
 --- !u!114 &196213007
@@ -3674,6 +3674,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70cce5e293cbb384b923909f52279c23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ReviveUI
+  revivePointsAmount: 300
+  revivePointFactor: 1.5
+  revivePointsText: {fileID: 2056459965}
   reviveButton: {fileID: 2075744387}
   endGameButton: {fileID: 550555847}
 --- !u!1 &764391402
@@ -10716,8 +10719,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -15, y: 0}
-  m_SizeDelta: {x: 200, y: -30}
+  m_AnchoredPosition: {x: -10, y: 0}
+  m_SizeDelta: {x: 220, y: -30}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!114 &2056459965
 MonoBehaviour:
@@ -10766,14 +10769,14 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 68
+  m_fontSize: 64
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 68
+  m_fontSizeMax: 64
   m_fontStyle: 0
-  m_HorizontalAlignment: 4
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0

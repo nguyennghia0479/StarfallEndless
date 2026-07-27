@@ -12,6 +12,7 @@ public class SettingsUI : MonoBehaviour
 
         mainMenuButton.onClick.AddListener(PlayMainMenuButton);
         closeButton.onClick.AddListener(PlayCloseButton);
+        ToggleMainMenuButton();
     }
 
     private void OnDisable()
@@ -22,25 +23,24 @@ public class SettingsUI : MonoBehaviour
         closeButton.onClick.AddListener(PlayCloseButton);
     }
 
+    private void ToggleMainMenuButton()
+    {
+        if (GameManager.Instance != null && GameManager.Instance.IsGamePlayingState())
+            mainMenuButton.gameObject.SetActive(true);
+        else
+            mainMenuButton.gameObject.SetActive(false);
+    }
+
     private void PlayMainMenuButton()
     {
         if (GameManager.Instance.IsGamePlayingState())
         {
-            GameEvents.RaiseGameRetried(false);
+            UIEvents.RaiseMainMenuButtonClicked();
         }
-
-
     }
 
     private void PlayCloseButton()
     {
-        if (GameManager.Instance.IsMainMenuState())
-        {
-            UIManager.Instance.SwitchToMainMenuUI();
-        }
-        else if (GameManager.Instance.IsGamePlayingState())
-        {
-            UIManager.Instance.SwitchToMainGameUI();
-        }
+        gameObject.SetActive(false);
     }
 }

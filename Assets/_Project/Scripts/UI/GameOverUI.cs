@@ -38,12 +38,12 @@ public class GameOverUI : MonoBehaviour
 
     private void PlayRetryButton()
     {
-        GameEvents.RaiseGameRetried(true);
+        UIEvents.RaiseStartButtonClicked();
     }
 
     private void PlayMainMenuButton()
     {
-        GameEvents.RaiseGameRetried(false);
+        UIEvents.RaiseMainMenuButtonClicked();
     }
 }
 

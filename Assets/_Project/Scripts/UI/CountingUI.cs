@@ -8,11 +8,14 @@ public class CountingUI : MonoBehaviour
 
     private float countdownTimer;
     private bool hasRollOut;
+    private bool isRestarted;
 
-    private void OnEnable()
+    public void SetStartCountdown(bool isRestarted)
     {
+        this.isRestarted = isRestarted;
         countdownTimer = countdown;
         hasRollOut = false;
+        gameObject.SetActive(true);
     }
 
     private void Update()
@@ -35,7 +38,7 @@ public class CountingUI : MonoBehaviour
         {
             hasRollOut = true;
             gameObject.SetActive(false);
-            GameEvents.RaiseGameStarted();
+            GameEvents.RaiseGameStart(isRestarted);
         }
     }
 }

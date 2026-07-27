@@ -3,12 +3,36 @@ using UnityEngine;
 
 public static class UIEvents
 {
+    // Button Events
+    public static event Action OnStartButtonClicked;
+    public static event Action OnMainMenuButtonClicked;
+    public static event Action<int> OnReviveButtonClicked;
+    public static event Action OnEndGameButtonClicked;
+
+    // UI Events
     public static event Action<int> OnRewardChanged;
     public static event Action<int> OnScoreChanged;
     public static event Action<GameObject, float> OnHealthChanged;
-    public static event Action OnPlayerRevived;
-    public static event Action OnGameEnded;
-    public static event Action OnGamePlayed;
+
+    public static void RaiseStartButtonClicked()
+    {
+        OnStartButtonClicked?.Invoke();
+    }
+
+    public static void RaiseMainMenuButtonClicked()
+    {
+        OnMainMenuButtonClicked?.Invoke();
+    }
+
+    public static void RaiseReviveButtonClicked(int revivePointsAmount)
+    {
+        OnReviveButtonClicked?.Invoke(revivePointsAmount);
+    }
+
+    public static void RaiseEndGameButtonClicked()
+    {
+        OnEndGameButtonClicked.Invoke();
+    }
 
     public static void RaiseRewardChanged(int currentReward)
     {
@@ -23,20 +47,5 @@ public static class UIEvents
     public static void RaiseHealthChanged(GameObject gameObject, float currentHP)
     {
         OnHealthChanged?.Invoke(gameObject, currentHP);
-    }
-
-    public static void RaisePlayerRevived()
-    {
-        OnPlayerRevived?.Invoke();
-    }
-
-    public static void RaiseGameEnded()
-    {
-        OnGameEnded?.Invoke();
-    }
-
-    public static void RaiseGamePlayed()
-    {
-        OnGamePlayed?.Invoke();
     }
 }

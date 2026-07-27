@@ -7,19 +7,23 @@ public class ScoreManager : MonoBehaviour
 
     private void OnEnable()
     {
-        GameEvents.OnGameRetried += ResetPoints;
+        GameEvents.OnGameStart += HandleResetPoints;
         GameEvents.OnEnemyDestroyed += HandleEnemyDestroyed;
+        UIEvents.OnReviveButtonClicked += HandleDecreaseRewardPoints;
     }
-
 
     private void OnDisable()
     {
-        GameEvents.OnGameRetried -= ResetPoints;
+        GameEvents.OnGameStart -= HandleResetPoints;
         GameEvents.OnEnemyDestroyed -= HandleEnemyDestroyed;
+        UIEvents.OnReviveButtonClicked -= HandleDecreaseRewardPoints;
     }
 
-    private void ResetPoints(bool _)
+    private void HandleResetPoints(bool isRestarted)
     {
+        if (!isRestarted)
+            return;
+
         scorePoints = 0;
         rewardPoints = 0;
         UIEvents.RaiseRewardChanged(rewardPoints);
@@ -28,8 +32,14 @@ public class ScoreManager : MonoBehaviour
 
     private void HandleEnemyDestroyed(Enemy enemy)
     {
-        IncreaseRewardPoints(enemy);
         IncreaseScorePoints(enemy);
+        IncreaseRewardPoints(enemy);
+    }
+
+    private void IncreaseScorePoints(Enemy enemy)
+    {
+        scorePoints += enemy.ScorePoints;
+        UIEvents.RaiseScoreChanged(scorePoints);
     }
 
     private void IncreaseRewardPoints(Enemy enemy)
@@ -41,11 +51,12 @@ public class ScoreManager : MonoBehaviour
         }
     }
 
-    private void IncreaseScorePoints(Enemy enemy)
+    private void HandleDecreaseRewardPoints(int revivePointsAmount)
     {
-        scorePoints += enemy.ScorePoints;
-        UIEvents.RaiseScoreChanged(scorePoints);
-    }
+        rewardPoints -= revivePointsAmount;
+        rewardPoints = Mathf.Clamp(rewardPoints, 0, rewardPoints);
+        UIEvents.RaiseRewardChanged(rewardPoints);
+    }   
 
     public int ScorePoints => scorePoints;
     public int RewardPoints => rewardPoints;

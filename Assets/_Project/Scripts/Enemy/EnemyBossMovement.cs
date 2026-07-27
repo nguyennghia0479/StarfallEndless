@@ -68,8 +68,8 @@ public class EnemyBossMovement : EnemyMovement
 
     public void StopRoamingMove()
     {
-        isEnterScreen = false;
         isMovedByWaypoint = true;
+        isEnterScreen = false;
         canRoamMove = false;
     }
 
