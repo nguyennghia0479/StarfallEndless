@@ -18,9 +18,28 @@ public class PlayerVisual : MonoBehaviour
         waitTime = new WaitForSeconds(blinkTime);
     }
 
+    private void OnEnable()
+    {
+        UIEvents.OnSelectedShipButtonClicked += HandleShipVisuals;
+    }
+
+    private void OnDisable()
+    {
+        UIEvents.OnSelectedShipButtonClicked -= HandleShipVisuals;
+    }
+
     private void Update()
     {
+        if (shieldSr == null)
+            return;
+
         DisableShield();
+    }
+
+    private void HandleShipVisuals(PlayerModel model)
+    {
+        shieldSr = model.ShieldSprite;
+        shipVisuals = model.ShipVisuals;
     }
 
     public void EnableShipVisual()

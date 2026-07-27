@@ -3,7 +3,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     [Header("Boundary settings")]
-    [SerializeField] private SpriteRenderer sprite;
+    [SerializeField] private SpriteRenderer shipSr;
     [SerializeField] private CameraBoundary cameraBoundary;
 
     private PlayerController playerController;
@@ -15,8 +15,17 @@ public class PlayerMovement : MonoBehaviour
     private void Awake()
     {
         playerController = GetComponent<PlayerController>();
-        trail = GetComponentInChildren<TrailRenderer>();
-        DisableTrail();
+        GetTrail();
+    }
+
+    private void OnEnable()
+    {
+        UIEvents.OnSelectedShipButtonClicked += HandleShipVisuals;
+    }
+
+    private void OnDisable()
+    {
+        UIEvents.OnSelectedShipButtonClicked -= HandleShipVisuals;
     }
 
     private void Update()
@@ -31,11 +40,23 @@ public class PlayerMovement : MonoBehaviour
         defaultMoveSpeed = moveSpeed;
     }
 
+    private void HandleShipVisuals(PlayerModel model)
+    {
+        shipSr = model.ShipSprite;
+        GetTrail();
+    }
+
+    private void GetTrail()
+    {
+        trail = GetComponentInChildren<TrailRenderer>();
+        DisableTrail();
+    }
+
     private void HandleMovement()
     {
         Vector3 targetPosition = transform.position + playerController.GetMoveDirection() * (moveSpeed * Time.deltaTime);
 
-        transform.position = cameraBoundary.ClampToCameraBoundaries(sprite, targetPosition);
+        transform.position = cameraBoundary.ClampToCameraBoundaries(shipSr, targetPosition);
     }
 
     public void StopBuff() => buffTimer = 0;

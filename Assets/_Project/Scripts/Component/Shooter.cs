@@ -50,6 +50,11 @@ public class Shooter : MonoBehaviour
         }
     }
 
+    public void SetupGunPoints(Transform[] gunPoints)
+    {
+        this.gunPoints = gunPoints;
+    }
+
     public void EnableAutoFire()
     {
         if (isAutoFire || fireRoutine != null)

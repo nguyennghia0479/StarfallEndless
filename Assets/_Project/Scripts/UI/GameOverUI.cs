@@ -17,14 +17,14 @@ public class GameOverUI : MonoBehaviour
 
     private void OnEnable()
     {
-        retryButton.onClick.AddListener(PlayRetryButton);
-        mainMenuButton.onClick.AddListener(PlayMainMenuButton);
+        retryButton.onClick.AddListener(OnRetryButtonClicked);
+        mainMenuButton.onClick.AddListener(OnMainMenuButtonClicked);
     }
 
     private void OnDisable()
     {
-        retryButton.onClick.RemoveListener(PlayRetryButton);
-        mainMenuButton.onClick.RemoveListener(PlayMainMenuButton);
+        retryButton.onClick.RemoveListener(OnRetryButtonClicked);
+        mainMenuButton.onClick.RemoveListener(OnMainMenuButtonClicked);
     }
 
     public void SetGameResult(GameResultData resultData)
@@ -36,12 +36,12 @@ public class GameOverUI : MonoBehaviour
         waveCompletedText.text = resultData.waveCompletedText;
     }
 
-    private void PlayRetryButton()
+    private void OnRetryButtonClicked()
     {
         UIEvents.RaiseStartButtonClicked();
     }
 
-    private void PlayMainMenuButton()
+    private void OnMainMenuButtonClicked()
     {
         UIEvents.RaiseMainMenuButtonClicked();
     }

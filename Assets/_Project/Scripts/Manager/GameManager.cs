@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public enum GameState
@@ -9,6 +10,9 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
+    [SerializeField] private PlayerDatabase playerDB;
+
+    private Dictionary<int, bool> playerDict;
     private GameState currentState = GameState.MainMenu;
     private int enemiesKill;
     private int bossesKill;
@@ -19,6 +23,8 @@ public class GameManager : MonoBehaviour
             Instance = this;
         else
             Destroy(gameObject);
+
+        SetupPlayerDatabase();
     }
 
     private void OnEnable()
@@ -66,7 +72,31 @@ public class GameManager : MonoBehaviour
             enemiesKill++;
     }
 
+    private void SetupPlayerDatabase()
+    {
+        playerDict = new Dictionary<int, bool>();
+        for (int i = 0; i < playerDB.Players.Length; i++)
+        {
+            playerDict.Add(i, playerDB.Players[i].UnlockedByDefault);
+        }
+    }
+
+    public void UnlockPlayerShip(int index)
+    {
+        if (playerDict.ContainsKey(index))
+            playerDict[index] = true;
+    }
+
+    public bool HasUnlockedShip(int index)
+    {
+        if (playerDict.ContainsKey(index))
+            return playerDict[index];
+
+        return false;
+    }
+
     public bool IsGamePlayingState() => currentState == GameState.GamePlaying;
     public int EnemiesKill => enemiesKill;
     public int BossesKill => bossesKill;
+    public Dictionary<int, bool> PlayerDictionary => playerDict;
 }

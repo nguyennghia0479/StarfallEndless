@@ -10,6 +10,7 @@ public class ScoreManager : MonoBehaviour
         GameEvents.OnGameStart += HandleResetPoints;
         GameEvents.OnEnemyDestroyed += HandleEnemyDestroyed;
         UIEvents.OnReviveButtonClicked += HandleDecreaseRewardPoints;
+        UIEvents.OnUnlockShipButtonClicked += HandleDecreaseRewardPoints;
     }
 
     private void OnDisable()
@@ -17,6 +18,14 @@ public class ScoreManager : MonoBehaviour
         GameEvents.OnGameStart -= HandleResetPoints;
         GameEvents.OnEnemyDestroyed -= HandleEnemyDestroyed;
         UIEvents.OnReviveButtonClicked -= HandleDecreaseRewardPoints;
+        UIEvents.OnUnlockShipButtonClicked -= HandleDecreaseRewardPoints;
+    }
+
+    private void Start()
+    {
+        // Get RewardPoints from PlayerPreft.GetInt
+        rewardPoints = 1000;
+        UIEvents.RaiseRewardChanged(rewardPoints);
     }
 
     private void HandleResetPoints(bool isRestarted)

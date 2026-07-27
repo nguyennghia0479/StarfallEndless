@@ -23,7 +23,7 @@ public class Player : Entity
         base.Start();
 
         Movement.Initialize(stats.MoveSpeed);
-        DisablePlayer();
+        //DisablePlayer();
     }
 
     protected override void OnEnable()
@@ -34,6 +34,7 @@ public class Player : Entity
         GameEvents.OnGameStart += ActivatePlayer;
         UIEvents.OnReviveButtonClicked += HandlePlayerRevive;
         GameEvents.OnGameQuit += DisablePlayer;
+        UIEvents.OnSelectedShipButtonClicked += HandleShipVisuals;
     }
 
     protected override void OnDisable()
@@ -44,6 +45,7 @@ public class Player : Entity
         GameEvents.OnGameStart -= ActivatePlayer;
         UIEvents.OnReviveButtonClicked -= HandlePlayerRevive;
         GameEvents.OnGameQuit -= DisablePlayer;
+        UIEvents.OnSelectedShipButtonClicked -= HandleShipVisuals;
     }
 
     protected override void HandleDestroyed()
@@ -65,6 +67,11 @@ public class Player : Entity
         Visual.StopBlinkEffect();
         Health.EnableDamaged();
         collider.enabled = true;
+    }
+
+    private void HandleShipVisuals(PlayerModel model)
+    {
+        Shooter.SetupGunPoints(model.GunPoints);
     }
 
     private void EnablePlayer()

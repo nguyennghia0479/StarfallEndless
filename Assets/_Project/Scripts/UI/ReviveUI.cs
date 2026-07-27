@@ -16,14 +16,14 @@ public class ReviveUI : MonoBehaviour
     private void OnEnable()
     {
         UpdateRevivePointsText();
-        reviveButton.onClick.AddListener(PlayReviveButton);
-        endGameButton.onClick.AddListener(PlayEndGameButton);
+        reviveButton.onClick.AddListener(OnReviveButtonClicked);
+        endGameButton.onClick.AddListener(OnEndGameButtonClicked);
     }
 
     private void OnDisable()
     {
-        reviveButton.onClick.RemoveListener(PlayReviveButton);
-        endGameButton.onClick.RemoveListener(PlayEndGameButton);
+        reviveButton.onClick.RemoveListener(OnReviveButtonClicked);
+        endGameButton.onClick.RemoveListener(OnEndGameButtonClicked);
     }
 
     private void UpdateRevivePointsText()
@@ -31,7 +31,7 @@ public class ReviveUI : MonoBehaviour
         revivePointsText.text = revivePointsAmount.ToString();
     }
 
-    private void PlayReviveButton()
+    private void OnReviveButtonClicked()
     {
         UIEvents.RaiseReviveButtonClicked(revivePointsAmount);
 
@@ -39,7 +39,7 @@ public class ReviveUI : MonoBehaviour
         UpdateRevivePointsText();
     }
 
-    private void PlayEndGameButton()
+    private void OnEndGameButtonClicked()
     {
         UIEvents.RaiseEndGameButtonClicked();
     }

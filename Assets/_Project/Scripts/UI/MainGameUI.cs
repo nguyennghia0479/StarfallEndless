@@ -12,7 +12,7 @@ public class MainGameUI : MonoBehaviour
 
     private void OnEnable()
     {
-        settingButton.onClick.AddListener(PlaySettingButton);
+        settingButton.onClick.AddListener(OnSettingButtonClicked);
 
         UIEvents.OnRewardChanged += UpdateRewardPointText;
         UIEvents.OnScoreChanged += UpdateScorePointText;
@@ -20,13 +20,13 @@ public class MainGameUI : MonoBehaviour
 
     private void OnDisable()
     {
-        settingButton.onClick.RemoveListener(PlaySettingButton);
+        settingButton.onClick.RemoveListener(OnSettingButtonClicked);
 
         UIEvents.OnRewardChanged -= UpdateRewardPointText;
         UIEvents.OnScoreChanged -= UpdateScorePointText;
     }
 
-    private void PlaySettingButton()
+    private void OnSettingButtonClicked()
     {
         UIManager.Instance.SwitchToSettingUI();
     }
