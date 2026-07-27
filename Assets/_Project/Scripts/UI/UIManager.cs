@@ -4,15 +4,17 @@ public class UIManager : MonoBehaviour
 {
     public static UIManager Instance { get; private set; }
 
-    [SerializeField] private GameObject[] uiElements;
-
     [Header("UI Elements")]
+    [SerializeField] private GameObject[] uiElements;
+    [Space]
     [SerializeField] private MainMenuUI mainMenuUI;
-    [SerializeField] private MainGameUI mainGameUI;
-    [SerializeField] private SettingsUI settingsUI;
-    [SerializeField] private ReviveUI reviveUI;
     [SerializeField] private CountingUI countingUI;
+    [SerializeField] private MainGameUI mainGameUI;
+    [SerializeField] private ReviveUI reviveUI;
     [SerializeField] private GameOverUI gameOverUI;
+    [SerializeField] private SettingsUI settingsUI;
+    [SerializeField] private HangarUI hangarUI;
+    [SerializeField] private CreditsUI creditsUI;
 
     [Header("Manager Elements")]
     [SerializeField] private GameManager gameManager;
@@ -48,6 +50,7 @@ public class UIManager : MonoBehaviour
     private void Start()
     {
         HandleEnableMainMenuUI();
+        hangarUI.SetDefaultShip();
     }
 
     public void SwitchToUI(GameObject uiToEnable)
@@ -56,6 +59,16 @@ public class UIManager : MonoBehaviour
             ui.SetActive(false);
 
         uiToEnable.SetActive(true);
+    }
+
+    public void SwitchToHangarUI()
+    {
+        hangarUI.gameObject.SetActive(true);
+    }
+
+    public void SwitchToCreditsUI()
+    {
+        creditsUI.gameObject.SetActive(true);
     }
 
     public void SwitchToSettingUI()
@@ -102,4 +115,5 @@ public class UIManager : MonoBehaviour
         SwitchToUI(mainMenuUI.gameObject);
     }
 
+    public int GetRewardPoints() => scoreManager.RewardPoints;
 }

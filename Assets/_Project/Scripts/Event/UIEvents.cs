@@ -8,6 +8,8 @@ public static class UIEvents
     public static event Action OnMainMenuButtonClicked;
     public static event Action<int> OnReviveButtonClicked;
     public static event Action OnEndGameButtonClicked;
+    public static event Action<PlayerModel> OnSelectedShipButtonClicked;
+    public static event Action<int> OnUnlockShipButtonClicked;
 
     // UI Events
     public static event Action<int> OnRewardChanged;
@@ -32,6 +34,16 @@ public static class UIEvents
     public static void RaiseEndGameButtonClicked()
     {
         OnEndGameButtonClicked.Invoke();
+    }
+
+    public static void RaiseSelectedShipButtonClicked(PlayerModel model)
+    {
+        OnSelectedShipButtonClicked?.Invoke(model);
+    }
+
+    public static void RaiseUnlockShipButton(int unlockedCost)
+    {
+        OnUnlockShipButtonClicked?.Invoke(unlockedCost);
     }
 
     public static void RaiseRewardChanged(int currentReward)

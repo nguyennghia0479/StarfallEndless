@@ -10,8 +10,8 @@ public class SettingsUI : MonoBehaviour
     {
         Time.timeScale = 0f;
 
-        mainMenuButton.onClick.AddListener(PlayMainMenuButton);
-        closeButton.onClick.AddListener(PlayCloseButton);
+        mainMenuButton.onClick.AddListener(OnMainMenuButtonClicked);
+        closeButton.onClick.AddListener(OnCloseButtonClicked);
         ToggleMainMenuButton();
     }
 
@@ -19,8 +19,8 @@ public class SettingsUI : MonoBehaviour
     {
         Time.timeScale = 1f;
 
-        mainMenuButton.onClick.RemoveListener(PlayMainMenuButton);
-        closeButton.onClick.AddListener(PlayCloseButton);
+        mainMenuButton.onClick.RemoveListener(OnMainMenuButtonClicked);
+        closeButton.onClick.AddListener(OnCloseButtonClicked);
     }
 
     private void ToggleMainMenuButton()
@@ -31,7 +31,7 @@ public class SettingsUI : MonoBehaviour
             mainMenuButton.gameObject.SetActive(false);
     }
 
-    private void PlayMainMenuButton()
+    private void OnMainMenuButtonClicked()
     {
         if (GameManager.Instance.IsGamePlayingState())
         {
@@ -39,7 +39,7 @@ public class SettingsUI : MonoBehaviour
         }
     }
 
-    private void PlayCloseButton()
+    private void OnCloseButtonClicked()
     {
         gameObject.SetActive(false);
     }
