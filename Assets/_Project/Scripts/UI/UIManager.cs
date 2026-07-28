@@ -50,6 +50,7 @@ public class UIManager : MonoBehaviour
     private void Start()
     {
         HandleEnableMainMenuUI();
+        settingsUI.LoadAudioSettings();
     }
 
     public void SwitchToUI(GameObject uiToEnable)

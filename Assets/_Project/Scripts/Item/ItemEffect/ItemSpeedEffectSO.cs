@@ -13,6 +13,6 @@ public class ItemSpeedEffectSO : ItemEffectSO
     {
         player.Movement.AppylyBuffSpeed(buffSpeedPercent, duration);
         player.Shooter.ApplyBuffFireRate(buffFireRatePercent, duration);
-        GameEvents.RaiseConsumedEffect(player.gameObject);
+        GameEvents.RaiseConsumedEffect(player.gameObject.transform.position);
     }
 }

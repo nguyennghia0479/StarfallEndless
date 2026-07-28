@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a51fe7607ff7f0498a001f506aeec58, type: 3}
+  m_Name: Music Database
+  m_EditorClassIdentifier: Assembly-CSharp::MusicDatabaseSO
+  musicList:
+  - musicState: 0
+    clips:
+    - {fileID: 8300000, guid: 95cdb6021ddf07845b7d956e5eac76a3, type: 3}
+  - musicState: 1
+    clips:
+    - {fileID: 8300000, guid: 9fcf36ecf6723d344afaad39ec2c0c39, type: 3}
+    - {fileID: 8300000, guid: b61b23a3da68d45458fa47513185759a, type: 3}
+    - {fileID: 8300000, guid: 036b1e7bfe68b404bbe23ae90896a3e3, type: 3}
+  - musicState: 2
+    clips:
+    - {fileID: 8300000, guid: 3e8592fb78390324f96af6969ffa6ebd, type: 3}

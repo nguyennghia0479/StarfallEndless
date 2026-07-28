@@ -13,12 +13,13 @@ public static class GameEvents
     public static event Action<Enemy> OnEnemyDestroyed;
     public static event Action<Vector2> OnMeteoriteDestroyed;
     public static event Action<GameObject> OnEntityDamaged;
+    public static event Action<Vector2> OnShooted;
 
     // VFX Events
     public static event Action<Vector2> OnHit;
     public static event Action<Vector2> OnExploded;
-    public static event Action<GameObject> OnHealed;
-    public static event Action<GameObject> OnConsumed;
+    public static event Action<Vector2> OnHealed;
+    public static event Action<Vector2> OnConsumed;
 
     public static void RaiseGameReady()
     {
@@ -58,18 +59,23 @@ public static class GameEvents
         OnEntityDamaged?.Invoke(gameObject);
     }
 
+    public static void RaiseOnShooted(Vector2 positon)
+    {
+        OnShooted?.Invoke(positon);
+    }
+
     public static void RaiseHit(Vector2 position)
     {
         OnHit?.Invoke(position);
     }
 
-    public static void RaiseHealedEffect(GameObject gameObject)
+    public static void RaiseHealedEffect(Vector2 position)
     {
-        OnHealed?.Invoke(gameObject);
+        OnHealed?.Invoke(position);
     }
 
-    public static void RaiseConsumedEffect(GameObject gameObject)
+    public static void RaiseConsumedEffect(Vector2 position)
     {
-        OnConsumed?.Invoke(gameObject);
+        OnConsumed?.Invoke(position);
     }
 }

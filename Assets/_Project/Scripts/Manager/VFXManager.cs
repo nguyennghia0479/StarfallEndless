@@ -33,19 +33,13 @@ public class VFXManager : MonoBehaviour
         Instantiate(explodeVFX, position, Quaternion.identity);
     }
 
-    private void PlayHealVFX(GameObject gameObject)
+    private void PlayHealVFX(Vector2 position)
     {
-        if (!gameObject.CompareTag(GameIdentifiers.GameTags.TAG_PLAYER))
-            return;
-
-        Instantiate(healVFX, gameObject.transform.position, Quaternion.identity);
+        Instantiate(healVFX, position, Quaternion.identity);
     }
 
-    private void PlayConsumeVFX(GameObject gameObject)
+    private void PlayConsumeVFX(Vector2 position)
     {
-        if (!gameObject.CompareTag(GameIdentifiers.GameTags.TAG_PLAYER))
-            return;
-
-        Instantiate(consumedVFX, gameObject.transform.position, Quaternion.identity);
+        Instantiate(consumedVFX, position, Quaternion.identity);
     }
 }
