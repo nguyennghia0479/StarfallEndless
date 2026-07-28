@@ -9,6 +9,6 @@ public class ItemHealEffectSO : ItemEffectSO
     public override void ApplyEffect(Player player)
     {
         player.Health.ApplyHealing(healPercent);
-        GameEvents.RaiseHealedEffect(player.gameObject);
+        GameEvents.RaiseHealedEffect(player.gameObject.transform.position);
     }
 }

@@ -12,6 +12,6 @@ public class ItemShieldEffectSO : ItemEffectSO
     {
         player.Visual.EnableShield(shieldSprite, duration);
         player.Health.ApplyBuffDefend(buffPercent, duration);
-        GameEvents.RaiseConsumedEffect(player.gameObject);
+        GameEvents.RaiseConsumedEffect(player.gameObject.transform.position);
     }
 }

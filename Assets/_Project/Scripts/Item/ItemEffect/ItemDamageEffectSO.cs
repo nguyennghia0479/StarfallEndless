@@ -11,6 +11,6 @@ public class ItemDamageEffectSO : ItemEffectSO
     public override void ApplyEffect(Player player)
     {
         player.Shooter.ApplyUpgradeProjectile(upgradeProjectile, buffPercent, duration);
-        GameEvents.RaiseConsumedEffect(player.gameObject);
+        GameEvents.RaiseConsumedEffect(player.gameObject.transform.position);
     }
 }

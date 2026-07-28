@@ -169,7 +169,7 @@ public class HangarUI : MonoBehaviour
             return;
 
         gameManager.UnlockPlayerShip(currentIndex);
-        UIEvents.RaiseUnlockShipButton(playerShip.UnlockedCost);
+        UIEvents.RaiseUnlockShipButtonClicked(playerShip.UnlockedCost);
         UpdateButton();
         SaveData.SaveUnlockShip(currentIndex.ToString());
     }

@@ -45,6 +45,7 @@ public class Shooter : MonoBehaviour
                 Projectile newProjectile = ProjectileManager.Instance.CreateProjectile(projectilePrefab, gunPoint.position, gunPoint.rotation);
                 newProjectile.Initialize(projectileDamage);
             }
+            GameEvents.RaiseOnShooted(transform.position);
 
             yield return waitTime;
         }
