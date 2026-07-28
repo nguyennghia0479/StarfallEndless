@@ -23,7 +23,7 @@ public class Player : Entity
         base.Start();
 
         Movement.Initialize(stats.MoveSpeed);
-        //DisablePlayer();
+        DisablePlayer();
     }
 
     protected override void OnEnable()
@@ -54,6 +54,15 @@ public class Player : Entity
 
         GameEvents.RaisePlayerDestroyed(transform.position);
         DisablePlayer();
+    }
+
+    public void UpdatePlayerStats(PlayerShipSO playerShipSO)
+    {
+        stats = playerShipSO;
+        Health.Initialize(stats.MaxHP, stats.Defend);
+        Shooter.Initialize(stats.ProjectileDamage);
+        DamageDealer.Initialize(stats.CollisionDamage);
+        Movement.Initialize(stats.MoveSpeed);
     }
 
     private void HandlePlayerRevive(int _)

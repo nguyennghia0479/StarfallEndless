@@ -7,7 +7,7 @@ public class ScoreManager : MonoBehaviour
 
     private void OnEnable()
     {
-        GameEvents.OnGameStart += HandleResetPoints;
+        GameEvents.OnGameStart += HandleResetScorePoints;
         GameEvents.OnEnemyDestroyed += HandleEnemyDestroyed;
         UIEvents.OnReviveButtonClicked += HandleDecreaseRewardPoints;
         UIEvents.OnUnlockShipButtonClicked += HandleDecreaseRewardPoints;
@@ -15,7 +15,7 @@ public class ScoreManager : MonoBehaviour
 
     private void OnDisable()
     {
-        GameEvents.OnGameStart -= HandleResetPoints;
+        GameEvents.OnGameStart -= HandleResetScorePoints;
         GameEvents.OnEnemyDestroyed -= HandleEnemyDestroyed;
         UIEvents.OnReviveButtonClicked -= HandleDecreaseRewardPoints;
         UIEvents.OnUnlockShipButtonClicked -= HandleDecreaseRewardPoints;
@@ -23,19 +23,16 @@ public class ScoreManager : MonoBehaviour
 
     private void Start()
     {
-        // Get RewardPoints from PlayerPreft.GetInt
-        rewardPoints = 1000;
+        rewardPoints = SaveData.LoadRewardPoints();
         UIEvents.RaiseRewardChanged(rewardPoints);
     }
 
-    private void HandleResetPoints(bool isRestarted)
+    private void HandleResetScorePoints(bool isRestarted)
     {
         if (!isRestarted)
             return;
 
         scorePoints = 0;
-        rewardPoints = 0;
-        UIEvents.RaiseRewardChanged(rewardPoints);
         UIEvents.RaiseScoreChanged(scorePoints);
     }
 
@@ -57,6 +54,7 @@ public class ScoreManager : MonoBehaviour
         {
             rewardPoints += enemy.ScorePoints;
             UIEvents.RaiseRewardChanged(rewardPoints);
+            SaveData.SaveRewardPoints(rewardPoints);
         }
     }
 
@@ -65,7 +63,8 @@ public class ScoreManager : MonoBehaviour
         rewardPoints -= revivePointsAmount;
         rewardPoints = Mathf.Clamp(rewardPoints, 0, rewardPoints);
         UIEvents.RaiseRewardChanged(rewardPoints);
-    }   
+        SaveData.SaveRewardPoints(rewardPoints);
+    }
 
     public int ScorePoints => scorePoints;
     public int RewardPoints => rewardPoints;

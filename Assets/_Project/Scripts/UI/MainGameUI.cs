@@ -41,9 +41,9 @@ public class MainGameUI : MonoBehaviour
         scorePointText.text = currentScore.ToString();
     }
 
-    public void ResetPointsUI()
+    public void UpdatePointsOnReady(int currentReward)
     {
+        UpdateRewardPointText(currentReward);
         UpdateScorePointText(0);
-        UpdateRewardPointText(0);
     }
 }

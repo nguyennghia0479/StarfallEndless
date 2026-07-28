@@ -50,7 +50,6 @@ public class UIManager : MonoBehaviour
     private void Start()
     {
         HandleEnableMainMenuUI();
-        hangarUI.SetDefaultShip();
     }
 
     public void SwitchToUI(GameObject uiToEnable)
@@ -80,7 +79,8 @@ public class UIManager : MonoBehaviour
     {
         SwitchToUI(mainGameUI.gameObject);
         countingUI.SetStartCountdown(true);
-        mainGameUI.ResetPointsUI();
+        mainGameUI.UpdatePointsOnReady(scoreManager.RewardPoints);
+        hangarUI.LoadLastSelectedShip();
     }
 
     private void HandleEnableReviveUI()
@@ -113,6 +113,8 @@ public class UIManager : MonoBehaviour
     private void HandleEnableMainMenuUI()
     {
         SwitchToUI(mainMenuUI.gameObject);
+        mainMenuUI.UpdateRewardPointsText(scoreManager.RewardPoints);
+        hangarUI.UpdateRewardPointsText(scoreManager.RewardPoints);
     }
 
     public int GetRewardPoints() => scoreManager.RewardPoints;

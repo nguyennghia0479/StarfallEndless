@@ -25,4 +25,3 @@ MonoBehaviour:
   maxSpeedRange: 10
   unlockedByDefault: 0
   unlockedCost: 500
-  hasUnlocked: 0

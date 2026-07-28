@@ -36,7 +36,7 @@ public class MainMenuUI : MonoBehaviour
         quitButton.onClick.RemoveListener(OnQuitButtonClicked);
     }
 
-    private void UpdateRewardPointsText(int rewardPoints)
+    public void UpdateRewardPointsText(int rewardPoints)
     {
         rewardPointsText.text = rewardPoints.ToString();
     }

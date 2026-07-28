@@ -5,12 +5,12 @@ using UnityEngine.UI;
 public class HangarUI : MonoBehaviour
 {
     [SerializeField] private Player player;
-    [SerializeField] private PlayerDatabase playerDB;
     [SerializeField] private Image previewShip;
 
     [Header("Text Elements")]
     [SerializeField] private TMP_Text rewardPointsText;
     [SerializeField] private TMP_Text orderText;
+    [SerializeField] private TMP_Text costText;
 
     [Header("Stats Elements")]
     [SerializeField] private Slider damageStat;
@@ -27,6 +27,7 @@ public class HangarUI : MonoBehaviour
     [SerializeField] private Button selectedButton;
 
     private GameManager gameManager;
+    private PlayerDatabase playerDB;
     private PlayerShipSO playerShip;
     private int currentIndex;
     private int maxSelect;
@@ -34,9 +35,10 @@ public class HangarUI : MonoBehaviour
 
     private void OnEnable()
     {
-        gameManager = GameManager.Instance;
-        currentIndex = 0;
-        maxSelect = playerDB.Players.Length;
+        if (gameManager == null)
+            return;
+
+        currentIndex = SaveData.LoadLastShipSelected();
         UpdateHangarUI();
 
         UIEvents.OnRewardChanged += UpdateRewardPointsText;
@@ -59,19 +61,38 @@ public class HangarUI : MonoBehaviour
         closeButton.onClick.RemoveListener(OnCloseButtonClicked);
     }
 
-    public void SetDefaultShip()
+    private void Start()
     {
+        Initialize();
+    }
+
+    private void Initialize()
+    {
+        gameManager = GameManager.Instance;
+        playerDB = gameManager.PlayerDB;
+        maxSelect = playerDB.Players.Length;
+        currentIndex = SaveData.LoadLastShipSelected();
+        playerShip = playerDB.Players[currentIndex];
+        UpdateHangarUI();
+    }
+
+    public void LoadLastSelectedShip()
+    {
+        if (gameManager == null)
+            Initialize();
+
         OnSelectButtonClicked();
     }
 
-    private void UpdateRewardPointsText(int rewardPoints)
+    public void UpdateRewardPointsText(int rewardPoints)
     {
         rewardPointsText.text = rewardPoints.ToString();
     }
 
-    private void UpdateOrderText()
+    private void UpdateTextView()
     {
         orderText.text = (currentIndex + 1).ToString() + "/" + maxSelect.ToString();
+        costText.text = playerShip.UnlockedCost.ToString();
     }
 
     private void UpdatePreviewShip()
@@ -90,15 +111,11 @@ public class HangarUI : MonoBehaviour
 
     private void UpdateButton()
     {
-        if (gameManager == null)
-            return;
-
         if (!gameManager.HasUnlockedShip(currentIndex))
         {
             int currentRewardPoints = UIManager.Instance.GetRewardPoints();
 
             unlockButton.interactable = currentRewardPoints >= playerShip.UnlockedCost;
-
             unlockButton.gameObject.SetActive(true);
             selectButton.gameObject.SetActive(false);
             selectedButton.gameObject.SetActive(false);
@@ -121,7 +138,7 @@ public class HangarUI : MonoBehaviour
 
     private void UpdateHangarUI()
     {
-        UpdateOrderText();
+        UpdateTextView();
         UpdatePreviewShip();
         UpdateShipStats();
         UpdateButton();
@@ -154,6 +171,7 @@ public class HangarUI : MonoBehaviour
         gameManager.UnlockPlayerShip(currentIndex);
         UIEvents.RaiseUnlockShipButton(playerShip.UnlockedCost);
         UpdateButton();
+        SaveData.SaveUnlockShip(currentIndex.ToString());
     }
 
     private void OnSelectButtonClicked()
@@ -168,6 +186,8 @@ public class HangarUI : MonoBehaviour
         Destroy(model.gameObject);
         PlayerModel newPlayerModel = Instantiate(playerShip.ShipModel, player.transform.position, Quaternion.identity, player.transform);
         UIEvents.RaiseSelectedShipButtonClicked(newPlayerModel);
+        player.UpdatePlayerStats(playerShip);
+        SaveData.SaveSelectedShip(currentIndex);
     }
 
     private void OnCloseButtonClicked()
