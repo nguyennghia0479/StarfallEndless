@@ -77,7 +77,10 @@ public class GameManager : MonoBehaviour
         playerDict = new Dictionary<int, bool>();
         for (int i = 0; i < playerDB.Players.Length; i++)
         {
-            playerDict.Add(i, playerDB.Players[i].UnlockedByDefault);
+            int unlockedByDefault = playerDB.Players[i].UnlockedByDefault ? 1 : 0;
+            bool hasUnlocked = SaveData.LoadShipIsUnlocked(i.ToString(), unlockedByDefault) == 1;
+
+            playerDict.Add(i, hasUnlocked);
         }
     }
 
@@ -98,5 +101,5 @@ public class GameManager : MonoBehaviour
     public bool IsGamePlayingState() => currentState == GameState.GamePlaying;
     public int EnemiesKill => enemiesKill;
     public int BossesKill => bossesKill;
-    public Dictionary<int, bool> PlayerDictionary => playerDict;
+    public PlayerDatabase PlayerDB => playerDB;
 }
