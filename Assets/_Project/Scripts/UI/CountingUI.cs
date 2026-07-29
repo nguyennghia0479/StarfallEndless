@@ -1,10 +1,15 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.Localization;
 
 public class CountingUI : MonoBehaviour
 {
     [SerializeField] private TMP_Text countdownText;
     [SerializeField] private float countdown = 5f;
+
+    [Header("Localization Dynamic")]
+    [SerializeField] private string tableName;
+    [SerializeField] private string countTextEntry;
 
     private float countdownTimer;
     private bool hasRollOut;
@@ -32,13 +37,27 @@ public class CountingUI : MonoBehaviour
         countdownText.text = Mathf.RoundToInt(countdownTimer).ToString();
 
         if (countdownTimer < 1)
-            countdownText.text = "ROLL OUT!";
+            LocalizationManager.Instance.ChangeDynamicLocalizedText(tableName, countTextEntry, countdownText);
 
-        if (countdownTimer < 0)
+        if (countdownTimer <= -.5f)
         {
             hasRollOut = true;
             gameObject.SetActive(false);
             GameEvents.RaiseGameStart(isRestarted);
         }
     }
+
+    //private void ShowLocalizedCountdownEnd()
+    //{
+    //    LocalizedString localizedEndText = new(tableName, countTextEntry);
+    //    localizedEndText.StringChanged += (translatedValue) =>
+    //    {
+    //        if (countdownText != null)
+    //        {
+    //            countdownText.text = translatedValue;
+    //        }
+    //    };
+
+    //    localizedEndText.RefreshString();
+    //}
 }

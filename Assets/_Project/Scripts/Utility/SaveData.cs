@@ -1,4 +1,5 @@
 using UnityEngine;
+using static UnityEngine.Rendering.DebugUI;
 
 public static class SaveData
 {
@@ -7,6 +8,10 @@ public static class SaveData
     private const string SFX_PARAM = "sfxParam";
     private const string BGM_PARAM = "bgmParam";
     private const float DEFAULT_AUDIO_VAL = .5f;
+    private const string LANG_EN = "langEN";
+    private const string LANG_VI = "langVI";
+    private const int DEFAULT_LANG = 1;
+    private const string LOCALE_SELECTED = "localeSelected";
 
     public static void SaveSelectedShip(int saveIndex)
     {
@@ -45,4 +50,21 @@ public static class SaveData
     public static void SaveBGMSetting(float value) => PlayerPrefs.SetFloat(BGM_PARAM, value);
 
     public static float LoadBGMSetting() => PlayerPrefs.GetFloat(BGM_PARAM, DEFAULT_AUDIO_VAL);
+
+    public static void SaveLanguageSettings(bool enToggle, bool viToggle)
+    {
+        int enToggleVal = enToggle ? 1 : 0;
+        int viToggleVal = viToggle ? 1 : 0;
+
+        if (enToggle)
+            PlayerPrefs.SetString(LOCALE_SELECTED, GameIdentifiers.Locales.LOCALES_EN);
+        else if (viToggle)
+            PlayerPrefs.SetString(LOCALE_SELECTED, GameIdentifiers.Locales.LOCALES_VI);
+
+        PlayerPrefs.SetInt(LANG_EN, enToggleVal);
+        PlayerPrefs.SetInt(LANG_VI, viToggleVal);
+    }
+
+    public static int LoadLangEnglishSetting() => PlayerPrefs.GetInt(LANG_EN, DEFAULT_LANG);
+    public static int LoadLangVietnameseSetting() => PlayerPrefs.GetInt(LANG_VI, 0);
 }

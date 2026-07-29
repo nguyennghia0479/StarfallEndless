@@ -52,7 +52,7 @@ public class MusicManager : MonoBehaviour
         while (true)
         {
             if (musicSource.isPlaying)
-                yield return AdjustVolume(musicSource, 0, duration);
+                yield return AdjustVolumeRoutine(musicSource, 0, duration);
 
             AudioClip musicClip = musicDB.GetRandomMusic(musicState);
             if (musicClip == null)
@@ -61,13 +61,13 @@ public class MusicManager : MonoBehaviour
             musicSource.clip = musicClip;
             musicSource.volume = 0;
             musicSource.Play();
-            StartCoroutine(AdjustVolume(musicSource, 1, duration));
+            StartCoroutine(AdjustVolumeRoutine(musicSource, 1, duration));
 
             float musicLength = musicClip.length - (duration * timeToTurnOff);
             if (musicLength > 0)
                 yield return new WaitForSecondsRealtime(musicLength);
 
-            yield return AdjustVolume(musicSource, 0, duration);
+            yield return AdjustVolumeRoutine(musicSource, 0, duration);
             musicSource.Stop();
         }
     }
@@ -81,7 +81,7 @@ public class MusicManager : MonoBehaviour
         }
     }
 
-    private IEnumerator AdjustVolume(AudioSource musicSource, float targetVolume, float duration)
+    private IEnumerator AdjustVolumeRoutine(AudioSource musicSource, float targetVolume, float duration)
     {
         float elapseTime = 0;
         float startVolume = musicSource.volume;

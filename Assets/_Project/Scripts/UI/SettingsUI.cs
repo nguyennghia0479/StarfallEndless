@@ -1,5 +1,7 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.Localization.Settings;
 using UnityEngine.UI;
 
 public class SettingsUI : MonoBehaviour
@@ -15,29 +17,37 @@ public class SettingsUI : MonoBehaviour
     [SerializeField] private Slider bgmSlider;
     [SerializeField] private string bgmParam;
 
+    [Header("Localization")]
+    [SerializeField] private Toggle enToggle;
+    [SerializeField] private Toggle viToggle;
+
     private readonly float minValue = .0001f;
 
     private void OnEnable()
     {
         Time.timeScale = 0f;
-        LoadAudioSettings();
+        LoadLanguageSettings();
         ToggleMainMenuButton();
 
         mainMenuButton.onClick.AddListener(OnMainMenuButtonClicked);
         closeButton.onClick.AddListener(OnCloseButtonClicked);
         sfxSlider.onValueChanged.AddListener(OnSFXVolumeChanged);
         bgmSlider.onValueChanged.AddListener(OnBGMVolumeChanged);
+        enToggle.onValueChanged.AddListener(OnEnglishToggle);
+        viToggle.onValueChanged.AddListener(OnVietnameseToggle);
     }
 
     private void OnDisable()
     {
         Time.timeScale = 1f;
-        SaveAudioSettings();
+        SaveSettings();
 
         mainMenuButton.onClick.RemoveListener(OnMainMenuButtonClicked);
         closeButton.onClick.RemoveListener(OnCloseButtonClicked);
         sfxSlider.onValueChanged.RemoveListener(OnSFXVolumeChanged);
         bgmSlider.onValueChanged.RemoveListener(OnBGMVolumeChanged);
+        enToggle.onValueChanged.RemoveListener(OnEnglishToggle);
+        viToggle.onValueChanged.RemoveListener(OnVietnameseToggle);
     }
 
     private void OnMainMenuButtonClicked()
@@ -84,7 +94,7 @@ public class SettingsUI : MonoBehaviour
         SaveData.SaveBGMSetting(bgmSlider.value);
     }
 
-    public void LoadAudioSettings()
+    private void LoadAudioSettings()
     {
         if (sfxSlider == null || bgmSlider == null)
             return;
@@ -97,5 +107,62 @@ public class SettingsUI : MonoBehaviour
 
         OnBGMVolumeChanged(bgmLoadValue);
         bgmSlider.value = bgmLoadValue;
+    }
+
+    private void OnEnglishToggle(bool isCheck)
+    {
+        if (isCheck)
+        {
+            viToggle.isOn = false;
+            UIEvents.RaiseLocaleChanged(GameIdentifiers.Locales.LOCALES_EN);
+        }
+
+        enToggle.interactable = !enToggle.isOn;
+    }
+
+    private void OnVietnameseToggle(bool isCheck)
+    {
+        if (isCheck)
+        {
+            enToggle.isOn = false;
+            UIEvents.RaiseLocaleChanged(GameIdentifiers.Locales.LOCALES_VI);
+        }
+
+        viToggle.interactable = !viToggle.isOn;
+    }
+
+    private void SaveLanguageSettings()
+    {
+        if (enToggle == null || viToggle == null)
+            return;
+
+        SaveData.SaveLanguageSettings(enToggle.isOn, viToggle.isOn);
+    }
+
+    private void LoadLanguageSettings()
+    {
+        if (enToggle == null || viToggle == null)
+            return;
+
+        bool enToggleLoadValue = SaveData.LoadLangEnglishSetting() == 1;
+        bool viToggleLoadValue = SaveData.LoadLangVietnameseSetting() == 1;
+
+        OnEnglishToggle(enToggleLoadValue);
+        enToggle.isOn = enToggleLoadValue;
+
+        OnVietnameseToggle(viToggleLoadValue);
+        viToggle.isOn = viToggleLoadValue;
+    }
+
+    private void SaveSettings()
+    {
+        SaveAudioSettings();
+        SaveLanguageSettings();
+    }
+
+    public void LoadSettings()
+    {
+        LoadAudioSettings();
+        LoadLanguageSettings();
     }
 }

@@ -18,5 +18,6 @@ public class CreditsUI : MonoBehaviour
     private void OnCloseButtonClicked()
     {
         gameObject.SetActive(false);
+        UIEvents.RaiseButtonClicked();
     }
 }

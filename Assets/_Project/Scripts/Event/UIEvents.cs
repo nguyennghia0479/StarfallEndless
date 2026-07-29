@@ -16,6 +16,8 @@ public static class UIEvents
     public static event Action<int> OnRewardChanged;
     public static event Action<int> OnScoreChanged;
     public static event Action<GameObject, float> OnHealthChanged;
+    public static event Action<string> OnLocaleChanaged;
+    public static event Action OnLocaleChangeDone;
 
     public static void RaiseStartButtonClicked()
     {
@@ -53,6 +55,11 @@ public static class UIEvents
         OnButtonClicked?.Invoke();
     }
 
+    public static void RaiseButtonClicked()
+    {
+        OnButtonClicked?.Invoke();
+    }
+
     public static void RaiseRewardChanged(int currentReward)
     {
         OnRewardChanged?.Invoke(currentReward);
@@ -66,5 +73,15 @@ public static class UIEvents
     public static void RaiseHealthChanged(GameObject gameObject, float currentHP)
     {
         OnHealthChanged?.Invoke(gameObject, currentHP);
+    }
+
+    public static void RaiseLocaleChanged(string localeCode)
+    {
+        OnLocaleChanaged?.Invoke(localeCode);
+    }
+
+    public static void RaiseLocaleChangeDone()
+    {
+        OnLocaleChangeDone?.Invoke();
     }
 }
