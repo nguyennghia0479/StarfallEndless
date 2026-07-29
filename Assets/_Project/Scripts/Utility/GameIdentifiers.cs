@@ -12,4 +12,10 @@ public static class GameIdentifiers
         public const string TAG_PLAYER = "Player";
         public const string TAG_ENEMY = "Enemy";
     }
+
+    public static class Locales
+    {
+        public const string LOCALES_EN = "en";
+        public const string LOCALES_VI = "vi";
+    }
 }

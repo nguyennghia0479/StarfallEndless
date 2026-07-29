@@ -151,6 +151,7 @@ public class HangarUI : MonoBehaviour
             currentIndex = maxSelect - 1;
 
         UpdateHangarUI();
+        UIEvents.RaiseButtonClicked();
     }
 
     private void OnNextButtonClicked()
@@ -160,6 +161,7 @@ public class HangarUI : MonoBehaviour
             currentIndex = 0;
 
         UpdateHangarUI();
+        UIEvents.RaiseButtonClicked();
     }
 
     private void OnUnlockButtonClick()

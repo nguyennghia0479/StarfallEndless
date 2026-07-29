@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: Game Over Labels_en
+  m_EditorClassIdentifier: Unity.Localization::UnityEngine.Localization.Tables.StringTable
+  m_LocaleId:
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: 8db6e350656cf7c45a6c0d73e5d4dd8a, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 19818651648
+    m_Localized: 'Enemies Killed:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21546704896
+    m_Localized: 'Bosses Killed:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36256129024
+    m_Localized: 'Reward Points:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 37938044928
+    m_Localized: 'Score Points:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40077139968
+    m_Localized: 'Waves Completed:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 44900589568
+    m_Localized: Retry
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

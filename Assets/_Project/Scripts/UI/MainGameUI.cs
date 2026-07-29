@@ -29,6 +29,7 @@ public class MainGameUI : MonoBehaviour
     private void OnSettingButtonClicked()
     {
         UIManager.Instance.SwitchToSettingUI();
+        UIEvents.RaiseButtonClicked();
     }
 
     private void UpdateRewardPointText(int currentReward)

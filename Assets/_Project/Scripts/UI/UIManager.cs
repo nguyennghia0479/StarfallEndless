@@ -15,6 +15,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private SettingsUI settingsUI;
     [SerializeField] private HangarUI hangarUI;
     [SerializeField] private CreditsUI creditsUI;
+    [SerializeField] private LoadingUI loadingUI;
 
     [Header("Manager Elements")]
     [SerializeField] private GameManager gameManager;
@@ -36,6 +37,12 @@ public class UIManager : MonoBehaviour
         UIEvents.OnReviveButtonClicked += HandlePlayerRevived;
         UIEvents.OnEndGameButtonClicked += HandleEnableGameOverUI;
         GameEvents.OnGameQuit += HandleEnableMainMenuUI;
+        UIEvents.OnLocaleChangeDone += HandleTurnOffLoading;
+    }
+
+    private void HandleTurnOffLoading()
+    {
+        loadingUI.TurnOffLoading();
     }
 
     private void OnDisable()
@@ -45,12 +52,13 @@ public class UIManager : MonoBehaviour
         UIEvents.OnReviveButtonClicked -= HandlePlayerRevived;
         UIEvents.OnEndGameButtonClicked -= HandleEnableGameOverUI;
         GameEvents.OnGameQuit -= HandleEnableMainMenuUI;
+        UIEvents.OnLocaleChangeDone -= HandleTurnOffLoading;
     }
 
     private void Start()
     {
+        settingsUI.LoadSettings();
         HandleEnableMainMenuUI();
-        settingsUI.LoadAudioSettings();
     }
 
     public void SwitchToUI(GameObject uiToEnable)

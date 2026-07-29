@@ -49,20 +49,24 @@ public class MainMenuUI : MonoBehaviour
     private void OnHangarButtonClicked()
     {
         UIManager.Instance.SwitchToHangarUI();
+        UIEvents.RaiseButtonClicked();
     }
 
     private void OnCreditsButtonClicked()
     {
         UIManager.Instance.SwitchToCreditsUI();
+        UIEvents.RaiseButtonClicked();
     }
 
     private void OnSettingButtonClicked()
     {
         UIManager.Instance.SwitchToSettingUI();
+        UIEvents.RaiseButtonClicked();
     }
 
     private void OnQuitButtonClicked()
     {
+        UIEvents.RaiseButtonClicked();
         if (EditorApplication.isPlaying)
             EditorApplication.isPlaying = false;
         else
