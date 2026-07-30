@@ -3,7 +3,8 @@ using UnityEngine;
 public class SoundManager : MonoBehaviour
 {
     [SerializeField] private SoundDatabaseSO soundDB;
-    [SerializeField] private AudioSource sfxSource;
+    [SerializeField] private AudioSource uiSource;
+    [SerializeField] private GameObject soundEmitterPrefab;
 
     private void OnEnable()
     {
@@ -30,8 +31,14 @@ public class SoundManager : MonoBehaviour
         AudioClip audioClip = soundDB.GetRandomClip(soundType);
         if (audioClip != null)
         {
-            sfxSource.transform.position = position;
-            sfxSource.PlayOneShot(audioClip);
+            if (position == Vector2.zero)
+                uiSource.PlayOneShot(audioClip);
+            else
+            {
+                GameObject emitterObject = ObjectPoolManager.Instance.GetPool(soundEmitterPrefab, position, Quaternion.identity);
+                if (emitterObject.TryGetComponent<SoundEmitter>(out var soundEmitter))
+                    soundEmitter.PlaySound(audioClip, position);
+            }
         }
     }
 

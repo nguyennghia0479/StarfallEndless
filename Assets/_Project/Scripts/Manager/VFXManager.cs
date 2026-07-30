@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class VFXManager : MonoBehaviour
 {
-    [SerializeField] private ParticleSystem hitVFX;
-    [SerializeField] private ParticleSystem explodeVFX;
+    [SerializeField] private GameObject hitVFX;
+    [SerializeField] private GameObject explodeVFX;
     [SerializeField] private ParticleSystem healVFX;
     [SerializeField] private ParticleSystem consumedVFX;
 
@@ -25,12 +25,12 @@ public class VFXManager : MonoBehaviour
 
     private void PlayHitVFX(Vector2 position)
     {
-        Instantiate(hitVFX, position, Quaternion.identity);
+        ObjectPoolManager.Instance.GetPool(hitVFX, position, Quaternion.identity);
     }
 
     private void PlayExplosionVFX(Vector2 position)
     {
-        Instantiate(explodeVFX, position, Quaternion.identity);
+        ObjectPoolManager.Instance.GetPool(explodeVFX, position, Quaternion.identity);
     }
 
     private void PlayHealVFX(Vector2 position)

@@ -103,6 +103,7 @@ GameObject:
   - component: {fileID: 2635272260733189480}
   - component: {fileID: 5097140985701448133}
   - component: {fileID: -2370845534686752438}
+  - component: {fileID: 5583941377406326284}
   - component: {fileID: 5189496051529954620}
   - component: {fileID: 5356748233727002895}
   m_Layer: 7
@@ -144,6 +145,7 @@ MonoBehaviour:
   lifeTime: 2
   isMoveUp: 1
   damageDealer: {fileID: -2370845534686752438}
+  pooledObject: {fileID: 5583941377406326284}
 --- !u!114 &-2370845534686752438
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -156,7 +158,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6eef85ff94f48a847b01a65a67b95a81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageDealer
-  damage: 0
+--- !u!114 &5583941377406326284
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7930951197769485024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7fb297dee3ac9c44bbc2e2dbb6b6678, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PooledObject
 --- !u!61 &5189496051529954620
 BoxCollider2D:
   m_ObjectHideFlags: 0
