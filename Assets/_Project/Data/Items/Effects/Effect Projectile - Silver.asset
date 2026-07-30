@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8130f4ce97cc2584499b8f389c313bd2, type: 3}
   m_Name: Effect Projectile - Silver
   m_EditorClassIdentifier: Assembly-CSharp::ItemDamageEffectSO
-  upgradeProjectile: {fileID: 5097140985701448133, guid: 9f3a0bfd6471ec846bcf2b465e4eb4b0, type: 3}
+  projectileUpgrade: {fileID: 7930951197769485024, guid: 9f3a0bfd6471ec846bcf2b465e4eb4b0, type: 3}
   buffPercent: 0.5
   duration: 10

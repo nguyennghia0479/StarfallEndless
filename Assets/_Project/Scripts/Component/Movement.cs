@@ -25,7 +25,7 @@ public class Movement : MonoBehaviour
         transform.position += targetPosition;
     }
 
-    protected void SelfDestroy()
+    protected virtual void SelfDestroy()
     {
         if (isDestroyed)
             return;

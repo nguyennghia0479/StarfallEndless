@@ -1379,12 +1379,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 203375601}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 276279459}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &211492524
 GameObject:
@@ -1598,6 +1598,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 212225572}
   m_CullTransparentMesh: 1
+--- !u!1 &212864547
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 212864548}
+  m_Layer: 0
+  m_Name: SoundHolder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &212864548
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 212864547}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2052610169}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &219974687
 GameObject:
   m_ObjectHideFlags: 0
@@ -2032,11 +2063,12 @@ Transform:
   m_Children:
   - {fileID: 325661699}
   - {fileID: 1531177812}
-  - {fileID: 6492691145171158154}
   - {fileID: 219974689}
   - {fileID: 1775954667}
   - {fileID: 1724699432}
   - {fileID: 752333225}
+  - {fileID: 203375603}
+  - {fileID: 2052610169}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &285211377
@@ -2337,7 +2369,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 74.05
+  m_fontSize: 100
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -3032,7 +3064,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -11282,6 +11314,37 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!1 &1135564164
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1135564165}
+  m_Layer: 0
+  m_Name: VFXHolder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1135564165
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1135564164}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2052610169}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1137631708
 GameObject:
   m_ObjectHideFlags: 0
@@ -14356,8 +14419,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8cee4d0d8df9244490555a15e6f58e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::VFXManager
-  hitVFX: {fileID: 8890662006905581227, guid: c32af3ce7d9b97240add34f58754587a, type: 3}
-  explodeVFX: {fileID: 4169010499140370987, guid: f79b0c28f6656574e9351591227bb1dd, type: 3}
+  hitVFX: {fileID: 1859459328540736192, guid: c32af3ce7d9b97240add34f58754587a, type: 3}
+  explodeVFX: {fileID: 7045907378095817686, guid: f79b0c28f6656574e9351591227bb1dd, type: 3}
   healVFX: {fileID: 7103677680711579383, guid: 5bba7071c34bacb419b58e9778feb7d4, type: 3}
   consumedVFX: {fileID: 6758352363070855744, guid: b8025c482d5ef0442a81b4545addbdb8, type: 3}
 --- !u!4 &1531177812
@@ -15598,7 +15661,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 34
+  m_fontSize: 36
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -15861,7 +15924,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SoundManager
   soundDB: {fileID: 11400000, guid: eb56eff355e1f4748b37e13ed1f53e07, type: 2}
-  sfxSource: {fileID: 1724699433}
+  uiSource: {fileID: 1724699433}
+  soundEmitterPrefab: {fileID: 923336552878677127, guid: b26301de5bc8513439c9a4f279eac501, type: 3}
 --- !u!4 &1724699432
 Transform:
   m_ObjectHideFlags: 0
@@ -17718,6 +17782,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1828342737}
   m_CullTransparentMesh: 1
+--- !u!1 &1837888660
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1837888661}
+  m_Layer: 0
+  m_Name: PlayerProjectileHolder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1837888661
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1837888660}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2052610169}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1840036720
 GameObject:
   m_ObjectHideFlags: 0
@@ -19634,6 +19729,87 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!1 &2052610167
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2052610169}
+  - component: {fileID: 2052610168}
+  m_Layer: 0
+  m_Name: ObjectPoolManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2052610168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2052610167}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbee7dd4d1d0f694a8a9838842efe95f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ProjectilePool
+  prefabInfos:
+  - prefab: {fileID: 7930951197769485024, guid: c9703c3042d82674b8370d41ecedfe05, type: 3}
+    defaultPoolSize: 12
+    maxPoolSize: 24
+    holder: {fileID: 1837888661}
+  - prefab: {fileID: 7930951197769485024, guid: f5a30e628e518e1419aa40073d38167c, type: 3}
+    defaultPoolSize: 12
+    maxPoolSize: 24
+    holder: {fileID: 1837888661}
+  - prefab: {fileID: 7930951197769485024, guid: 7d89fceccd6e6324c994dfd2ee853c9c, type: 3}
+    defaultPoolSize: 12
+    maxPoolSize: 24
+    holder: {fileID: 1837888661}
+  - prefab: {fileID: 7930951197769485024, guid: 9f3a0bfd6471ec846bcf2b465e4eb4b0, type: 3}
+    defaultPoolSize: 12
+    maxPoolSize: 24
+    holder: {fileID: 1837888661}
+  - prefab: {fileID: 7930951197769485024, guid: e574e7e5cb1481c49a55b116388d72fb, type: 3}
+    defaultPoolSize: 15
+    maxPoolSize: 30
+    holder: {fileID: 2104080659}
+  - prefab: {fileID: 1859459328540736192, guid: c32af3ce7d9b97240add34f58754587a, type: 3}
+    defaultPoolSize: 12
+    maxPoolSize: 24
+    holder: {fileID: 1135564165}
+  - prefab: {fileID: 7045907378095817686, guid: f79b0c28f6656574e9351591227bb1dd, type: 3}
+    defaultPoolSize: 6
+    maxPoolSize: 12
+    holder: {fileID: 1135564165}
+  - prefab: {fileID: 923336552878677127, guid: b26301de5bc8513439c9a4f279eac501, type: 3}
+    defaultPoolSize: 15
+    maxPoolSize: 30
+    holder: {fileID: 212864548}
+--- !u!4 &2052610169
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2052610167}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1837888661}
+  - {fileID: 2104080659}
+  - {fileID: 1135564165}
+  - {fileID: 212864548}
+  m_Father: {fileID: 276279459}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2056459963
 GameObject:
   m_ObjectHideFlags: 0
@@ -19892,6 +20068,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2075744385}
   m_CullTransparentMesh: 1
+--- !u!1 &2104080658
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2104080659}
+  m_Layer: 0
+  m_Name: EnemyProjectileHolder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2104080659
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2104080658}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2052610169}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2115753990
 GameObject:
   m_ObjectHideFlags: 0
@@ -20272,23 +20479,6 @@ SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 5975313253742838062, guid: f2e20ac7228076a49b4812418439187c, type: 3}
   m_PrefabInstance: {fileID: 7493167753384611841}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &2647503561438461487
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6492691145171158154}
-  - component: {fileID: 6492691145171158155}
-  m_Layer: 0
-  m_Name: ProjectileManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!50 &2994007944731547604
 Rigidbody2D:
   serializedVersion: 5
@@ -20624,7 +20814,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c87cd8e366101744e92d54b65c9c2f09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Shoot
-  projectilePrefab: {fileID: 5097140985701448133, guid: c9703c3042d82674b8370d41ecedfe05, type: 3}
+  projectilePrefab: {fileID: 7930951197769485024, guid: c9703c3042d82674b8370d41ecedfe05, type: 3}
   gunPoints:
   - {fileID: 1770809555254368085}
   - {fileID: 6114024080954937000}
@@ -20687,33 +20877,6 @@ SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 5815280626251835562, guid: f2e20ac7228076a49b4812418439187c, type: 3}
   m_PrefabInstance: {fileID: 7493167753384611841}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &6492691145171158154
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2647503561438461487}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 276279459}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6492691145171158155
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2647503561438461487}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 527845d95301f3842b3456140dddb64c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ProjectileHolder
 --- !u!114 &7300799535124875028
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20868,4 +21031,3 @@ SceneRoots:
   - {fileID: 276279459}
   - {fileID: 1788326839}
   - {fileID: 1307528648}
-  - {fileID: 203375603}

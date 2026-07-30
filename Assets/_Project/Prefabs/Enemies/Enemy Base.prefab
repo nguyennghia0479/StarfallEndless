@@ -253,6 +253,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
   stats: {fileID: 0}
+  isBoss: 0
 --- !u!114 &7072845055934032039
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -277,7 +278,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c87cd8e366101744e92d54b65c9c2f09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Shoot
-  projectilePrefab: {fileID: 5097140985701448133, guid: e574e7e5cb1481c49a55b116388d72fb, type: 3}
+  projectilePrefab: {fileID: 7930951197769485024, guid: e574e7e5cb1481c49a55b116388d72fb, type: 3}
   gunPoints:
   - {fileID: 9214450921998076496}
   fireRate: 0.5
@@ -305,7 +306,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6eef85ff94f48a847b01a65a67b95a81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageDealer
-  damage: 50
 --- !u!58 &1747397562315369886
 CircleCollider2D:
   m_ObjectHideFlags: 0

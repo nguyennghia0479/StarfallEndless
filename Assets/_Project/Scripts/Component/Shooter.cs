@@ -3,11 +3,11 @@ using UnityEngine;
 
 public class Shooter : MonoBehaviour
 {
-    [SerializeField] private Projectile projectilePrefab;
+    [SerializeField] private GameObject projectilePrefab;
     [SerializeField] private Transform[] gunPoints;
     [SerializeField] private float fireRate = .5f;
 
-    private Projectile defaultProjectile;
+    private GameObject defaultProjectile;
     private Coroutine fireRoutine;
     private WaitForSeconds waitTime;
     private float projectileDamage;
@@ -42,8 +42,9 @@ public class Shooter : MonoBehaviour
         {
             foreach (Transform gunPoint in gunPoints)
             {
-                Projectile newProjectile = ProjectileManager.Instance.CreateProjectile(projectilePrefab, gunPoint.position, gunPoint.rotation);
-                newProjectile.Initialize(projectileDamage);
+                GameObject projectilePool = ObjectPoolManager.Instance.GetPool(projectilePrefab, gunPoint.position, gunPoint.rotation);
+                if (projectilePool.TryGetComponent<Projectile>(out var projectile))
+                    projectile.Initialize(projectileDamage);
             }
             GameEvents.RaiseOnShooted(transform.position);
 
@@ -81,10 +82,10 @@ public class Shooter : MonoBehaviour
         buffTimer = 0;
     }
 
-    public void ApplyUpgradeProjectile(Projectile upgradeProjectile, float buffPercent, float duration)
+    public void ApplyUpgradeProjectile(GameObject projectileUpgrade, float buffPercent, float duration)
     {
         upgradeTimer = duration;
-        projectilePrefab = upgradeProjectile;
+        projectilePrefab = projectileUpgrade;
         projectileDamage = defaultProjectileDamage + (defaultProjectileDamage * buffPercent);
     }
 
