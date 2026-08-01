@@ -1,7 +1,5 @@
-using System.Collections;
 using UnityEngine;
 using UnityEngine.Audio;
-using UnityEngine.Localization.Settings;
 using UnityEngine.UI;
 
 public class SettingsUI : MonoBehaviour
@@ -54,12 +52,15 @@ public class SettingsUI : MonoBehaviour
     {
         if (GameManager.Instance.IsGamePlayingState())
         {
-            UIEvents.RaiseMainMenuButtonClicked();
+            gameObject.SetActive(false);
+            UIEvents.RaiseSettingQuitButtonClicked();
+            UIEvents.RaiseButtonClicked();
         }
     }
 
     private void OnCloseButtonClicked()
     {
+        UIEvents.RaiseButtonClicked();
         gameObject.SetActive(false);
     }
 

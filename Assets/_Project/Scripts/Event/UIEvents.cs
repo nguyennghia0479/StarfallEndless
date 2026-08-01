@@ -11,53 +11,59 @@ public static class UIEvents
     public static event Action<PlayerModel> OnSelectedShipButtonClicked;
     public static event Action<int> OnUnlockShipButtonClicked;
     public static event Action OnButtonClicked;
+    public static event Action OnSettingQuitButtonClicked;
+    public static event Action OnQuitToGameOver;
 
     // UI Events
     public static event Action<int> OnRewardChanged;
     public static event Action<int> OnScoreChanged;
-    public static event Action<GameObject, float> OnHealthChanged;
+    public static event Action<GameObject, float, float> OnHealthChanged;
     public static event Action<string> OnLocaleChanaged;
     public static event Action OnLocaleChangeDone;
 
     public static void RaiseStartButtonClicked()
     {
         OnStartButtonClicked?.Invoke();
-        OnButtonClicked?.Invoke();
     }
 
     public static void RaiseMainMenuButtonClicked()
     {
         OnMainMenuButtonClicked?.Invoke();
-        OnButtonClicked?.Invoke();
     }
 
     public static void RaiseReviveButtonClicked(int revivePointsAmount)
     {
         OnReviveButtonClicked?.Invoke(revivePointsAmount);
-        OnButtonClicked?.Invoke();
     }
 
     public static void RaiseEndGameButtonClicked()
     {
         OnEndGameButtonClicked.Invoke();
-        OnButtonClicked?.Invoke();
     }
 
     public static void RaiseSelectedShipButtonClicked(PlayerModel model)
     {
         OnSelectedShipButtonClicked?.Invoke(model);
-        OnButtonClicked?.Invoke();
     }
 
     public static void RaiseUnlockShipButtonClicked(int unlockedCost)
     {
         OnUnlockShipButtonClicked?.Invoke(unlockedCost);
-        OnButtonClicked?.Invoke();
     }
 
     public static void RaiseButtonClicked()
     {
         OnButtonClicked?.Invoke();
+    }
+
+    public static void RaiseSettingQuitButtonClicked()
+    {
+        OnSettingQuitButtonClicked?.Invoke();
+    }
+
+    public static void RaiseQuitToGameOver()
+    {
+        OnQuitToGameOver?.Invoke();
     }
 
     public static void RaiseRewardChanged(int currentReward)
@@ -70,9 +76,9 @@ public static class UIEvents
         OnScoreChanged?.Invoke(currentScore);
     }
 
-    public static void RaiseHealthChanged(GameObject gameObject, float currentHP)
+    public static void RaiseHealthChanged(GameObject gameObject, float maxHP, float currentHP)
     {
-        OnHealthChanged?.Invoke(gameObject, currentHP);
+        OnHealthChanged?.Invoke(gameObject, maxHP, currentHP);
     }
 
     public static void RaiseLocaleChanged(string localeCode)

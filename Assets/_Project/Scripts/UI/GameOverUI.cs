@@ -2,6 +2,15 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+public struct GameResultData
+{
+    public string enemiesKillText;
+    public string bossesKillText;
+    public string rewardPointsText;
+    public string scorePointsText;
+    public string waveCompletedText;
+}
+
 public class GameOverUI : MonoBehaviour
 {
     [Header("Result Text")]
@@ -15,8 +24,17 @@ public class GameOverUI : MonoBehaviour
     [SerializeField] private Button retryButton;
     [SerializeField] private Button mainMenuButton;
 
+    [Header("Canvas Group")]
+    [SerializeField] private CanvasGroup gameOverUICG;
+    [SerializeField] private float fadeDuration = 1f;
+
+    private DOTweenManager dotTweenManager;
+
     private void OnEnable()
     {
+        if (dotTweenManager != null)
+            dotTweenManager.FadeIn(gameOverUICG, fadeDuration);
+
         retryButton.onClick.AddListener(OnRetryButtonClicked);
         mainMenuButton.onClick.AddListener(OnMainMenuButtonClicked);
     }
@@ -25,6 +43,11 @@ public class GameOverUI : MonoBehaviour
     {
         retryButton.onClick.RemoveListener(OnRetryButtonClicked);
         mainMenuButton.onClick.RemoveListener(OnMainMenuButtonClicked);
+    }
+
+    private void Start()
+    {
+        dotTweenManager = DOTweenManager.Instance;
     }
 
     public void SetGameResult(GameResultData resultData)
@@ -38,20 +61,13 @@ public class GameOverUI : MonoBehaviour
 
     private void OnRetryButtonClicked()
     {
-        UIEvents.RaiseStartButtonClicked();
+        UIEvents.RaiseButtonClicked();
+        dotTweenManager.FadeOut(UIEvents.RaiseStartButtonClicked, gameOverUICG, fadeDuration);
     }
 
     private void OnMainMenuButtonClicked()
     {
-        UIEvents.RaiseMainMenuButtonClicked();
+        UIEvents.RaiseButtonClicked();
+        dotTweenManager.FadeOut(UIEvents.RaiseMainMenuButtonClicked, gameOverUICG, fadeDuration);
     }
-}
-
-public struct GameResultData
-{
-    public string enemiesKillText;
-    public string bossesKillText;
-    public string rewardPointsText;
-    public string scorePointsText;
-    public string waveCompletedText;
 }

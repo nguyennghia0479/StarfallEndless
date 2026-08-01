@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -14,9 +15,10 @@ public class HangarUI : MonoBehaviour
 
     [Header("Stats Elements")]
     [SerializeField] private Slider damageStat;
-    [SerializeField] private Slider defendStat;   
+    [SerializeField] private Slider defendStat;
     [SerializeField] private Slider hpStat;
     [SerializeField] private Slider speedStat;
+    [SerializeField] private float changeDuration = .5f;
 
     [Header("Button Elements")]
     [SerializeField] private Button previousButton;
@@ -32,6 +34,11 @@ public class HangarUI : MonoBehaviour
     private int currentIndex;
     private int maxSelect;
     private int currentSelect;
+    private Coroutine rewardPointsRoutine;
+    private Coroutine damageStatRoutine;
+    private Coroutine defendStatRoutine;
+    private Coroutine hpStatRoutine;
+    private Coroutine speedStatRoutine;
 
     private void OnEnable()
     {
@@ -42,7 +49,6 @@ public class HangarUI : MonoBehaviour
         UpdateHangarUI();
 
         UIEvents.OnRewardChanged += UpdateRewardPointsText;
-
         previousButton.onClick.AddListener(OnPreviousButtonClicked);
         nextButton.onClick.AddListener(OnNextButtonClicked);
         unlockButton.onClick.AddListener(OnUnlockButtonClick);
@@ -53,7 +59,6 @@ public class HangarUI : MonoBehaviour
     private void OnDisable()
     {
         UIEvents.OnRewardChanged -= UpdateRewardPointsText;
-
         previousButton.onClick.RemoveListener(OnPreviousButtonClicked);
         nextButton.onClick.RemoveListener(OnNextButtonClicked);
         unlockButton.onClick.RemoveListener(OnUnlockButtonClick);
@@ -72,6 +77,7 @@ public class HangarUI : MonoBehaviour
         playerDB = gameManager.PlayerDB;
         maxSelect = playerDB.Players.Length;
         currentIndex = SaveData.LoadLastShipSelected();
+        currentSelect = currentIndex;
         playerShip = playerDB.Players[currentIndex];
         UpdateHangarUI();
     }
@@ -86,7 +92,36 @@ public class HangarUI : MonoBehaviour
 
     public void UpdateRewardPointsText(int rewardPoints)
     {
-        rewardPointsText.text = rewardPoints.ToString();
+        if (!gameObject.activeSelf)
+        {
+            rewardPointsText.text = rewardPoints.ToString();
+            return;
+        }
+
+        if (rewardPointsRoutine != null)
+            StopCoroutine(rewardPointsRoutine);
+
+        rewardPointsRoutine = StartCoroutine(ChangeRewadPointsRoutine(rewardPoints));
+    }
+
+    private IEnumerator ChangeRewadPointsRoutine(int targetValue)
+    {
+        float elapsedTime = 0;
+        if (!int.TryParse(rewardPointsText.text, out int lastValue))
+        {
+            rewardPointsText.text = targetValue.ToString();
+            yield break;
+        }
+
+        while (elapsedTime <= changeDuration)
+        {
+            float currentValue = Mathf.Lerp(lastValue, targetValue, Mathf.Clamp01(elapsedTime / changeDuration));
+            rewardPointsText.text = Mathf.RoundToInt(currentValue).ToString();
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        rewardPointsText.text = targetValue.ToString();
     }
 
     private void UpdateTextView()
@@ -103,10 +138,36 @@ public class HangarUI : MonoBehaviour
 
     private void UpdateShipStats()
     {
-        damageStat.value = playerShip.ProjectileDamage / playerShip.MaxDamageRange;
-        defendStat.value = playerShip.Defend / playerShip.MaxDefendRange;
-        hpStat.value = playerShip.MaxHP / playerShip.MaxHPRange;
-        speedStat.value = playerShip.MoveSpeed / playerShip.MaxSpeedRange;
+        float damageValue = playerShip.ProjectileDamage / playerShip.MaxDamageRange;
+        float defendValue = playerShip.Defend / playerShip.MaxDefendRange;
+        float hpValue = playerShip.MaxHP / playerShip.MaxHPRange;
+        float speedValue = playerShip.MoveSpeed / playerShip.MaxSpeedRange;
+
+        ChangeStat(ref damageStatRoutine, damageStat, damageValue);
+        ChangeStat(ref defendStatRoutine, defendStat, defendValue);
+        ChangeStat(ref hpStatRoutine, hpStat, hpValue);
+        ChangeStat(ref speedStatRoutine, speedStat, speedValue);
+    }
+
+    private void ChangeStat(ref Coroutine routine, Slider statSlider, float targetValue)
+    {
+        if (routine != null)
+            StopCoroutine(routine);
+
+        routine = StartCoroutine(ChangeStatRoutine(statSlider, targetValue));
+    }
+
+    private IEnumerator ChangeStatRoutine(Slider statSlider, float targetValue)
+    {
+        float elapsedTime = 0;
+        float startValue = statSlider.value;
+        while (elapsedTime <= changeDuration)
+        {
+            statSlider.value = Mathf.Lerp(startValue, targetValue, Mathf.Clamp01(elapsedTime / changeDuration));
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+        statSlider.value = targetValue;
     }
 
     private void UpdateButton()
@@ -171,6 +232,7 @@ public class HangarUI : MonoBehaviour
             return;
 
         gameManager.UnlockPlayerShip(currentIndex);
+        UIEvents.RaiseButtonClicked();
         UIEvents.RaiseUnlockShipButtonClicked(playerShip.UnlockedCost);
         UpdateButton();
         SaveData.SaveUnlockShip(currentIndex.ToString());
@@ -187,6 +249,7 @@ public class HangarUI : MonoBehaviour
 
         Destroy(model.gameObject);
         PlayerModel newPlayerModel = Instantiate(playerShip.ShipModel, player.transform.position, Quaternion.identity, player.transform);
+        UIEvents.RaiseButtonClicked();
         UIEvents.RaiseSelectedShipButtonClicked(newPlayerModel);
         player.UpdatePlayerStats(playerShip);
         SaveData.SaveSelectedShip(currentIndex);

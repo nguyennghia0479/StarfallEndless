@@ -85,7 +85,7 @@ public class HealthPoint : MonoBehaviour, IDamageable
             defend = defaultDefend;
     }
 
-    public void UpdateHealthUI() => UIEvents.RaiseHealthChanged(gameObject, currentHP);
+    public void UpdateHealthUI() => UIEvents.RaiseHealthChanged(gameObject, maxHP, currentHP);
     public void DisableDamaged() => canTakeDamge = false;
     public void EnableDamaged() => canTakeDamge = true;
 }

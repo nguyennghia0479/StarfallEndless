@@ -141,7 +141,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3c54beefa560bf43be10ad7e7bad8d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Projectile
-  moveSpeed: 10
+  moveSpeed: 14
   lifeTime: 2
   isMoveUp: 1
   damageDealer: {fileID: -2370845534686752438}

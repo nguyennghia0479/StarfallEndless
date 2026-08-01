@@ -14,10 +14,18 @@ public class MainMenuUI : MonoBehaviour
     [SerializeField] private Button settingButton;
     [SerializeField] private Button quitButton;
 
+    [Header("Canvas Group")]
+    [SerializeField] private CanvasGroup mainMenuUICG;
+    [SerializeField] private float fadeDuration = 1f;
+
+    private DOTweenManager dotTweenManager;
+
     private void OnEnable()
     {
-        UIEvents.OnRewardChanged += UpdateRewardPointsText;
+        if (dotTweenManager != null)
+            dotTweenManager.FadeIn(mainMenuUICG, fadeDuration);
 
+        UIEvents.OnRewardChanged += UpdateRewardPointsText;
         playButton.onClick.AddListener(OnPlayButtonClicked);
         hangarButton.onClick.AddListener(OnHangarButtonClicked);
         creditsButton.onClick.AddListener(OnCreditsButtonClicked);
@@ -28,12 +36,16 @@ public class MainMenuUI : MonoBehaviour
     private void OnDisable()
     {
         UIEvents.OnRewardChanged -= UpdateRewardPointsText;
-
         playButton.onClick.RemoveListener(OnPlayButtonClicked);
-        hangarButton.onClick.RemoveListener (OnHangarButtonClicked);
+        hangarButton.onClick.RemoveListener(OnHangarButtonClicked);
         creditsButton.onClick.RemoveListener(OnCreditsButtonClicked);
         settingButton.onClick.RemoveListener(OnSettingButtonClicked);
         quitButton.onClick.RemoveListener(OnQuitButtonClicked);
+    }
+
+    private void Start()
+    {
+        dotTweenManager = DOTweenManager.Instance;
     }
 
     public void UpdateRewardPointsText(int rewardPoints)
@@ -43,7 +55,8 @@ public class MainMenuUI : MonoBehaviour
 
     private void OnPlayButtonClicked()
     {
-        UIEvents.RaiseStartButtonClicked();
+        UIEvents.RaiseButtonClicked();
+        dotTweenManager.FadeOut(UIEvents.RaiseStartButtonClicked, mainMenuUICG, fadeDuration);
     }
 
     private void OnHangarButtonClicked()
@@ -67,6 +80,11 @@ public class MainMenuUI : MonoBehaviour
     private void OnQuitButtonClicked()
     {
         UIEvents.RaiseButtonClicked();
+        dotTweenManager.FadeOut(HandleQuitGame, mainMenuUICG, fadeDuration);
+    }
+
+    private void HandleQuitGame()
+    {  
         if (EditorApplication.isPlaying)
             EditorApplication.isPlaying = false;
         else

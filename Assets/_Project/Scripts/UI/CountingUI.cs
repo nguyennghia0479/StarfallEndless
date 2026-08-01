@@ -1,6 +1,5 @@
 using TMPro;
 using UnityEngine;
-using UnityEngine.Localization;
 
 public class CountingUI : MonoBehaviour
 {
@@ -46,18 +45,4 @@ public class CountingUI : MonoBehaviour
             GameEvents.RaiseGameStart(isRestarted);
         }
     }
-
-    //private void ShowLocalizedCountdownEnd()
-    //{
-    //    LocalizedString localizedEndText = new(tableName, countTextEntry);
-    //    localizedEndText.StringChanged += (translatedValue) =>
-    //    {
-    //        if (countdownText != null)
-    //        {
-    //            countdownText.text = translatedValue;
-    //        }
-    //    };
-
-    //    localizedEndText.RefreshString();
-    //}
 }

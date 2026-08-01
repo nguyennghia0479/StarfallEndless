@@ -23,15 +23,15 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 338246017024
-    m_Localized: Hangar
+    m_Localized: HANGAR
     m_Metadata:
       m_Items: []
   - m_Id: 345904816128
-    m_Localized: Credits
+    m_Localized: CREDITS
     m_Metadata:
       m_Items: []
   - m_Id: 350694711296
-    m_Localized: Quit
+    m_Localized: QUIT
     m_Metadata:
       m_Items: []
   references:
