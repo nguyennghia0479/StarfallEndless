@@ -44,12 +44,18 @@ public class ScoreManager : MonoBehaviour
 
     private void IncreaseScorePoints(Enemy enemy)
     {
+        if (!GameManager.Instance.IsGamePlayingState())
+            return;
+
         scorePoints += enemy.ScorePoints;
         UIEvents.RaiseScoreChanged(scorePoints);
     }
 
     private void IncreaseRewardPoints(Enemy enemy)
     {
+        if (!GameManager.Instance.IsGamePlayingState())
+            return;
+
         if (enemy.IsBoss)
         {
             rewardPoints += enemy.ScorePoints;
@@ -60,6 +66,9 @@ public class ScoreManager : MonoBehaviour
 
     private void HandleDecreaseRewardPoints(int revivePointsAmount)
     {
+        if (!GameManager.Instance.IsGamePlayingState())
+            return;
+
         rewardPoints -= revivePointsAmount;
         rewardPoints = Mathf.Clamp(rewardPoints, 0, rewardPoints);
         UIEvents.RaiseRewardChanged(rewardPoints);

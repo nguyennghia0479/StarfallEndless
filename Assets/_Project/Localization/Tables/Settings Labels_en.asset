@@ -19,7 +19,7 @@ MonoBehaviour:
     m_Items: []
   m_TableData:
   - m_Id: 8003297280
-    m_Localized: Settings
+    m_Localized: SETTINGS
     m_Metadata:
       m_Items: []
   references:

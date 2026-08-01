@@ -19,19 +19,19 @@ MonoBehaviour:
     m_Items: []
   m_TableData:
   - m_Id: 350694711296
-    m_Localized: "Tho\xE1t"
+    m_Localized: "THO\xC1T"
     m_Metadata:
       m_Items: []
   - m_Id: 334290788352
-    m_Localized: "XU\u1EA4T K\xCDCH"
+    m_Localized: "XU\u1EA4T PH\xC1T"
     m_Metadata:
       m_Items: []
   - m_Id: 338246017024
-    m_Localized: "Phi Thuy\u1EC1n"
+    m_Localized: "PHI THUY\u1EC0N"
     m_Metadata:
       m_Items: []
   - m_Id: 345904816128
-    m_Localized: Credits
+    m_Localized: CREDITS
     m_Metadata:
       m_Items: []
   references:

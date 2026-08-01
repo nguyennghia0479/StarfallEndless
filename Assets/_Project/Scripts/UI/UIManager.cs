@@ -126,5 +126,6 @@ public class UIManager : MonoBehaviour
         hangarUI.UpdateRewardPointsText(scoreManager.RewardPoints);
     }
 
+    public void FadeOutMainGameUI() => mainGameUI.FadeOut(null);
     public int GetRewardPoints() => scoreManager.RewardPoints;
 }

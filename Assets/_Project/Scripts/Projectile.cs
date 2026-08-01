@@ -18,16 +18,18 @@ public class Projectile : Movement
 
         lifeTimer += Time.deltaTime;
         if (lifeTimer > lifeTime)
-        {
-            hasReturned = true;
             ReturnToPool();
-        }
     }
 
     private void ReturnToPool()
     {
+        if (hasReturned) return;
+
         if (pooledObject != null && pooledObject.Pool != null)
+        {
+            hasReturned = true;
             pooledObject.Pool.Release(gameObject);
+        }
         else
             Destroy(gameObject);
     }
