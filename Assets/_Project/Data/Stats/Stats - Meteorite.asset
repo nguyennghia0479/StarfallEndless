@@ -16,5 +16,5 @@ MonoBehaviour:
   collisionDamage: 50
   defend: 0
   maxHP: 50
-  moveSpeed: 2
-  scorePoint: 0
+  speed: 2
+  scorePoint: 5

@@ -40,7 +40,7 @@ public class PlayerMovement : MonoBehaviour
         defaultMoveSpeed = moveSpeed;
     }
 
-    private void HandleShipVisuals(PlayerModel model)
+    private void HandleShipVisuals(PlayerModel model, PlayerShipSO _)
     {
         shipSr = model.ShipSprite;
         GetTrail();

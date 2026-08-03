@@ -27,8 +27,11 @@ public class EnemyBoss : Enemy
 
     protected override void Start()
     {
-        base.Start();
-
+        Health.Initialize(stats.MaxHP, stats.Defend);
+        Shooter.Initialize(stats.ProjectileDamage, stats.Speed);
+        DamageDealer.Initialize(stats.CollisionDamage);
+        Movement.Initialize(stats.Speed);
+        scorePoints = stats.ScorePoint;
         StopFire();
     }
 

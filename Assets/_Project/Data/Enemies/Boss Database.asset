@@ -13,5 +13,13 @@ MonoBehaviour:
   m_Name: Boss Database
   m_EditorClassIdentifier: Assembly-CSharp::EnemyDatabaseSO
   enemies:
-  - {fileID: 2171544212410794776, guid: 92503d5d454266f42a9db2c09a93379c, type: 3}
+  - {fileID: 2171544212410794776, guid: bcdb4de4cecd7584690e37ec5fb755d0, type: 3}
+  - {fileID: 2171544212410794776, guid: a67ca5e58ab4c8845ac574cda368153d, type: 3}
+  - {fileID: 2171544212410794776, guid: d10cd91367c0fe34f838dbdd2c313e09, type: 3}
+  - {fileID: 2171544212410794776, guid: c83d632fc31dad748aa2e195beec50a0, type: 3}
+  - {fileID: 2171544212410794776, guid: 1720cc543af7e8f48934ecaaed760176, type: 3}
   - {fileID: 2171544212410794776, guid: f9220f74643cdb049afad6ff7223aea0, type: 3}
+  - {fileID: 2171544212410794776, guid: a903445a90f5fce448922e4c0fecfc57, type: 3}
+  - {fileID: 2171544212410794776, guid: 3a1f8b693b807b643934183239472162, type: 3}
+  - {fileID: 2171544212410794776, guid: dd197e722c15e6e4da838e49e1a7adde, type: 3}
+  - {fileID: 2171544212410794776, guid: 9ae5f03f1f469414aa78893626b1bcfc, type: 3}

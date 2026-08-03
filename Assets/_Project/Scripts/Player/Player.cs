@@ -22,7 +22,7 @@ public class Player : Entity
     {
         base.Start();
 
-        Movement.Initialize(stats.MoveSpeed);
+        Movement.Initialize(stats.Speed);
         DisablePlayer();
     }
 
@@ -56,15 +56,6 @@ public class Player : Entity
         DisablePlayer();
     }
 
-    public void UpdatePlayerStats(PlayerShipSO playerShipSO)
-    {
-        stats = playerShipSO;
-        Health.Initialize(stats.MaxHP, stats.Defend);
-        Shooter.Initialize(stats.ProjectileDamage);
-        DamageDealer.Initialize(stats.CollisionDamage);
-        Movement.Initialize(stats.MoveSpeed);
-    }
-
     private void HandlePlayerRevive(int _)
     {
         EnablePlayer();
@@ -78,9 +69,19 @@ public class Player : Entity
         collider.enabled = true;
     }
 
-    private void HandleShipVisuals(PlayerModel model)
+    private void HandleShipVisuals(PlayerModel model, PlayerShipSO shipSO)
     {
         Shooter.SetupGunPoints(model.GunPoints);
+        UpdatePlayerStats(shipSO);
+    }
+
+    private void UpdatePlayerStats(PlayerShipSO playerShipSO)
+    {
+        stats = playerShipSO;
+        Health.Initialize(stats.MaxHP, stats.Defend);
+        Shooter.Initialize(stats.ProjectileDamage, stats.Speed);
+        DamageDealer.Initialize(stats.CollisionDamage);
+        Movement.Initialize(stats.Speed);
     }
 
     private void EnablePlayer()

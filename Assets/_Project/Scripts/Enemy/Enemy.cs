@@ -33,7 +33,7 @@ public class Enemy : Entity
     {
         base.Start();
 
-        Movement.Initialize(stats.MoveSpeed);
+        Movement.Initialize(stats.Speed);
         scorePoints = stats.ScorePoint;
         StartFire();
     }

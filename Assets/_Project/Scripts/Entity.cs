@@ -18,7 +18,7 @@ public class Entity : MonoBehaviour
     protected virtual void Start()
     {
         Health.Initialize(stats.MaxHP, stats.Defend);
-        Shooter.Initialize(stats.ProjectileDamage);
+        Shooter.Initialize(stats.ProjectileDamage, stats.Speed);
         DamageDealer.Initialize(stats.CollisionDamage);
     }
 

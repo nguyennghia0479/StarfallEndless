@@ -5,10 +5,10 @@ public static class UIEvents
 {
     // Button Events
     public static event Action OnStartButtonClicked;
-    public static event Action OnMainMenuButtonClicked;
+    public static event Action<bool> OnMainMenuButtonClicked;
     public static event Action<int> OnReviveButtonClicked;
     public static event Action OnEndGameButtonClicked;
-    public static event Action<PlayerModel> OnSelectedShipButtonClicked;
+    public static event Action<PlayerModel, PlayerShipSO> OnSelectedShipButtonClicked;
     public static event Action<int> OnUnlockShipButtonClicked;
     public static event Action OnButtonClicked;
     public static event Action OnSettingQuitButtonClicked;
@@ -26,9 +26,9 @@ public static class UIEvents
         OnStartButtonClicked?.Invoke();
     }
 
-    public static void RaiseMainMenuButtonClicked()
+    public static void RaiseMainMenuButtonClicked(bool canSave)
     {
-        OnMainMenuButtonClicked?.Invoke();
+        OnMainMenuButtonClicked?.Invoke(canSave);
     }
 
     public static void RaiseReviveButtonClicked(int revivePointsAmount)
@@ -41,9 +41,9 @@ public static class UIEvents
         OnEndGameButtonClicked.Invoke();
     }
 
-    public static void RaiseSelectedShipButtonClicked(PlayerModel model)
+    public static void RaiseSelectedShipButtonClicked(PlayerModel model, PlayerShipSO shipSO)
     {
-        OnSelectedShipButtonClicked?.Invoke(model);
+        OnSelectedShipButtonClicked?.Invoke(model, shipSO);
     }
 
     public static void RaiseUnlockShipButtonClicked(int unlockedCost)

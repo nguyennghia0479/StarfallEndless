@@ -15,11 +15,21 @@ public class ItemManager : MonoBehaviour
     private void OnEnable()
     {
         GameEvents.OnMeteoriteDestroyed += DropItem;
+        GameEvents.OnEnemyDestroyed += HandleBossDestroyed;
     }
 
     private void OnDisable()
     {
         GameEvents.OnMeteoriteDestroyed -= DropItem;
+        GameEvents.OnEnemyDestroyed -= HandleBossDestroyed;
+    }
+
+    private void HandleBossDestroyed(Enemy enemy)
+    {
+        if (!enemy.IsBoss)
+            return;
+
+        DropItem(enemy.transform.position);
     }
 
     private void DropItem(Vector2 position)

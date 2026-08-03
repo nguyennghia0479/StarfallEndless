@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f68d496a28ceba46924a54cd785fd69, type: 3}
+  m_Name: Enemy Green DB
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyDatabaseSO
+  enemies:
+  - {fileID: 3892144918735762774, guid: 1c4094576f631b3409ae10b813822ae7, type: 3}
+  - {fileID: 3892144918735762774, guid: 2ce3992472a1f8f41bff882c815b1dbc, type: 3}
+  - {fileID: 3892144918735762774, guid: c547883e5f98a5f46942c62a8bbff678, type: 3}
+  - {fileID: 3892144918735762774, guid: 6aabc82f94e86ad4db1b7dbf5c8b3084, type: 3}
+  - {fileID: 3892144918735762774, guid: 22fcbf210543b9445ba549a3b824e00a, type: 3}

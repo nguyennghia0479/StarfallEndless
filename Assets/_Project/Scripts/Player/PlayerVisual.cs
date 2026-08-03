@@ -36,7 +36,7 @@ public class PlayerVisual : MonoBehaviour
         DisableShield();
     }
 
-    private void HandleShipVisuals(PlayerModel model)
+    private void HandleShipVisuals(PlayerModel model, PlayerShipSO _)
     {
         shieldSr = model.ShieldSprite;
         shipVisuals = model.ShipVisuals;

@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class Item : Movement
 {
+    [SerializeField] private SpriteRenderer spriteRenderer;
+
     private ItemEffectSO itemEffectSO;
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -15,7 +17,10 @@ public class Item : Movement
 
     public void SetupItem(Sprite sprite, ItemEffectSO itemEffectSO)
     {
-        GetComponentInChildren<SpriteRenderer>().sprite = sprite;
+        if (spriteRenderer == null)
+            return;
+
+        spriteRenderer.sprite = sprite;
         this.itemEffectSO = itemEffectSO;
     }
 

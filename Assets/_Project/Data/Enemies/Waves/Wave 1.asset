@@ -12,9 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c6eef0a77ab8fe4390b88b397772d90, type: 3}
   m_Name: Wave 1
   m_EditorClassIdentifier: Assembly-CSharp::Wave
-  path: {fileID: 1648526203142164523, guid: 17f5486c37967d04d9ca95f56d50d650, type: 3}
-  enemyList:
-  - {fileID: 11400000, guid: f06b0697a7086e44a8606a1b5ad9cf26, type: 2}
-  - {fileID: 11400000, guid: b20581fab7505384695b7ff51d4bf399, type: 2}
+  path: {fileID: 2675995223452512689, guid: bcc6c2006a3a6c34fb436659b2f35f05, type: 3}
   minTimeToSpawn: 0.3
   maxTimeToSpawn: 0.7

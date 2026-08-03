@@ -25,7 +25,7 @@ public class MainMenuUI : MonoBehaviour
         if (dotTweenManager != null)
             dotTweenManager.FadeIn(mainMenuUICG, fadeDuration);
 
-        UIEvents.OnRewardChanged += UpdateRewardPointsText;
+        //UIEvents.OnRewardChanged += UpdateRewardPointsText;
         playButton.onClick.AddListener(OnPlayButtonClicked);
         hangarButton.onClick.AddListener(OnHangarButtonClicked);
         creditsButton.onClick.AddListener(OnCreditsButtonClicked);
@@ -35,7 +35,7 @@ public class MainMenuUI : MonoBehaviour
 
     private void OnDisable()
     {
-        UIEvents.OnRewardChanged -= UpdateRewardPointsText;
+        //UIEvents.OnRewardChanged -= UpdateRewardPointsText;
         playButton.onClick.RemoveListener(OnPlayButtonClicked);
         hangarButton.onClick.RemoveListener(OnHangarButtonClicked);
         creditsButton.onClick.RemoveListener(OnCreditsButtonClicked);

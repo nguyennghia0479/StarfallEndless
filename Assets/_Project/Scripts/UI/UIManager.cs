@@ -122,8 +122,8 @@ public class UIManager : MonoBehaviour
     private void HandleEnableMainMenuUI()
     {
         SwitchToUI(mainMenuUI.gameObject);
-        mainMenuUI.UpdateRewardPointsText(scoreManager.RewardPoints);
-        hangarUI.UpdateRewardPointsText(scoreManager.RewardPoints);
+        mainMenuUI.UpdateRewardPointsText(gameManager.RewardPoints);
+        hangarUI.UpdateRewardPointsText(gameManager.RewardPoints);
     }
 
     public void FadeOutMainGameUI() => mainGameUI.FadeOut(null);

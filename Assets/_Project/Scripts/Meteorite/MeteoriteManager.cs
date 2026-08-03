@@ -77,9 +77,9 @@ public class MeteoriteManager : MonoBehaviour
 
     private float GetTimeToSpawnMeteorite() => Random.Range(minTimeToSpawn, maxTimeToSpawn);
 
-    private void HandleGameStart(bool isRestarted)
+    private void HandleGameStart(bool isStarted)
     {
-        if (isRestarted)
+        if (isStarted)
             spawnTimer = 0;
 
         EnableSpawnMeteorites();

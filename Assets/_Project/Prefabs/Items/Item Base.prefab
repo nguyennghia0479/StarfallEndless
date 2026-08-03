@@ -152,9 +152,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c192d1cc6907954db8b419156cb5557, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Item
-  moveSpeed: 2
+  moveSpeed: 4
   lifeTime: 10
   isMoveUp: 0
+  spriteRenderer: {fileID: 743840080174917062}
 --- !u!58 &3335780616977324202
 CircleCollider2D:
   m_ObjectHideFlags: 0

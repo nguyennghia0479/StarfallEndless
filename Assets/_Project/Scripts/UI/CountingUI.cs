@@ -12,11 +12,11 @@ public class CountingUI : MonoBehaviour
 
     private float countdownTimer;
     private bool hasRollOut;
-    private bool isRestarted;
+    private bool isStarted;
 
-    public void SetStartCountdown(bool isRestarted)
+    public void SetStartCountdown(bool isStarted)
     {
-        this.isRestarted = isRestarted;
+        this.isStarted = isStarted;
         countdownTimer = countdown;
         hasRollOut = false;
         gameObject.SetActive(true);
@@ -42,7 +42,7 @@ public class CountingUI : MonoBehaviour
         {
             hasRollOut = true;
             gameObject.SetActive(false);
-            GameEvents.RaiseGameStart(isRestarted);
+            GameEvents.RaiseGameStart(isStarted);
         }
     }
 }

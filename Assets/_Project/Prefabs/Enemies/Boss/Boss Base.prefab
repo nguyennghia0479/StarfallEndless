@@ -459,7 +459,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraBoundary
   bottomPadding: 0
-  topLimited: 0.4
+  topLimited: 0.5
   isLookUp: 0
 --- !u!114 &8682559898543050247
 MonoBehaviour:
@@ -473,10 +473,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c87cd8e366101744e92d54b65c9c2f09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Shooter
-  projectilePrefab: {fileID: 7930951197769485024, guid: e574e7e5cb1481c49a55b116388d72fb, type: 3}
+  projectilePrefab: {fileID: 7930951197769485024, guid: 8b84a7a37bc7ea348bdf75b74344e202, type: 3}
   gunPoints:
   - {fileID: 5692033291078989544}
-  fireRate: 0.5
+  rawFireRate: 0.6
+  fireRateFactor: 0.02
 --- !u!114 &6113958784621643157
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -516,6 +517,11 @@ MonoBehaviour:
   healthBar: {fileID: 6245787771578408538}
   healthText: {fileID: 0}
   healthBarCanvas: {fileID: 3748291397389020780}
+  changeDuration: 0.5
+  healthThreshold: 0.35
+  blinkTime: 0.2
+  greenColor: {r: 0, g: 0, b: 0, a: 0}
+  redColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!58 &-8096247367759132447
 CircleCollider2D:
   m_ObjectHideFlags: 0

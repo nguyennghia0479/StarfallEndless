@@ -7,7 +7,7 @@ public class StatsSO : ScriptableObject
     [SerializeField] private float collisionDamage;
     [SerializeField] private float defend;
     [SerializeField] private float maxHP;
-    [SerializeField] private float moveSpeed;
+    [SerializeField] private float speed;
     [Tooltip("Use for enemy")]
     [SerializeField] private int scorePoint;
 
@@ -15,6 +15,6 @@ public class StatsSO : ScriptableObject
     public float CollisionDamage => collisionDamage;
     public float Defend => defend;
     public float MaxHP => maxHP;
-    public float MoveSpeed => moveSpeed;
+    public float Speed => speed;
     public int ScorePoint => scorePoint;
 }
