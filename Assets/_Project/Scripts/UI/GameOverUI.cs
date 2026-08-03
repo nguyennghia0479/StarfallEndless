@@ -68,6 +68,6 @@ public class GameOverUI : MonoBehaviour
     private void OnMainMenuButtonClicked()
     {
         UIEvents.RaiseButtonClicked();
-        dotTweenManager.FadeOut(UIEvents.RaiseMainMenuButtonClicked, gameOverUICG, fadeDuration);
+        dotTweenManager.FadeOut(() => UIEvents.RaiseMainMenuButtonClicked(true), gameOverUICG, fadeDuration);
     }
 }

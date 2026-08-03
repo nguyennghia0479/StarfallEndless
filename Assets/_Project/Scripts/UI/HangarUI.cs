@@ -48,7 +48,7 @@ public class HangarUI : MonoBehaviour
         currentIndex = SaveData.LoadLastShipSelected();
         UpdateHangarUI();
 
-        UIEvents.OnRewardChanged += UpdateRewardPointsText;
+        //UIEvents.OnRewardChanged += UpdateRewardPointsText;
         previousButton.onClick.AddListener(OnPreviousButtonClicked);
         nextButton.onClick.AddListener(OnNextButtonClicked);
         unlockButton.onClick.AddListener(OnUnlockButtonClick);
@@ -58,7 +58,7 @@ public class HangarUI : MonoBehaviour
 
     private void OnDisable()
     {
-        UIEvents.OnRewardChanged -= UpdateRewardPointsText;
+        //UIEvents.OnRewardChanged -= UpdateRewardPointsText;
         previousButton.onClick.RemoveListener(OnPreviousButtonClicked);
         nextButton.onClick.RemoveListener(OnNextButtonClicked);
         unlockButton.onClick.RemoveListener(OnUnlockButtonClick);
@@ -141,7 +141,7 @@ public class HangarUI : MonoBehaviour
         float damageValue = playerShip.ProjectileDamage / playerShip.MaxDamageRange;
         float defendValue = playerShip.Defend / playerShip.MaxDefendRange;
         float hpValue = playerShip.MaxHP / playerShip.MaxHPRange;
-        float speedValue = playerShip.MoveSpeed / playerShip.MaxSpeedRange;
+        float speedValue = playerShip.Speed / playerShip.MaxSpeedRange;
 
         ChangeStat(ref damageStatRoutine, damageStat, damageValue);
         ChangeStat(ref defendStatRoutine, defendStat, defendValue);
@@ -250,8 +250,8 @@ public class HangarUI : MonoBehaviour
         Destroy(model.gameObject);
         PlayerModel newPlayerModel = Instantiate(playerShip.ShipModel, player.transform.position, Quaternion.identity, player.transform);
         UIEvents.RaiseButtonClicked();
-        UIEvents.RaiseSelectedShipButtonClicked(newPlayerModel);
-        player.UpdatePlayerStats(playerShip);
+        UIEvents.RaiseSelectedShipButtonClicked(newPlayerModel, playerShip);
+        //player.UpdatePlayerStats(playerShip);
         SaveData.SaveSelectedShip(currentIndex);
     }
 

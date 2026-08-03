@@ -19,7 +19,7 @@ PrefabInstance:
     - target: {fileID: -674587975670901264, guid: c95304de35944d542bafa1172ccbdbd3, type: 3}
       propertyPath: stats
       value: 
-      objectReference: {fileID: 11400000, guid: b73b72b7b92d4c046a2f8673b3631748, type: 2}
+      objectReference: {fileID: 11400000, guid: 57bef6672e8d4e94f8af5b09d3cafa93, type: 2}
     - target: {fileID: 1175893379194440235, guid: c95304de35944d542bafa1172ccbdbd3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -66,11 +66,11 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: 235dd031c045df54a83b5f5314bd8bca, type: 3}
     - target: {fileID: 3894742295453415923, guid: c95304de35944d542bafa1172ccbdbd3, type: 3}
       propertyPath: m_Name
-      value: Boss Ship Green 4
+      value: Boss Ship Aqua Coral 1
       objectReference: {fileID: 0}
     - target: {fileID: 5692033291078989544, guid: c95304de35944d542bafa1172ccbdbd3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.9
+      value: 0.7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

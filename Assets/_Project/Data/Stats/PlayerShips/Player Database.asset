@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56ed37569e0732749b96ec723d5cd014, type: 3}
+  m_Name: Player Database
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerDatabase
+  playerShips:
+  - {fileID: 11400000, guid: b3ce11832dcee5d478814c1299ff8ffe, type: 2}
+  - {fileID: 11400000, guid: ff8f60dd659f0034dae37b6c71eb265f, type: 2}
+  - {fileID: 11400000, guid: a3c93d15b82a7ae4e96e570026eea310, type: 2}
+  - {fileID: 11400000, guid: b67110281c660ea43ad2510addd6aa76, type: 2}
+  - {fileID: 11400000, guid: 56395a66169d8e8439becf4577ab820e, type: 2}
+  - {fileID: 11400000, guid: c8e4367d1a8af0d4899a2fd135ad1f5c, type: 2}
+  - {fileID: 11400000, guid: c85d01306e3029a41b998593591751ee, type: 2}
+  - {fileID: 11400000, guid: ae1f0166eaec422429efc0f6f9db8884, type: 2}
+  - {fileID: 11400000, guid: 746564fea1912f446903f0ee4fe15c32, type: 2}
+  - {fileID: 11400000, guid: e560dca72a9e07542a3b08abea43ec09, type: 2}
+  - {fileID: 11400000, guid: 0589531d91e318a488ef57a856f826bb, type: 2}
+  - {fileID: 11400000, guid: 51e8aa36eb7a7f9479c857ab5fad95aa, type: 2}

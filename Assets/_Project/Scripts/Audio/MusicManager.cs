@@ -26,10 +26,10 @@ public class MusicManager : MonoBehaviour
 
     private void Start()
     {
-        PlayMainMenuTrack();
+        PlayMainMenuTrack(false);
     }
 
-    private void PlayMainMenuTrack()
+    private void PlayMainMenuTrack(bool _)
     {
         StopPlayBGM();
         musicCoroutine = StartCoroutine(PlayRandomMusic(GameState.MainMenu));

@@ -5,13 +5,15 @@ public class Shooter : MonoBehaviour
 {
     [SerializeField] private GameObject projectilePrefab;
     [SerializeField] private Transform[] gunPoints;
-    [SerializeField] private float fireRate = .5f;
+    [SerializeField] private float rawFireRate = .6f;
+    [SerializeField] private float fireRateFactor = .02f;
 
     private GameObject defaultProjectile;
     private Coroutine fireRoutine;
     private WaitForSeconds waitTime;
     private float projectileDamage;
     private float defaultProjectileDamage;
+    private float fireRate;
     private float defaultFireRate;
     private bool isAutoFire;
     private float upgradeTimer;
@@ -25,12 +27,14 @@ public class Shooter : MonoBehaviour
         RemoveBuffFireRate();
     }
 
-    public void Initialize(float projectileDamage)
+    public void Initialize(float projectileDamage, float speed)
     {
         this.projectileDamage = projectileDamage;
         defaultProjectileDamage = projectileDamage;
-
         defaultProjectile = projectilePrefab;
+
+        fireRate = rawFireRate - (speed * fireRateFactor);
+        fireRate = Mathf.Clamp(fireRate, MIN_FIRE_RATE, fireRate);
         defaultFireRate = fireRate;
         
         waitTime = new WaitForSeconds(fireRate);

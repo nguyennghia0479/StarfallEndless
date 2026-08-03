@@ -27,9 +27,9 @@ public class ScoreManager : MonoBehaviour
         UIEvents.RaiseRewardChanged(rewardPoints);
     }
 
-    private void HandleResetScorePoints(bool isRestarted)
+    private void HandleResetScorePoints(bool isStarted)
     {
-        if (!isRestarted)
+        if (!isStarted)
             return;
 
         scorePoints = 0;
@@ -60,7 +60,6 @@ public class ScoreManager : MonoBehaviour
         {
             rewardPoints += enemy.ScorePoints;
             UIEvents.RaiseRewardChanged(rewardPoints);
-            SaveData.SaveRewardPoints(rewardPoints);
         }
     }
 
@@ -72,7 +71,6 @@ public class ScoreManager : MonoBehaviour
         rewardPoints -= revivePointsAmount;
         rewardPoints = Mathf.Clamp(rewardPoints, 0, rewardPoints);
         UIEvents.RaiseRewardChanged(rewardPoints);
-        SaveData.SaveRewardPoints(rewardPoints);
     }
 
     public int ScorePoints => scorePoints;

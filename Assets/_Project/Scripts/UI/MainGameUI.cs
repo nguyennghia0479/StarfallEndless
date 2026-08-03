@@ -83,7 +83,7 @@ public class MainGameUI : MonoBehaviour
 
     private void HandleQuitToMainMenu()
     {
-        FadeOut(UIEvents.RaiseMainMenuButtonClicked);
+        FadeOut(() => UIEvents.RaiseMainMenuButtonClicked(false));
     }
 
     private void HandleQuitToGameOver()

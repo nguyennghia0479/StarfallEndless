@@ -26,9 +26,9 @@ public static class GameEvents
         OnGameReady?.Invoke();
     }
 
-    public static void RaiseGameStart(bool isRestarted)
+    public static void RaiseGameStart(bool isStarted)
     {
-        OnGameStart?.Invoke(isRestarted);
+        OnGameStart?.Invoke(isStarted);
     }
 
     public static void RaiseGameQuit()

@@ -1448,7 +1448,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MeteoriteManager
   meteoriteDB: {fileID: 11400000, guid: 57b5d3c41405f1a498a3e5190c4605b2, type: 2}
   minTimeToSpawn: 18
-  maxTimeToSpawn: 23
+  maxTimeToSpawn: 25
   cameraBoundary: {fileID: 196213007}
   spawnPoint: {fileID: 1239211246}
 --- !u!114 &196213007
@@ -6777,7 +6777,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70cce5e293cbb384b923909f52279c23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ReviveUI
-  revivePointsAmount: 300
+  revivePointsAmount: 500
   revivePointFactor: 1.5
   revivePointsText: {fileID: 2056459965}
   reviveButton: {fileID: 2075744387}
@@ -20724,6 +20724,14 @@ MonoBehaviour:
     defaultPoolSize: 15
     maxPoolSize: 30
     holder: {fileID: 2104080659}
+  - prefab: {fileID: 7930951197769485024, guid: 8b84a7a37bc7ea348bdf75b74344e202, type: 3}
+    defaultPoolSize: 12
+    maxPoolSize: 24
+    holder: {fileID: 212864548}
+  - prefab: {fileID: 7930951197769485024, guid: d0b5780f908b69448a02879c3e97bcb9, type: 3}
+    defaultPoolSize: 12
+    maxPoolSize: 24
+    holder: {fileID: 212864548}
   - prefab: {fileID: 1859459328540736192, guid: c32af3ce7d9b97240add34f58754587a, type: 3}
     defaultPoolSize: 12
     maxPoolSize: 24
@@ -21787,13 +21795,30 @@ MonoBehaviour:
   waves:
   - {fileID: 11400000, guid: 8786f879e18e9ed428da0d8033e77a34, type: 2}
   - {fileID: 11400000, guid: e5039ed8eb7f75f45bbc254c214fd2b8, type: 2}
+  - {fileID: 11400000, guid: 09cd9db8d71f80846b7b2ab95b1e90ba, type: 2}
+  - {fileID: 11400000, guid: 6da271af3d35d314b848b042369a3de3, type: 2}
+  - {fileID: 11400000, guid: 03a6a44e2fd5aba4aba10bf1e4613ae7, type: 2}
+  - {fileID: 11400000, guid: 3286c134fa25cc340a1b71240293b4a2, type: 2}
+  - {fileID: 11400000, guid: 78c186eb8497628469fa9a73da90cbed, type: 2}
+  - {fileID: 11400000, guid: f07daf0d80250ee44a4732144b3bb7f2, type: 2}
+  - {fileID: 11400000, guid: 05a62e7d2fdf5f24cb3d193a42c9b156, type: 2}
+  - {fileID: 11400000, guid: ef48e27fee820f745ab8d49ddc0e3ad6, type: 2}
+  - {fileID: 11400000, guid: 981f0279a0bbc3848934687d8535bbfe, type: 2}
+  - {fileID: 11400000, guid: f862a796d11e34b4bb94ac1acccc6c43, type: 2}
+  - {fileID: 11400000, guid: 261135296e11ba94bababbf7977d942e, type: 2}
+  - {fileID: 11400000, guid: 4f4ab93726310934bbda4c0fa253ca7c, type: 2}
   enemyDB:
   - {fileID: 11400000, guid: 693f99225d60bf14886001c1cbcb3e57, type: 2}
   - {fileID: 11400000, guid: b418fdfa910e5dd43be3b2d4320dacda, type: 2}
+  - {fileID: 11400000, guid: 978f53b8dedbfc74c9facd8c563427b1, type: 2}
+  - {fileID: 11400000, guid: c887240bc4951c6418f6accabc907f9f, type: 2}
   timeToSpawnWave: 2
   bossWave: {fileID: 11400000, guid: 3127fe96030122a4693ae6e60146b07e, type: 2}
   bossDB: {fileID: 11400000, guid: 9779b9c9d81f63446a5f57d0e23a1242, type: 2}
   waveAmountToSpawnBoss: 10
+  chanceToSpawnMultiBoss: 0
+  chanceIncreaseInterval: 10
+  maxChanceToSpawnBoss: 70
 --- !u!222 &5305915983123065687
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -21915,7 +21940,8 @@ MonoBehaviour:
   gunPoints:
   - {fileID: 1770809555254368085}
   - {fileID: 6114024080954937000}
-  fireRate: 0.5
+  rawFireRate: 0.6
+  fireRateFactor: 0.02
 --- !u!4 &6114024080954937000 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8963973057774110494, guid: f2e20ac7228076a49b4812418439187c, type: 3}
@@ -21987,7 +22013,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraBoundary
   bottomPadding: 1
-  topLimited: 1
+  topLimited: 0.6
   isLookUp: 1
 --- !u!114 &7300799535124875029
 MonoBehaviour:

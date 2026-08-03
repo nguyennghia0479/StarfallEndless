@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f68d496a28ceba46924a54cd785fd69, type: 3}
+  m_Name: Enemy Red DB
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyDatabaseSO
+  enemies:
+  - {fileID: 3892144918735762774, guid: 123e93438389bc0489d2964e3b9303df, type: 3}
+  - {fileID: 3892144918735762774, guid: 76aec91007f92994e8472e275d7123b7, type: 3}
+  - {fileID: 3892144918735762774, guid: ccbcf0c4d4ad2484a82cc8045a07ec1c, type: 3}
+  - {fileID: 3892144918735762774, guid: 940d29d2fbff2824b81c9bc777ec8fab, type: 3}
+  - {fileID: 3892144918735762774, guid: 3d7a347281af0ed429c3d4b50576b54c, type: 3}

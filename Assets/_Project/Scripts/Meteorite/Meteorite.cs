@@ -17,7 +17,7 @@ public class Meteorite : Movement
 
     private void Start()
     {
-        Initialize(stats.MoveSpeed);
+        Initialize(stats.Speed);
         health.Initialize(stats.MaxHP, stats.Defend);
         damageDealer.Initialize(stats.CollisionDamage);
         health.DisableDamaged();

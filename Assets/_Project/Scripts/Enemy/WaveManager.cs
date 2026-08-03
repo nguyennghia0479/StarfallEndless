@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class WaveManager : MonoBehaviour
@@ -14,13 +15,16 @@ public class WaveManager : MonoBehaviour
     [SerializeField] private WaveSO bossWave;
     [SerializeField] private EnemyDatabaseSO bossDB;
     [SerializeField] private int waveAmountToSpawnBoss = 10;
+    [SerializeField] private int chanceToSpawnMultiBoss = 0;
+    [SerializeField] private int chanceIncreaseInterval = 10;
+    [SerializeField] private int maxChanceToSpawnBoss = 70;
 
     private WaitForSeconds waitTimeToSpawnWave;
     private Coroutine spawnEnemiesRoutine;
-    private EnemyBoss enemyBoss;
     private bool canSpawnEnemy;
     private bool isBossWave;
     private int currentWave;
+    private List<EnemyBoss> bossAppearingList = new();
 
     private void Awake()
     {
@@ -46,22 +50,6 @@ public class WaveManager : MonoBehaviour
         GameEvents.OnGameQuit -= HandleGameQuit;
         GameEvents.OnPlayerDestroyed -= DisableSpawnWave;
         GameEvents.OnEnemyDestroyed -= CheckIfBossDestroyed;
-    }
-
-    private void CheckIfBossDestroyed(Enemy gameObject)
-    {
-        if (gameObject.IsBoss)
-        {
-            isBossWave = false;
-            EnableSpawnWave();
-        }
-    }
-
-    private void SpawnEnemyBoss()
-    {
-        EnemyBoss bossSelected = bossDB.Enemies[Random.Range(0, bossDB.Enemies.Length)] as EnemyBoss;
-        enemyBoss = Instantiate(bossSelected, bossWave.GetStartingPoint().position, Quaternion.identity);
-        enemyBoss.Movement.SetupEnemyMove(bossWave);
     }
 
     private IEnumerator SpawnWaveRoutine()
@@ -104,11 +92,63 @@ public class WaveManager : MonoBehaviour
         }
     }
 
-    private void HandleGameStart(bool isRestarted)
+    private bool CanSpawnMultipleBoss()
     {
-        if (isRestarted)
-            currentWave = 0;
+        float minChance = 10;
+        float maxChance = 100;
+        return Random.Range(minChance, maxChance) < chanceToSpawnMultiBoss;
+    }
 
+    private void SpawnEnemyBoss()
+    {
+        bool canSpawnMulti = CanSpawnMultipleBoss();
+        int amountToSpawn = canSpawnMulti ? 2 : 1;
+        StartCoroutine(SpawnEnemyBossRoutine(amountToSpawn));
+    }
+
+    private IEnumerator SpawnEnemyBossRoutine(int amountToSpawn)
+    {
+        for (int i = 0; i < amountToSpawn; i++)
+        {
+            EnemyBoss bossSelected = bossDB.Enemies[Random.Range(0, bossDB.Enemies.Length)] as EnemyBoss;
+            EnemyBoss enemyBoss = Instantiate(bossSelected, bossWave.GetStartingPoint().position, Quaternion.identity);
+            enemyBoss.Movement.SetupEnemyMove(bossWave);
+            bossAppearingList.Add(enemyBoss);
+
+            yield return waitTimeToSpawnWave;
+        }
+    }
+
+    private void CheckIfBossDestroyed(Enemy gameObject)
+    {
+        if (gameObject == null || !gameObject.IsBoss)
+            return;
+
+        if (gameObject is EnemyBoss enemyBoss)
+        {
+            if (bossAppearingList.Contains(enemyBoss))
+                bossAppearingList.Remove(enemyBoss);
+        }
+
+        if (bossAppearingList.Count > 0)
+            return;
+
+        bossAppearingList.Clear();
+        isBossWave = false;
+        chanceToSpawnMultiBoss += chanceIncreaseInterval;
+        chanceToSpawnMultiBoss = Mathf.Clamp(chanceToSpawnMultiBoss, 0, maxChanceToSpawnBoss);
+        Invoke(nameof(EnableSpawnWave), timeToSpawnWave);
+    }
+
+    private void HandleGameStart(bool isStarted)
+    {
+        if (isStarted)
+        {
+            currentWave = 0;
+            chanceToSpawnMultiBoss = 0;
+        }
+
+        bossAppearingList = new();
         EnableSpawnWave();
     }
 
@@ -116,8 +156,11 @@ public class WaveManager : MonoBehaviour
     {
         DisableSpawnWave();
 
-        if (enemyBoss != null && enemyBoss.gameObject != null)
-            enemyBoss.StopRoamingMove();
+        foreach (var enemyBoss in bossAppearingList)
+        {
+            if (enemyBoss != null && enemyBoss.gameObject != null)
+                enemyBoss.StopRoamingMove();
+        }
     }
 
     private void EnableSpawnWave()

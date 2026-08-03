@@ -281,7 +281,8 @@ MonoBehaviour:
   projectilePrefab: {fileID: 7930951197769485024, guid: e574e7e5cb1481c49a55b116388d72fb, type: 3}
   gunPoints:
   - {fileID: 9214450921998076496}
-  fireRate: 0.5
+  fireRate: 0.6
+  fireRateFactor: 0.02
 --- !u!114 &-4008450175681770712
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -357,6 +358,11 @@ MonoBehaviour:
   healthBar: {fileID: 5549791233776842164}
   healthText: {fileID: 0}
   healthBarCanvas: {fileID: 7308793478465967172}
+  changeDuration: 0.5
+  healthThreshold: 0.35
+  blinkTime: 0.2
+  greenColor: {r: 0, g: 0, b: 0, a: 0}
+  redColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &8745653365413919038
 GameObject:
   m_ObjectHideFlags: 0
