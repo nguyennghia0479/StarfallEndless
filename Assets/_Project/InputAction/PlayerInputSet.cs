@@ -100,6 +100,24 @@ public partial class @PlayerInputSet: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Pointer"",
+                    ""type"": ""Value"",
+                    ""id"": ""f0af97f6-a34e-4c00-a085-abe03b7bba0c"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Press"",
+                    ""type"": ""Button"",
+                    ""id"": ""99451efb-0e8a-4c1a-af11-e11a900f0573"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -212,6 +230,28 @@ public partial class @PlayerInputSet: IInputActionCollection2, IDisposable
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ee14899d-6b74-4bba-aa0f-addaf7ded7a8"",
+                    ""path"": ""<Pointer>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pointer"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""aeb91793-6d40-4b7c-b802-68756a1641ae"",
+                    ""path"": ""<Pointer>/press"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Press"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -238,6 +278,8 @@ public partial class @PlayerInputSet: IInputActionCollection2, IDisposable
         // Player
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
+        m_Player_Pointer = m_Player.FindAction("Pointer", throwIfNotFound: true);
+        m_Player_Press = m_Player.FindAction("Press", throwIfNotFound: true);
     }
 
     ~@PlayerInputSet()
@@ -319,6 +361,8 @@ public partial class @PlayerInputSet: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Player;
     private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
     private readonly InputAction m_Player_Move;
+    private readonly InputAction m_Player_Pointer;
+    private readonly InputAction m_Player_Press;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player".
     /// </summary>
@@ -334,6 +378,14 @@ public partial class @PlayerInputSet: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Player/Move".
         /// </summary>
         public InputAction @Move => m_Wrapper.m_Player_Move;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/Pointer".
+        /// </summary>
+        public InputAction @Pointer => m_Wrapper.m_Player_Pointer;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/Press".
+        /// </summary>
+        public InputAction @Press => m_Wrapper.m_Player_Press;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -363,6 +415,12 @@ public partial class @PlayerInputSet: IInputActionCollection2, IDisposable
             @Move.started += instance.OnMove;
             @Move.performed += instance.OnMove;
             @Move.canceled += instance.OnMove;
+            @Pointer.started += instance.OnPointer;
+            @Pointer.performed += instance.OnPointer;
+            @Pointer.canceled += instance.OnPointer;
+            @Press.started += instance.OnPress;
+            @Press.performed += instance.OnPress;
+            @Press.canceled += instance.OnPress;
         }
 
         /// <summary>
@@ -377,6 +435,12 @@ public partial class @PlayerInputSet: IInputActionCollection2, IDisposable
             @Move.started -= instance.OnMove;
             @Move.performed -= instance.OnMove;
             @Move.canceled -= instance.OnMove;
+            @Pointer.started -= instance.OnPointer;
+            @Pointer.performed -= instance.OnPointer;
+            @Pointer.canceled -= instance.OnPointer;
+            @Press.started -= instance.OnPress;
+            @Press.performed -= instance.OnPress;
+            @Press.canceled -= instance.OnPress;
         }
 
         /// <summary>
@@ -437,5 +501,19 @@ public partial class @PlayerInputSet: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnMove(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Pointer" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnPointer(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Press" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnPress(InputAction.CallbackContext context);
     }
 }

@@ -146,6 +146,7 @@ MonoBehaviour:
   isMoveUp: 1
   damageDealer: {fileID: 7552120782001065688}
   pooledObject: {fileID: -8327502497591400173}
+  adjustValue: 0.8
 --- !u!114 &7552120782001065688
 MonoBehaviour:
   m_ObjectHideFlags: 0

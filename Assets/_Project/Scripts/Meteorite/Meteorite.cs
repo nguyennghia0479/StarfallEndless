@@ -3,11 +3,14 @@ using UnityEngine;
 public class Meteorite : Movement
 {
     [SerializeField] private StatsSO stats;
+    [Header("Mobile Adjust")]
+    [SerializeField] private float adjustValue = .6f;
 
     private HealthPoint health;
     private DamageDealer damageDealer;
     private float topBound;
     private bool isEnteredScreen;
+    private float maxHP;
 
     private void Awake()
     {
@@ -17,8 +20,13 @@ public class Meteorite : Movement
 
     private void Start()
     {
+        maxHP = stats.MaxHP;
+#if UNITY_ANDROID
+        maxHP *= adjustValue;
+#endif
+
         Initialize(stats.Speed);
-        health.Initialize(stats.MaxHP, stats.Defend);
+        health.Initialize(maxHP, stats.Defend);
         damageDealer.Initialize(stats.CollisionDamage);
         health.DisableDamaged();
     }

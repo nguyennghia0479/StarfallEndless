@@ -84,10 +84,7 @@ public class MainMenuUI : MonoBehaviour
     }
 
     private void HandleQuitGame()
-    {  
-        if (EditorApplication.isPlaying)
-            EditorApplication.isPlaying = false;
-        else
-            Application.Quit();
+    {
+        Application.Quit();
     }
 }
