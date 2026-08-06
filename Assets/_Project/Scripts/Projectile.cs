@@ -4,7 +4,16 @@ public class Projectile : Movement
 {
     [SerializeField] private DamageDealer damageDealer;
     [SerializeField] private PooledObject pooledObject;
+
+    [Header("Mobile Adjust")]
+    [SerializeField] private float adjustValue = .8f;
     private bool hasReturned;
+    private float defaultMoveSpeed;
+
+    private void Awake()
+    {
+        defaultMoveSpeed = moveSpeed;
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -36,6 +45,11 @@ public class Projectile : Movement
 
     public override void Initialize(float damage)
     {
+#if UNITY_ANDROID
+        moveSpeed = defaultMoveSpeed;
+        moveSpeed *= adjustValue;
+#endif
+
         lifeTimer = 0;
         hasReturned = false;
         damageDealer.Initialize(damage);

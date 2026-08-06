@@ -82,6 +82,7 @@ public class HealthBarUI : MonoBehaviour
             StopCoroutine(textChangeRoutine);
 
         int targetValue = Mathf.RoundToInt(newFillAmount * 100);
+        targetValue = Mathf.Clamp(targetValue, 0, targetValue);
         textChangeRoutine = StartCoroutine(ChangeTextRoutine(targetValue, lastHealthAmount));
     }
 

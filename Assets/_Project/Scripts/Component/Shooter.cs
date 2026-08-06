@@ -8,6 +8,9 @@ public class Shooter : MonoBehaviour
     [SerializeField] private float rawFireRate = .6f;
     [SerializeField] private float fireRateFactor = .02f;
 
+    [Header("Mobile Adjust")]
+    [SerializeField] private float adjustValue = 1.2f;
+
     private GameObject defaultProjectile;
     private Coroutine fireRoutine;
     private WaitForSeconds waitTime;
@@ -29,6 +32,10 @@ public class Shooter : MonoBehaviour
 
     public void Initialize(float projectileDamage, float speed)
     {
+#if UNITY_ANDROID
+        rawFireRate *= adjustValue;
+#endif
+
         this.projectileDamage = projectileDamage;
         defaultProjectileDamage = projectileDamage;
         defaultProjectile = projectilePrefab;
@@ -36,7 +43,7 @@ public class Shooter : MonoBehaviour
         fireRate = rawFireRate - (speed * fireRateFactor);
         fireRate = Mathf.Clamp(fireRate, MIN_FIRE_RATE, fireRate);
         defaultFireRate = fireRate;
-        
+
         waitTime = new WaitForSeconds(fireRate);
     }
 
@@ -65,7 +72,7 @@ public class Shooter : MonoBehaviour
     {
         if (isAutoFire || fireRoutine != null)
             return;
-  
+
         isAutoFire = true;
         fireRoutine = StartCoroutine(FireRoutine());
     }

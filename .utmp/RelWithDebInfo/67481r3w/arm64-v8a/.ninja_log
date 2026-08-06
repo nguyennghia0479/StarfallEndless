@@ -1,0 +1,23 @@
+# ninja log v5
+11	1410	8076028303593770	GameActivity/CMakeFiles/game.dir/UGAApplication.cpp.o	70936bd0e68485da
+71	199	8076028291510467	FramePacing/CMakeFiles/swappywrapper.dir/UnitySwappyWrapper.cpp.o	af0b24f4f5732c8d
+199	317	8076028292632800	D:/Workspace/Starfall Endless/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/67481r3w/obj/arm64-v8a/libswappywrapper.so	739ec974ea25163c
+28	987	8076028299348930	GameActivity/CMakeFiles/game.dir/UGAEntry.cpp.o	64ced3ee5839c91d
+61	1075	8076028300185775	GameActivity/CMakeFiles/game.dir/UGAInputKeyEvent.cpp.o	3b3170d2f059f1aa
+53	1217	8076028301688977	GameActivity/CMakeFiles/game.dir/UGASoftKeyboard.cpp.o	429d02700f934681
+35	1073	8076028300113852	GameActivity/CMakeFiles/game.dir/UGAConfiguration.cpp.o	cc049ffa3aa04ffa
+22	1172	8076028300910029	GameActivity/CMakeFiles/game.dir/UGADebug.cpp.o	d6bd0f50c6887bae
+46	1170	8076028300721293	GameActivity/CMakeFiles/game.dir/UGAInputMotionEvent.cpp.o	a9cb9b90cd55791c
+41	1297	8076028302451659	GameActivity/CMakeFiles/game.dir/UGAInput.cpp.o	6afd471ec79a1a2e
+1410	1484	8076028304402304	D:/Workspace/Starfall Endless/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/67481r3w/obj/arm64-v8a/libgame.so	5cffcbdd4caa107c
+52	186	8076044140072514	FramePacing/CMakeFiles/swappywrapper.dir/UnitySwappyWrapper.cpp.o	af0b24f4f5732c8d
+186	319	8076044141318970	D:/Workspace/Starfall Endless/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/67481r3w/obj/arm64-v8a/libswappywrapper.so	739ec974ea25163c
+9	952	8076044147707156	GameActivity/CMakeFiles/game.dir/UGAEntry.cpp.o	64ced3ee5839c91d
+40	1011	8076044148292507	GameActivity/CMakeFiles/game.dir/UGAInputKeyEvent.cpp.o	3b3170d2f059f1aa
+16	1032	8076044148415011	GameActivity/CMakeFiles/game.dir/UGAConfiguration.cpp.o	cc049ffa3aa04ffa
+22	1074	8076044148907264	GameActivity/CMakeFiles/game.dir/UGADebug.cpp.o	d6bd0f50c6887bae
+45	1078	8076044148937226	GameActivity/CMakeFiles/game.dir/UGAInputMotionEvent.cpp.o	a9cb9b90cd55791c
+34	1177	8076044149946626	GameActivity/CMakeFiles/game.dir/UGASoftKeyboard.cpp.o	429d02700f934681
+28	1281	8076044151022484	GameActivity/CMakeFiles/game.dir/UGAInput.cpp.o	6afd471ec79a1a2e
+4	1384	8076044151870147	GameActivity/CMakeFiles/game.dir/UGAApplication.cpp.o	70936bd0e68485da
+1385	1488	8076044153105243	D:/Workspace/Starfall Endless/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/67481r3w/obj/arm64-v8a/libgame.so	5cffcbdd4caa107c
