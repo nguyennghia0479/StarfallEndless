@@ -10,7 +10,7 @@ public class HealthBarUI : MonoBehaviour
     [SerializeField] private Canvas healthBarCanvas;
     [SerializeField] private float changeDuration = .5f;
 
-    [Space]
+    [Header("Blink Effect")]
     [SerializeField] private float healthThreshold = .35f;
     [SerializeField] private float blinkTime = .2f;
     [SerializeField] private Color greenColor;
@@ -49,7 +49,7 @@ public class HealthBarUI : MonoBehaviour
         float newFillAmount = currentHP / maxHP;
         ChangeHealthAmount(newFillAmount);
         ChangeHealthText(newFillAmount);
-        CheckCanPlayBlink(gameObject);
+        CheckCanPlayBlink(gameObject, newFillAmount);
     }
 
     private void ChangeHealthAmount(float newFillAmount)
@@ -101,11 +101,11 @@ public class HealthBarUI : MonoBehaviour
         lastHealthAmount = targetValue;
     }
 
-    private void CheckCanPlayBlink(GameObject gameObject)
+    private void CheckCanPlayBlink(GameObject gameObject, float currentFillAmount)
     {
         if (gameObject.CompareTag(GameIdentifiers.GameTags.TAG_PLAYER))
         {
-            if (healthBar.fillAmount <= healthThreshold)
+            if (currentFillAmount <= healthThreshold)
             {
                 if (isBlinking) return;
                 isBlinking = true;

@@ -16,11 +16,15 @@ MonoBehaviour:
   m_TableCollectionNameGuidString: e37a64ffafaefbf4582e903cece5fc50
   m_Entries:
   - m_Id: 5738373120
-    m_Key: countdown.guideText
+    m_Key: countdown.pcGuideText
     m_Metadata:
       m_Items: []
   - m_Id: 2767091965952
     m_Key: countdown.countText
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3238525198180352
+    m_Key: countdown.mobileGuideText
     m_Metadata:
       m_Items: []
   m_Metadata:
