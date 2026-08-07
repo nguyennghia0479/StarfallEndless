@@ -26,6 +26,10 @@ MonoBehaviour:
     m_Localized: ROLL OUT
     m_Metadata:
       m_Items: []
+  - m_Id: 3238525198180352
+    m_Localized: Swipe to move
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

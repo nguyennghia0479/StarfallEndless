@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class CountingUI : MonoBehaviour
 {
+    [SerializeField] private TMP_Text pcGuideText;
+    [SerializeField] private TMP_Text mobileGuideText;
     [SerializeField] private TMP_Text countdownText;
     [SerializeField] private float countdown = 5f;
 
@@ -13,6 +15,17 @@ public class CountingUI : MonoBehaviour
     private float countdownTimer;
     private bool hasRollOut;
     private bool isStarted;
+
+    private void Awake()
+    {
+        mobileGuideText.gameObject.SetActive(false);
+        pcGuideText.gameObject.SetActive(true);
+
+#if UNITY_ANDROID
+        mobileGuideText.gameObject.SetActive(true);
+        pcGuideText.gameObject.SetActive(false);
+#endif
+    }
 
     public void SetStartCountdown(bool isStarted)
     {
