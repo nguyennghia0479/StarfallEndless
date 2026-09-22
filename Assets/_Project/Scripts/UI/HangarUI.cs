@@ -48,7 +48,7 @@ public class HangarUI : MonoBehaviour
         currentIndex = SaveData.LoadLastShipSelected();
         UpdateHangarUI();
 
-        //UIEvents.OnRewardChanged += UpdateRewardPointsText;
+        UIEvents.OnRewardChanged += UpdateRewardPointsText;
         previousButton.onClick.AddListener(OnPreviousButtonClicked);
         nextButton.onClick.AddListener(OnNextButtonClicked);
         unlockButton.onClick.AddListener(OnUnlockButtonClick);
@@ -58,7 +58,7 @@ public class HangarUI : MonoBehaviour
 
     private void OnDisable()
     {
-        //UIEvents.OnRewardChanged -= UpdateRewardPointsText;
+        UIEvents.OnRewardChanged -= UpdateRewardPointsText;
         previousButton.onClick.RemoveListener(OnPreviousButtonClicked);
         nextButton.onClick.RemoveListener(OnNextButtonClicked);
         unlockButton.onClick.RemoveListener(OnUnlockButtonClick);

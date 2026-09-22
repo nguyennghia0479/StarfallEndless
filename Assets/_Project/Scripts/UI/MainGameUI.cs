@@ -91,10 +91,10 @@ public class MainGameUI : MonoBehaviour
         FadeOut(UIEvents.RaiseEndGameButtonClicked);
     }
 
-    public void UpdatePointsOnReady(int currentReward)
+    public void UpdatePoints(int currentReward, int currentScorePoint)
     {
         UpdateRewardPointText(currentReward);
-        UpdateScorePointText(0);
+        UpdateScorePointText(currentScorePoint);
     }
 
     public void FadeOut(Action callback)

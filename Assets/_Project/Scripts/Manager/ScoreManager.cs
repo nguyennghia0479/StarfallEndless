@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class ScoreManager : MonoBehaviour
 {
+    [SerializeField] private int watchAdBonusPoint = 500;
+
     private int scorePoints;
     private int rewardPoints;
 
@@ -11,6 +13,7 @@ public class ScoreManager : MonoBehaviour
         GameEvents.OnEnemyDestroyed += HandleEnemyDestroyed;
         UIEvents.OnReviveButtonClicked += HandleDecreaseRewardPoints;
         UIEvents.OnUnlockShipButtonClicked += HandleDecreaseRewardPoints;
+        UIEvents.OnWatchAdButtonClicked += HandleWatchAdButtonClicked;
     }
 
     private void OnDisable()
@@ -19,6 +22,7 @@ public class ScoreManager : MonoBehaviour
         GameEvents.OnEnemyDestroyed -= HandleEnemyDestroyed;
         UIEvents.OnReviveButtonClicked -= HandleDecreaseRewardPoints;
         UIEvents.OnUnlockShipButtonClicked -= HandleDecreaseRewardPoints;
+        UIEvents.OnWatchAdButtonClicked -= HandleWatchAdButtonClicked;
     }
 
     private void Start()
@@ -63,13 +67,17 @@ public class ScoreManager : MonoBehaviour
         }
     }
 
-    private void HandleDecreaseRewardPoints(int revivePointsAmount)
+    private void HandleDecreaseRewardPoints(int cost)
     {
-        if (!GameManager.Instance.IsGamePlayingState())
-            return;
-
-        rewardPoints -= revivePointsAmount;
+        rewardPoints -= cost;
         rewardPoints = Mathf.Clamp(rewardPoints, 0, rewardPoints);
+        UIEvents.RaiseRewardChanged(rewardPoints);
+        SaveData.SaveRewardPoints(rewardPoints);
+    }
+
+    private void HandleWatchAdButtonClicked()
+    {
+        rewardPoints += watchAdBonusPoint;
         UIEvents.RaiseRewardChanged(rewardPoints);
     }
 
