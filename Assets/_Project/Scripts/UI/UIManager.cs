@@ -27,7 +27,7 @@ public class UIManager : MonoBehaviour
         if (Instance == null)
             Instance = this;
         else
-            Destroy(gameManager);
+            Destroy(gameObject);
     }
 
     private void OnEnable()
@@ -88,19 +88,20 @@ public class UIManager : MonoBehaviour
     {
         SwitchToUI(mainGameUI.gameObject);
         countingUI.SetStartCountdown(true);
-        mainGameUI.UpdatePointsOnReady(scoreManager.RewardPoints);
+        mainGameUI.UpdatePoints(gameManager.RewardPoints, scoreManager.ScorePoints);
         hangarUI.LoadLastSelectedShip();
     }
 
     private void HandleEnableReviveUI()
     {
         reviveUI.gameObject.SetActive(true);
-        reviveUI.EnableReviveButton(scoreManager.RewardPoints);
+        reviveUI.EnableReviveButton(gameManager.RewardPoints);
     }
 
     private void HandlePlayerRevived(int _)
     {
         SwitchToUI(mainGameUI.gameObject);
+        mainGameUI.UpdatePoints(gameManager.RewardPoints, scoreManager.ScorePoints);
         countingUI.SetStartCountdown(false);
     }
 
@@ -110,7 +111,7 @@ public class UIManager : MonoBehaviour
         {
             enemiesKillText = gameManager.EnemiesKill.ToString(),
             bossesKillText = gameManager.BossesKill.ToString(),
-            rewardPointsText = scoreManager.RewardPoints.ToString(),
+            rewardPointsText = gameManager.RewardPoints.ToString(),
             scorePointsText = scoreManager.ScorePoints.ToString(),
             waveCompletedText = waveManager.CurrentWave.ToString()
         };
@@ -127,5 +128,5 @@ public class UIManager : MonoBehaviour
     }
 
     public void FadeOutMainGameUI() => mainGameUI.FadeOut(null);
-    public int GetRewardPoints() => scoreManager.RewardPoints;
+    public int GetRewardPoints() => gameManager.RewardPoints;
 }

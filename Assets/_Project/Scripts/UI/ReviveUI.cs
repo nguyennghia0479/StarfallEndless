@@ -5,24 +5,39 @@ using UnityEngine.UI;
 
 public class ReviveUI : MonoBehaviour
 {
+    [SerializeField] private InterstitialAdManager adManager;
+    private bool isMobilePlatform;
+
     [Header("Revive Points")]
     [SerializeField] private int revivePointsAmount = 500;
     [SerializeField] private float revivePointFactor = 1.5f;
 
-    [Header("UI Elements")]
+    [Space]
     [SerializeField] private TMP_Text revivePointsText;
-    [SerializeField] private Button reviveButton;
-    [SerializeField] private Button endGameButton;
     [SerializeField] private Slider timeSlider;
     [SerializeField] private float duration = 15f;
     private float elapsedTimer;
     private bool isTimeOut;
+
+    [Header("Button Elements")]
+    [SerializeField] private Button reviveButton;
+    [SerializeField] private Button watchAdButton;
+    [SerializeField] private Button endGameButton;
 
     [Header("Canvas Group")]
     [SerializeField] private CanvasGroup reviveUICG;
     [SerializeField] private float fadeDuration = 1f;
 
     private DOTweenManager dotTweenManager;
+    private void Awake()
+    {
+        isMobilePlatform = Application.isMobilePlatform;
+        watchAdButton.gameObject.SetActive(Application.isMobilePlatform);
+#if UNITY_ANDROID
+        isMobilePlatform = true;
+        watchAdButton.gameObject.SetActive(true);
+#endif
+    }
 
     private void OnEnable()
     {
@@ -32,12 +47,14 @@ public class ReviveUI : MonoBehaviour
         SetupTimeSlider();
         UpdateRevivePointsText();
         reviveButton.onClick.AddListener(OnReviveButtonClicked);
+        watchAdButton.onClick.AddListener(OnWatchAdButtonClicked);
         endGameButton.onClick.AddListener(OnEndGameButtonClicked);
     }
 
     private void OnDisable()
     {
         reviveButton.onClick.RemoveListener(OnReviveButtonClicked);
+        watchAdButton.onClick.RemoveListener(OnWatchAdButtonClicked);
         endGameButton.onClick.RemoveListener(OnEndGameButtonClicked);
     }
 
@@ -67,7 +84,28 @@ public class ReviveUI : MonoBehaviour
         UpdateRevivePointsText();
     }
 
+    private void OnWatchAdButtonClicked()
+    {
+        if (isMobilePlatform && adManager != null)
+        {
+            UIEvents.RaiseButtonClicked();
+            adManager.ShowAd(() =>
+            {
+                UIEvents.RaiseWatchAdButtonClicked();
+                EnableReviveButton(GameManager.Instance.RewardPoints);
+            });
+        }
+    }
+
     private void OnEndGameButtonClicked()
+    {
+        if (isMobilePlatform && adManager != null)
+            adManager.ShowAd(ProceedEndGameButtonClicked);
+        else
+            ProceedEndGameButtonClicked();
+    }
+
+    private void ProceedEndGameButtonClicked()
     {
         UIEvents.RaiseButtonClicked();
         FadeOut(UIEvents.RaiseQuitToGameOver);
@@ -87,6 +125,7 @@ public class ReviveUI : MonoBehaviour
     {
         isTimeOut = false;
         timeSlider.value = 1;
+        elapsedTimer = 0;
     }
 
     private void HandleTimeSlider()

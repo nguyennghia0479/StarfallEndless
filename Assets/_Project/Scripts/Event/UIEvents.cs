@@ -13,6 +13,7 @@ public static class UIEvents
     public static event Action OnButtonClicked;
     public static event Action OnSettingQuitButtonClicked;
     public static event Action OnQuitToGameOver;
+    public static event Action OnWatchAdButtonClicked;
 
     // UI Events
     public static event Action<int> OnRewardChanged;
@@ -64,6 +65,11 @@ public static class UIEvents
     public static void RaiseQuitToGameOver()
     {
         OnQuitToGameOver?.Invoke();
+    }
+
+    public static void RaiseWatchAdButtonClicked()
+    {
+        OnWatchAdButtonClicked?.Invoke();
     }
 
     public static void RaiseRewardChanged(int currentReward)

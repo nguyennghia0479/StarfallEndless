@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour
         UIEvents.OnMainMenuButtonClicked += HandleMainMenu;
         GameEvents.OnGameStart += ResetCount;
         GameEvents.OnEnemyDestroyed += CountEnemiesKill;
-        UIEvents.OnRewardChanged += HandleRewardPoints;
+        UIEvents.OnRewardChanged += HandleRewardPointsChanged;
     }
 
     private void OnDisable()
@@ -43,7 +43,7 @@ public class GameManager : MonoBehaviour
         UIEvents.OnMainMenuButtonClicked -= HandleMainMenu;
         GameEvents.OnGameStart -= ResetCount;
         GameEvents.OnEnemyDestroyed -= CountEnemiesKill;
-        UIEvents.OnRewardChanged -= HandleRewardPoints;
+        UIEvents.OnRewardChanged -= HandleRewardPointsChanged;
     }
 
     private void HandleGameStart()
@@ -54,6 +54,7 @@ public class GameManager : MonoBehaviour
 
     private void HandleMainMenu(bool canSave)
     {
+        Debug.Log(rewardPoints);
         if (canSave)
             SaveData.SaveRewardPoints(rewardPoints);
         else
@@ -62,7 +63,7 @@ public class GameManager : MonoBehaviour
         currentState = GameState.MainMenu;
     }
 
-    private void HandleRewardPoints(int rewardPoints)
+    private void HandleRewardPointsChanged(int rewardPoints)
     {
         this.rewardPoints = rewardPoints;
     }

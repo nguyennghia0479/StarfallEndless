@@ -27,6 +27,10 @@ MonoBehaviour:
     m_Key: revive.endGame
     m_Metadata:
       m_Items: []
+  - m_Id: 19947188432445440
+    m_Key: revivew.watchAd
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
